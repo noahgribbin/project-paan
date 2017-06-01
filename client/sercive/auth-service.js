@@ -85,5 +85,6 @@ function authService($q, $log, $http, $window) {
     return $q.resolve();
   };
 
+  // user pass update: $http.put()...
   return service;
 }
