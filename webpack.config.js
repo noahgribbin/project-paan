@@ -16,7 +16,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 dotenv.load();
 
 module.exports = {
-  entry: './client/index.js',
+  entry: './client/entry.jsx',
   output: {
     path: path.resolve('dist'),
     filename: 'index_bundle.js'
