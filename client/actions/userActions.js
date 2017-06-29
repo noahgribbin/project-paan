@@ -23,8 +23,18 @@ function login(username, password) {
   return {
     type: 'LOGIN',
     payload: request
-    .get(`${__API_URL__}/api/signin`)
+    .get(`${'http://localhost:8000'}/api/signin`)
     .auth(`${username}:${password}`)
+    .then( res => {
+      // console.log('res', res);
+      var response = JSON.parse(res.text);
+      // console.log('parsed response', response);
+      return response;
+    })
+    .catch( err => {
+      console.log('err', err);
+      return err;
+    })
   };
 }
 
