@@ -1,7 +1,9 @@
 import myStore from './store.js';
 import {signup, login, logout} from './actions/userActions.js';
+import { Provider } from 'react-redux';
+import { reactDom } from 'react-dom';
 // console.log('myStore' + '\n', myStore);
-console.log('initialState'+'\n', myStore.getState());
+// console.log('initialState'+'\n', myStore.getState());
 // console.log('signup',signup);
 // myStore.dispatch(signup('goji3456', 'passwordtest'));
 
