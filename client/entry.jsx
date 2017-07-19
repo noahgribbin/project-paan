@@ -1,22 +1,31 @@
-import myStore from './store.js';
-import {signup, login, logout} from './actions/userActions.js';
+import React from 'react';
 import { Provider } from 'react-redux';
-import { reactDom } from 'react-dom';
-// console.log('myStore' + '\n', myStore);
-// console.log('initialState'+'\n', myStore.getState());
-// console.log('signup',signup);
-// myStore.dispatch(signup('goji3456', 'passwordtest'));
+import { render } from 'react-dom';
+import {Router, Route, browserHistory} from 'react-router';
+import createHistory from 'history/createBrowserHistory'
 
-myStore.dispatch(login('goji3456', 'passwordtest'));
+import store from './store.js';
+
+import {signup, login, logout} from './actions/userActions.js';
+
+import SignupFormContainer from './containers/signupFormContainer.jsx';
+import { Home } from './containers/home.jsx';
+
 
 function checkState() {
-  console.log('checkState'+'\n', myStore.getState());
+  console.log('checkState'+'\n', store.getState());
 }
 
-function signoff() {
-  myStore.dispatch(logout());
-}
+export const history = createHistory()
 
-setTimeout(function() { checkState(); }, 5000);
-setTimeout(function() { signoff(); }, 6000);
-setTimeout(function() { checkState(); }, 7000);
+render(
+  <Provider store={store}>
+    <Router history={history}>
+      <div>
+        <Route path='/' component={SignupFormContainer}/>
+        <Route path='/landing' component={Home}/>
+      </div>
+    </Router>
+  </Provider>,
+  document.getElementById('app')
+)

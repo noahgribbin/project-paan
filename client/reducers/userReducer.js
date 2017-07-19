@@ -48,6 +48,16 @@ export default function userReducer(state=initialState, action) {
   case 'LOGOUT' :
     console.log(action);
     return initialState;
+  //  usernameChange
+  case 'LOGIN_USERNAME_FULFILLED':
+    console.log(action);
+    console.log('action.payload'+'\n',action.payload);
+    return Object.assign({}, state, {
+      username: action.payload
+    });
+  case 'LOGIN_USERNAME_REJECTED' :
+    console.log(action);
+    return state;
     // Default
   default:
     return state;

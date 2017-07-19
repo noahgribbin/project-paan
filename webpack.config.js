@@ -19,7 +19,8 @@ module.exports = {
   entry: './client/entry.jsx',
   output: {
     path: path.resolve('dist'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
+    sourceMapFilename: 'sourceMap.map'
   },
   module: {
     loaders: [
