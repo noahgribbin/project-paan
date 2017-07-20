@@ -22,7 +22,7 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <div>
-        <Route path='/' component={SignupFormContainer}/>
+        <Route exact path='/' component={SignupFormContainer}/>
         <Route path='/landing' component={Home}/>
       </div>
     </Router>
