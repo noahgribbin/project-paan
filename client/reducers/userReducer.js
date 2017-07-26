@@ -28,7 +28,9 @@ export default function userReducer(state=initialState, action) {
     });
   case 'SIGNUP_REJECTED' :
     console.log(action);
-    return state;
+    return Oject.assign({}, state, {
+      signInError: action.payload.response.text
+    })
     // Login
   case 'LOGIN_PENDING' :
     console.log(action);
@@ -43,7 +45,9 @@ export default function userReducer(state=initialState, action) {
     });
   case 'LOGIN_REJECTED' :
     console.log(action);
-    return state;
+    return Object.assign({}, state, {
+      signInError: action.payload.response.text
+    })
     // Logout
   case 'LOGOUT' :
     console.log(action);

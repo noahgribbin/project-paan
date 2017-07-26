@@ -9,6 +9,7 @@ import store from './store.js';
 import {signup, login, logout} from './actions/userActions.js';
 
 import SignupFormContainer from './containers/signupFormContainer.jsx';
+import LoginFormContainer from './containers/loginFormContainer.jsx';
 import { Home } from './containers/home.jsx';
 
 
@@ -22,7 +23,7 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <div>
-        <Route exact path='/' component={SignupFormContainer}/>
+        <Route exact path='/' component={LoginFormContainer }/>
         <Route path='/landing' component={Home}/>
       </div>
     </Router>

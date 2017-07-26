@@ -8,14 +8,14 @@ function signup(username, password) {
     payload: request
     .post(`${'http://localhost:8000'}/api/signup`)
     .send({username, password})
-    .then( res => {
-      console.log('res', res);
-      return res;
-    })
-    .catch( err => {
-      console.log('err', err);
-      return err;
-    })
+    // .then( res => {
+    //   console.log('res', res);
+    //   return res;
+    // })
+    // .catch( err => {
+    //   console.log('err', err);
+    //   return err;
+    // })
   };
 }
 
@@ -28,12 +28,8 @@ function login(username, password) {
     .then( res => {
       // console.log('res', res);
       var response = JSON.parse(res.text);
-      // console.log('parsed response', response);
       return response;
-    })
-    .catch( err => {
-      console.log('err', err);
-      return err;
+      console.log('bottom of then');
     })
   };
 }
