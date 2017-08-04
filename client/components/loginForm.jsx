@@ -15,14 +15,16 @@ export class LoginForm extends React.Component {
 
   render() {
     return (
-      <section>
+      <section className="signup">
         <h1>Login</h1>
         <form onSubmit={this.onSubmit}>
           <div>
             <input onChange={this.onUsernameInput} type="text" name="username" placeholder="username"></input>
+            {this.props.signInError === "NotFoundError" ? <div><p>Username not found</p></div> : null}
           </div>
           <div>
             <input onChange={this.onPasswordInput} type="text" name="password" placeholder="password"></input>
+            {this.props.signInError === "badRequest" ? <div><p>Invalid Password</p></div> : null}
           </div>
           <button type="submit">Login</button>
         </form>

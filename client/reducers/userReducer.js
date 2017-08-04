@@ -13,27 +13,26 @@ export default function userReducer(state=initialState, action) {
   switch(action.type) {
     // Signup
   case 'SIGNUP_PENDING' :
-    console.log(action);
-    console.log('action.payload'+'\n',action.payload);
     return Object.assign({}, state, {
       fetching: true
     });
   case 'SIGNUP_FULFILLED' :
-    console.log(action);
-    console.log('action.payload'+'\n',action.payload);
+  console.log('action.payload'+'\n',action.payload);
     return Object.assign({}, state, {
       fetching: false,
-      token: action.payload.text
+      token: action.payload.token,
+      username: action.payload.user.username
 
     });
   case 'SIGNUP_REJECTED' :
-    console.log(action);
-    return Oject.assign({}, state, {
-      signInError: action.payload.response.text
-    })
+    if (action.error) {
+      return Object.assign({}, state, {
+        alreadyExists: true,
+        fetching: false
+      })
+    }
     // Login
   case 'LOGIN_PENDING' :
-    console.log(action);
     return Object.assign({}, state , {
       fetching: true
     });
@@ -41,13 +40,22 @@ export default function userReducer(state=initialState, action) {
     console.log('action.payload'+'\n',action.payload);
     return Object.assign({}, state,  {
       fetching: false,
-      token: action.payload.token
+      token: action.payload.token,
+      username: action.payload.user.username
     });
   case 'LOGIN_REJECTED' :
     console.log(action);
-    return Object.assign({}, state, {
-      signInError: action.payload.response.text
-    })
+    if (action.payload.status == 404)  {
+      return Object.assign({}, state, {
+        signInError: action.payload.response.text,
+        fetching: false
+      })
+    }else if (action.payload.status == 401) {
+      return Object.assign({}, state, {
+        signInError: 'badRequest',
+        fetching: false
+      })
+    }
     // Logout
   case 'LOGOUT' :
     console.log(action);

@@ -8,6 +8,7 @@ import store from '../store.js';
 import { SignupForm } from '../components/signupForm.jsx';
 
 import { signup } from '../actions/userActions.js';
+import { createProfile } from '../actions/profileActions.js';
 
 import { history } from '../entry.jsx';
 
@@ -34,18 +35,23 @@ class SignupFormContainer extends React.Component {
   }
 
   onSubmit(e) {
-    console.log('submitted');
     e.preventDefault();
       store.dispatch(signup(this.state.username, this.state.password))
+      .then((user) => {
+        store.dispatch(createProfile(user.value));
+      })
       .then(() => {
         history.push('./landing');
-      }, err => console.error('ERROR', err)
+      }
     );
   }
 
   render() {
+        console.log('SignupFormContainer',this);
     return (
-          <SignupForm  onSubmit={this.onSubmit}
+          <SignupForm
+                       alreadyExists={this.props.alreadyExists}
+                       onSubmit={this.onSubmit}
                        onUsernameInput={this.onUsernameInput}
                        onPasswordInput={this.onPasswordInput}
            />
@@ -55,8 +61,10 @@ class SignupFormContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   console.log('state'+'\n',state);
+  console.log('stateUser'+'\n',state.userReducer);
   return {
     // add props if needed
+    alreadyExists: state.userReducer.alreadyExists
   }
 }
 

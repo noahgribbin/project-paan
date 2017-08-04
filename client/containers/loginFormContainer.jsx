@@ -8,6 +8,7 @@ import store from '../store.js';
 import { LoginForm } from '../components/loginForm.jsx';
 
 import { login } from '../actions/userActions.js';
+import { getProfile } from '../actions/profileActions.js';
 
 import { history } from '../entry.jsx';
 
@@ -38,18 +39,21 @@ class LoginFormContainer extends React.Component {
   }
 
   onSubmit(e) {
-    console.log('submitted');
     e.preventDefault();
     store.dispatch(login(this.state.username, this.state.password))
+    .then((user) => {
+      store.dispatch(getProfile(user.value))
+    })
     .then(() => {
       history.push('./landing');
     }, err => console.error('ERROR',err));
   }
 
   render() {
-    console.log('asdasd',this);
     return (
-      <LoginForm onSubmit={this.onSubmit}
+      <LoginForm
+                 signInError={this.props.signInError}
+                 onSubmit={this.onSubmit}
                  onUsernameInput={this.onUsernameInput}
                  onPasswordInput={this.onPasswordInput}
       />
@@ -58,9 +62,9 @@ class LoginFormContainer extends React.Component {
 }
 
   const mapStateToProps = (state) => {
-    console.log('state'+'\n', state);
+    console.log('state',state);
     return {
-      {signInError: state.signInError}
+      signInError: state.signInError
     }
   }
 

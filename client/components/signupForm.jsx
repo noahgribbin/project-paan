@@ -20,6 +20,7 @@ export class SignupForm extends React.Component {
         <form onSubmit={this.onSubmit}>
           <div>
             <input onChange={this.onUsernameInput} type="text" name="username"  placeholder='username'></input>
+            {this.props.alreadyExists ? <div><p>Username taken</p></div>: null}
           </div>
           <div>
             <input onChange={this.onPasswordInput} type="password" name="password" placeholder="password"></input>
