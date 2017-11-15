@@ -15,27 +15,50 @@ import { history } from '../entry.jsx';
 class SignupFormContainer extends React.Component {
   constructor(props) {
     super(props);
-
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onInput = this.onInput.bind(this);
+    this.errorCheck = this.errorCheck.bind(this);
      this.state = {
        username:'',
-       password:''
+       password:'',
+       usernameError:false,
+       passwordError:false,
+       signupError:false
      }
   }
 
-  onUsernameInput(e) {
+  onInput(e){
+    var type = e.target.getAttribute('name')
     this.setState({
-      username: e.target.value
-    });
+      [type]: e.target.value
+    })
   }
 
-  onPasswordInput(e) {
-    this.setState({
-      password: e.target.value
-    });
+  errorCheck(){
+    if(this.state.signupError){
+    if(this.state.username===''){
+      this.setState({usernameError:true})
+    }else{
+      this.setState({usernameError:false})
+    }
+    if(this.state.password===''){
+        this.setState({passwordError:true})
+      }else{
+        this.setState({passwordError:false})
+      }
+    }
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
+    console.log('???',this.state);
+    if(this.state.username===''||this.state.password===''){
+      console.log('!!!');
+      console.log(this.state)
+      await this.setState({signupError:true})
+      this.errorCheck()
+      return
+    }
       store.dispatch(signup(this.state.username, this.state.password))
       .then((user) => {
         store.dispatch(createProfile(user.value));
@@ -52,8 +75,13 @@ class SignupFormContainer extends React.Component {
           <SignupForm
                        alreadyExists={this.props.alreadyExists}
                        onSubmit={this.onSubmit}
-                       onUsernameInput={this.onUsernameInput}
-                       onPasswordInput={this.onPasswordInput}
+                       onInput={this.onInput}
+                       errorCheck={this.errorCheck}
+                       toggleForm={this.props.toggleForm}
+                       passwordError={this.state.passwordError}
+                       usernameError={this.state.usernameError}
+                       username={this.state.username}
+                       password={this.state.password}
            />
     )
   }
@@ -61,7 +89,6 @@ class SignupFormContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   console.log('state'+'\n',state);
-  console.log('stateUser'+'\n',state.userReducer);
   return {
     // add props if needed
     alreadyExists: state.userReducer.alreadyExists

@@ -1,0 +1,41 @@
+
+$primary-color: #333;
+$color-1: #ffffff;
+$color-2: #DDDAD6;
+$color-3: #F9F1B5;
+$color-4: #A6D8DE;
+$color-5: #AE9C96;
+
+@import "./base/_reset.scss";
+@import "./base/_base.scss";
+
+@import "./containers/_home.scss";
+@import "./containers/_campaignPage.scss";
+@import "./containers/_characterPage.scss";
+
+@import "./components/_characterHome.scss";
+
+@import "./components/_characterList.scss";
+@import "./components/_characterSheets.scss";
+@import "./components/_characterStats.scss";
+@import "./components/_characterHeader.scss";
+@import "./components/_createCharacterForm.scss";
+@import "./components/_createDmForm.scss";
+@import "./components/_createWeaponForm.scss";
+@import "./components/_createSpellForm.scss";
+@import "./components/_createArmorForm.scss";
+@import "./components/_createItem.scss";
+@import "./components/_spellItem.scss";
+@import "./components/_updateWeaponForm.scss";
+@import "./components/_updateSpellForm.scss";
+@import "./components/_updateArmorForm.scss";
+@import "./components/_weaponItem.scss";
+@import "./components/_weaponList.scss";
+@import "./components/_toggleWeaponUpdateFormButton.scss";
+@import "./components/_deleteWeaponButton.scss";
+@import "./components/_dmHome.scss";
+@import "./components/_dmList.scss";
+@import "./components/_loginForm.scss";
+@import "./components/_updateCharacterForm.scss";
+@import "./components/_deleteCharacter.scss";
+@import "./components/_joinPartyForm.scss";

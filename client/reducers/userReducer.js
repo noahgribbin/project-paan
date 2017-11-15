@@ -14,14 +14,16 @@ export default function userReducer(state=initialState, action) {
     // Signup
   case 'SIGNUP_PENDING' :
     return Object.assign({}, state, {
+      alreadyExists: false,
       fetching: true
     });
   case 'SIGNUP_FULFILLED' :
-  console.log('action.payload'+'\n',action.payload);
+  console.log(action);
     return Object.assign({}, state, {
       fetching: false,
       token: action.payload.token,
-      username: action.payload.user.username
+      username: action.payload.user.username,
+      alreadyExists: false
 
     });
   case 'SIGNUP_REJECTED' :
@@ -34,14 +36,16 @@ export default function userReducer(state=initialState, action) {
     // Login
   case 'LOGIN_PENDING' :
     return Object.assign({}, state , {
-      fetching: true
+      fetching: true,
+      signInError: ''
     });
   case 'LOGIN_FULFILLED' :
-    console.log('action.payload'+'\n',action.payload);
+    console.log(action);
     return Object.assign({}, state,  {
       fetching: false,
       token: action.payload.token,
-      username: action.payload.user.username
+      username: action.payload.user.username,
+      signInError: ''
     });
   case 'LOGIN_REJECTED' :
     console.log(action);
@@ -63,7 +67,6 @@ export default function userReducer(state=initialState, action) {
   //  usernameChange
   case 'LOGIN_USERNAME_FULFILLED':
     console.log(action);
-    console.log('action.payload'+'\n',action.payload);
     return Object.assign({}, state, {
       username: action.payload
     });

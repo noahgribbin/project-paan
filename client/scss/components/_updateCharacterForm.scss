@@ -1,0 +1,50 @@
+.update-character-form-container{
+  width: 50%;
+  display:inline-block;
+}
+.update-character-form-title{
+  width: 95%;
+  font-size: 1rem;
+  margin-left: auto;
+  // background: grey;
+  margin-right: auto;
+  border-radius: 5px;
+}
+.update-character-form-holder{
+  width: 50%;
+  display: inline-block;
+}
+.update-character-form-shader{
+  width: 100vw;
+  height:100vh;
+  background: rgba(34,34,34, .9);
+  position: fixed;
+  top:0;
+  left: 0;
+}
+.update-stat-input-container{
+  width:33.33333333%;
+  text-align: center;
+  display:inline-block;
+}
+.update-stat-input-div{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  // background: white;
+  border-radius: 5px;
+  margin-bottom: .5rem;
+  padding-bottom: 1rem;
+}
+.update-character-stat-input-container{
+  margin-top: 1rem;
+}
+.update-character-stat-input{
+  margin: 0 auto 0 auto;
+  width: 90%;
+  text-align: center;
+}
+.update-stat-input-title{
+  font-size: 100%;
+  margin-bottom: 0
+}

@@ -3,14 +3,13 @@
 // import { request } from 'superagent';
 var request = require('superagent');
 
-export function createProfile(user) {
-  console.log('user', user);
+export function createProfile(data) {
   return {
     type: 'CREATE_PROFILE',
     payload: request
     .post(`${'http://localhost:8000'}/api/profile`)
-    .set({authorization: `Bearer ${user.token}`})
-    .send(user.user)
+    .set({authorization: `Bearer ${data.token}`})
+    .send(data.user)
     .then( res => {
       var response = JSON.parse(res.text)
       return response;

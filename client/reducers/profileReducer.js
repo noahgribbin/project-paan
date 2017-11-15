@@ -4,7 +4,8 @@ const initialState = {
   username: '',
   dms: [],
   characters: [],
-  fetching: false
+  fetching: false,
+  profileID: ''
 };
 
 export default function profileReducer(state=initialState, action) {
@@ -17,13 +18,12 @@ export default function profileReducer(state=initialState, action) {
       });
     case 'CREATE_PROFILE_FULFILLED' :
       console.log(action);
-      console.log('action.payload'+'\n', action.payload);
       return Object.assign({}, state, {
-        fetching: false
+        fetching: false,
+        profileID: action.payload._id
       });
     case 'CREATE_PROFILE_REJECTED' :
       console.log('action.error',+'\n', action);
-      console.log('state'+'\n',state);
       return Object.assign({}, state, {
         fetching: false
       })
@@ -35,17 +35,16 @@ export default function profileReducer(state=initialState, action) {
       });
     case 'GET_PROFILE_FULFILLED' :
       console.log(action);
-      console.log('action.payload'+'\n', action.payload);
       return Object.assign({}, state, {
-        fetching: false
-        // dms: action.payload.dm
+        fetching: false,
+        profileID: action.payload._id,
+        profile: action.payload
         // what needs to be stored in state?
         // userID, _id?
         // profile?
       });
     case "GET_PROFILE_REJECTED" :
       console.log('action.error',+'\n', action);
-      console.log('state'+'\n',state);
       return Object.assign({}, state, {
         fetching: false
       });
