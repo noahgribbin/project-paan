@@ -80,9 +80,11 @@ class CharacterPage extends React.Component {
   await this.props.getCharacter(data)
     .then(character => {
       console.log('CHARACTER', character);
-      // var campaignName = character.value.dmID.campaignName
-      // var characterName = character.value.name
       var characterName = character.value
+      if(character.value.dmID.campaignName){
+        var campaignName = character.value.dmID.campaignName
+      }
+      // var characterName = character.value.name
       // this.setState({campaignName:campaignName})
       // this.setState({characterName:characterName})
       this.setState({cahracter:character})
@@ -427,7 +429,7 @@ class CharacterPage extends React.Component {
           loadCharacterData={this.loadCharacterData}
           onInput = {this.onInput}
           campaign = {this.props.campaign}
-          campaignName={this.props.campaignName}
+          campaignName={this.state.campaignName}
           updateCampaignName={this.state.campaignName}
           characterName={this.state.characterName}
           hp={this.state.hp}
@@ -532,7 +534,7 @@ CharacterPage.propTypes = {
   weapons:         React.PropTypes.array,
   armor:  React.PropTypes.array,
   spell:  React.PropTypes.array,
-  character:  React.PropTypes.object.isRequired,
+  // character:  React.PropTypes.object.isRequired,
   campaign:  React.PropTypes.object,
   campaignName:  React.PropTypes.string
 }
