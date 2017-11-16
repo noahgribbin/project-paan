@@ -127,7 +127,7 @@ class CharacterPage extends React.Component {
     .then(() => {
       store.dispatch(getAllCharacters(allCharacterData))
       .then(() => {
-        debugger
+        
         history.push('./player')
       })
     })
@@ -430,17 +430,6 @@ class CharacterPage extends React.Component {
           onInput = {this.onInput}
           campaign = {this.props.campaign}
           campaignName={this.state.campaignName}
-          updateCampaignName={this.state.campaignName}
-          characterName={this.state.characterName}
-          hp={this.state.hp}
-          ac={this.state.ac}
-          strength={this.state.strength}
-          dexterity={this.state.dexterity}
-          constitution={this.state.constitution}
-          intelligence={this.state.intelligence}
-          wisdom={this.state.wisdom}
-          charisma={this.state.charisma}
-
         />
 
         <CreateWeaponForm
@@ -493,7 +482,7 @@ const mapStateToProps = (state) => {
   console.log('state has CHANGED',state.characterReducer);
   console.log('campaign',state.characterReducer.campaign);
   console.log('campaignName',state.characterReducer.campaignName);
-  // debugger
+  // 
   return {
     weapons: state.characterReducer.weapons,
     armor:   state.characterReducer.armor,

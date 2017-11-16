@@ -47,7 +47,7 @@ class CampaignPage extends React.Component {
       token: this.props.token
     }
     this.props.deleteCampaign(data)
-    // debugger
+    // 
     history.push('./dm')
 
   }

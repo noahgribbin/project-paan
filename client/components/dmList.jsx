@@ -12,10 +12,8 @@ import { getDm, getAllDm , setSessionDm, setCampaignName, getCampaignMembers } f
 export class DmList extends React.Component {
   constructor(props) {
     super(props)
-    this.onClick = this.props.onClick.bind(this);
+    console.log(this);
     this.toCharacterSheets = this.toCharacterSheets.bind(this);
-    console.log('I WANT TO SEE THIS', this.props);
-    console.log('I WANT TO SEE THIS', this.state);
   }
 
   // move to container
@@ -23,7 +21,6 @@ export class DmList extends React.Component {
     console.log('here');
     var dmId = e.target.getAttribute('id');
     var dmName = e.target.getAttribute('name');
-    console.log("!!!!DM NAME!!!!", e.target.text);
     var data =  {
       token: store.getState().userReducer.token,
       id:    dmId
@@ -41,7 +38,6 @@ export class DmList extends React.Component {
   render() {
     var toCharacterSheets = this.toCharacterSheets
     if(this.props.dms) {
-
     var dmInstance = this.props.dms.map(function(dm) {
       return <li className="dm-list-li"
                  key={dm._id} id={dm._id}
@@ -54,8 +50,8 @@ export class DmList extends React.Component {
   }
     return (
       <section>
-        <h1 className="dm-list-title" onClick={this.onClick}>Campaign List</h1>
-        {this.props.dms ? <ul>{dmInstance}</ul> : null}
+        {this.props.dms.length > 0 ? <h1 className="dm-list-title">Campaign List</h1> :null}
+        {this.props.dms ? <ul>{dmInstance}</ul> :null}
       </section>
     )
   }

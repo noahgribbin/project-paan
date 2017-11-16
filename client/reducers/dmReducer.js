@@ -4,7 +4,8 @@ const initialState = {
   campaignName: '',
   campaignCode: '',
   campaignMembers: '',
-  sessionDm: ''
+  sessionDm: '',
+  duplicateError:false
 }
 
 export default function dmReducer(state=initialState, action) {
@@ -13,19 +14,20 @@ export default function dmReducer(state=initialState, action) {
     case 'CREATE_DM_PENDING' :
       console.log(action);
       return Object.assign({}, state, {
-      // update state
+      // update
     });
     case 'CREATE_DM_FULFILLED' :
       console.log(action);
       return Object.assign({}, state, {
         // campaignName: action.payload.dm.campaignName,
+        duplicateError: false
         // campaignCode: action.payload.dm.campaignCode,
         // campaignMembers: action.payload.dm.campaignMembers
     });
     case 'CREATE_DM_REJECTED' :
       console.log(action);
       return Object.assign({}, state, {
-      // update state
+      duplicateError: true
     })
     // GET DM
     case 'GET_DM_PENDING' :
