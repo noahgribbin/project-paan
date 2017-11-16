@@ -3,21 +3,14 @@
 import React from 'react';
 import { connect } from  'react-redux';
 import { bindActionCreators } from 'redux';
-
 import store from '../store.js';
-
 import { history } from '../entry.jsx';
-
 import  CharacterStats  from '../components/characterStats.jsx'
 import CharacterSpells from '../components/characterSpells.jsx'
 import CharacterWeapons from '../components/characterWeapons.jsx'
 import CharacterArmor from '../components/characterArmor.jsx'
-
 import { CampaignHeader } from '../components/campaignHeader.jsx'
-
 import { deleteDm, updateDm, setCampaignName, getDm, getCampaignMembers } from '../actions/dmActions.js';
-
-
 
 class CampaignPage extends React.Component {
   constructor(props) {
@@ -35,7 +28,6 @@ class CampaignPage extends React.Component {
     }
     await store.dispatch(getDm(data))
     await store.dispatch(getCampaignMembers(data))
-    // console.log('past get campaign members');
     this.setState({
       campaign: this.props.dm
     })
@@ -47,7 +39,6 @@ class CampaignPage extends React.Component {
       token: this.props.token
     }
     this.props.deleteCampaign(data)
-    // 
     history.push('./dm')
 
   }
@@ -65,6 +56,7 @@ class CampaignPage extends React.Component {
       id: this.props.id,
       token: this.props.token
     }
+    if(this.props.campaignName==='')return
     await store.dispatch(updateDm(updateData))
     await store.dispatch(getDm(getData))
     await store.dispatch(getCampaignMembers(getData))
