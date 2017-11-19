@@ -1,10 +1,5 @@
 
-$primary-color: #333;
-$color-1: #ffffff;
-$color-2: #DDDAD6;
-$color-3: #F9F1B5;
-$color-4: #A6D8DE;
-$color-5: #AE9C96;
+$blue: #0193b7;
 
 @import "./base/_reset.scss";
 @import "./base/_base.scss";
@@ -33,6 +28,7 @@ $color-5: #AE9C96;
 @import "./components/_weaponList.scss";
 @import "./components/_toggleWeaponUpdateFormButton.scss";
 @import "./components/_deleteWeaponButton.scss";
+@import "./components/_navbar.scss";
 @import "./components/_dmHome.scss";
 @import "./components/_dmList.scss";
 @import "./components/_loginForm.scss";

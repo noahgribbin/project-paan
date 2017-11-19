@@ -6,6 +6,7 @@ import store from '../store.js';
 
 import  {CharacterHome} from '../components/characterHome.jsx'
 import  {DmHome} from '../components/dmHome.jsx'
+import  {Navbar} from '../components/navbar.jsx'
 import { history } from '../entry.jsx';
 
 import { getAllCharacters, setCharacters, getAllArmor } from '../actions/characterActions.js';
@@ -53,8 +54,9 @@ export class Home extends React.Component {
   render() {
     return (
       <section>
+        <Navbar />
         <DmHome onClick={this.dmOnClick}/>
-        <CharacterHome onClick={this.characterOnClick}/>
+        {/* <CharacterHome onClick={this.characterOnClick}/> */}
       </section>
     )
   }

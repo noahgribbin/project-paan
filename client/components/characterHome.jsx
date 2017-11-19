@@ -14,7 +14,12 @@ export class CharacterHome extends React.Component {
     return (
       <section>
         <div className="character-home-container" onClick={this.onClick}>
-          Player
+          <div className="home-banner">
+          </div>
+          <p className="home-banner-text">Player</p>
+          <div className="sub-banner">
+          </div>
+          <p className="sub-banner-text">Play your PC</p>
         </div>
       </section>
     )
