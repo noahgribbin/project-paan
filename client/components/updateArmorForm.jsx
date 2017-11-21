@@ -119,7 +119,7 @@ export class UpdateArmorForm extends React.Component {
 
   render() {
     return (
-      <section className="update-armor-form-shader"
+      <section className="update-weapon-form-shader"
                id={"updateArmorForm"+this.props.armor._id}
                onClick={this.closeModal}
                onKeyDown={this.onEscapeKey}

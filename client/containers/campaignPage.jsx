@@ -9,6 +9,7 @@ import  CharacterStats  from '../components/characterStats.jsx'
 import CharacterSpells from '../components/characterSpells.jsx'
 import CharacterWeapons from '../components/characterWeapons.jsx'
 import CharacterArmor from '../components/characterArmor.jsx'
+import { Navbar } from '../components/navbar.jsx'
 import { CampaignHeader } from '../components/campaignHeader.jsx'
 import { deleteDm, updateDm, setCampaignName, getDm, getCampaignMembers } from '../actions/dmActions.js';
 
@@ -94,6 +95,8 @@ class CampaignPage extends React.Component {
     }
       return (
         <section>
+          <Navbar />
+          <section clasName="page-container">
           <CampaignHeader
             updateCampaign={this.updateCampaign}
             deleteCampaign={this.deleteCampaign}
@@ -101,6 +104,7 @@ class CampaignPage extends React.Component {
             dm={this.props.dm}
           />
           {member}
+        </section>
         </section>
       )
   }

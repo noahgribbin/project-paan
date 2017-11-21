@@ -149,7 +149,7 @@ export class UpdateSpellForm extends React.Component {
 
   render() {
     return (
-      <section className="update-spell-form-shader"
+      <section className="update-weapon-form-shader"
                id={"update-spell-form-shader-"+this.props.spell._id}
                onClick={this.toggleHide}
                onKeyDown={this.onEscapeKey}

@@ -10,6 +10,7 @@ import { histroy } from '../entry.jsx';
 
 import { CreateCharacterForm } from '../components/createCharacterForm.jsx';
 import { CharacterList } from '../components/characterList.jsx';
+import { Navbar } from '../components/navbar.jsx';
 
 import { createCharacter, getAllCharacters, setCharacters, getCharacter, getAllWeapons, getAllSpells, getAllArmor } from '../actions/characterActions.js';
 // import { getAllCharacters } from '../actions/characterActions.js';
@@ -149,6 +150,8 @@ async createCharacter(e) {
   render() {
     return (
       <section>
+        <Navbar />
+      <section className="page-container">
         <CreateCharacterForm
           onInput={this.onInput}
           onSubmit={this.createCharacter}
@@ -173,6 +176,7 @@ async createCharacter(e) {
           getAllWeapons={this.props.getAllWeapons}
           characters={this.props.characters}
           />
+      </section>
       </section>
     )
   }

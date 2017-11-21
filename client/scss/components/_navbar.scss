@@ -5,6 +5,8 @@ nav{
   position: fixed;
   top: 0;
   z-index: 5;
+  transition: 300ms;
+  background: $blue;
       .navbar-brand{
         width: 70%;
         height: 70px;
@@ -64,23 +66,58 @@ nav{
     }
 }
 
-
+.flip-burger{
+  transition: 400ms;
+  transform: rotate(-0.5turn);
+}
+.revert-flip-burger{
+  transition: 400ms;
+  transform: rotate(0turn);
+}
 .hamburger-nav{
-  height: 200px;
-  background: $blue;
+
 }
 .hamburger-dropdown-div{
-  display: block;
-  clear: both;
-  text-align: center;
+  position: absolute;
   width: 100%;
-  height: 150px;
+  padding-top: 70px;
+  z-index: -1;
   button{
     display: block;
     float: none;
-    width: unset;
+    width: 100%;
     height: unset;
-    background: $color-4;
-    color: $color-1;
+    color: #f4f4f4;
+    padding: 0 8px;
+    border-top: 1px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-weight: 100;
   }
+}
+
+.dropdown-entering {
+  background: $blue;
+  transform: translateY(-100%);
+
+
+}
+.dropdown-entered {
+  opacity: 1;
+  background: $blue;
+  transform: translate(0%);
+  transition: 400ms ease-in-out;
+}
+
+.dropdown-exiting {
+  opacity: 1;
+  transition: 400ms
+}
+.dropdown-exited {
+  transform: translateY(-100%);
+  transition: 400ms;
+}
+
+.no-background{
+  background: none;
 }

@@ -9,6 +9,8 @@ import { histroy } from '../entry.jsx';
 
 import {CreateDmForm} from '../components/createDmForm.jsx';
 import {DmList} from '../components/dmList.jsx';
+import {Navbar} from '../components/navbar.jsx'
+
 
 import { createDm, getAllDms, updateDm, deleteDm } from '../actions/dmActions.js';
 
@@ -107,6 +109,9 @@ onSubmit(e) {
   render() {
     return (
       <section>
+        <Navbar />
+        <section className="page-container">
+
         <CreateDmForm
           onCampaignNameInput={this.onCampaignNameInput}
           onPasscodeInput={this.onPasscodeInput}
@@ -119,6 +124,7 @@ onSubmit(e) {
           onClick={this.onClickAllDm}
           dms={this.props.dms}
         />
+      </section>
       </section>
     )
   }
