@@ -50,21 +50,24 @@ export class UpdateDmForm extends React.Component {
                onKeyDown={this.onEscapeKey}
                tabIndex="0"
                >
-        <form className='update-weapon-form'
+        <div className="update-form-container">
+        <form className='create-dm-form'
               onSubmit={this.updateAndToggle}
               onClick={this.stopPropagation}
                 >
-          <div className="update-weapon-form-input-div">
-            <input className="update-weapon-form-input"
+          <div className="create-dm-input-div">
+            <input className="create-dm-input"
+
                    onChange={this.updateCampaignName}
                    placeholder={this.props.dm.campaignName}
                    onKeyDown={this.deepOnEscapeKey}
                    ></input>
-          </div>
-          <button className="update-weapon-form-button"
+          <button className="create-dm-button"
                   type="submit"
                   >Update</button>
+          </div>
         </form>
+      </div>
       </section>
     )
   }

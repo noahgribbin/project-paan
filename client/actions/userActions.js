@@ -34,13 +34,4 @@ function logout() {
   };
 }
 
-//
-
-function loginUsername(username) {
-  return {
-    type: 'LOGIN_USERNAME',
-    payload: username
-  }
-}
-
 export { signup, login, logout};

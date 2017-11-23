@@ -113,6 +113,7 @@ onSubmit(e) {
         <section className="page-container">
 
         <CreateDmForm
+          dms={this.props.dms}
           onCampaignNameInput={this.onCampaignNameInput}
           onPasscodeInput={this.onPasscodeInput}
           onSubmit={this.onSubmit}
@@ -120,10 +121,12 @@ onSubmit(e) {
           campaignName={this.state.campaignName}
         />
 
+        {this.props.dms ?
         <DmList
           onClick={this.onClickAllDm}
           dms={this.props.dms}
         />
+      :null}
       </section>
       </section>
     )

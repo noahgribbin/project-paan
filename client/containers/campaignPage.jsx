@@ -96,7 +96,7 @@ class CampaignPage extends React.Component {
       return (
         <section>
           <Navbar />
-          <section clasName="page-container">
+          <section className="page-container">
           <CampaignHeader
             updateCampaign={this.updateCampaign}
             deleteCampaign={this.deleteCampaign}

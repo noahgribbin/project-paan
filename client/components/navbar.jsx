@@ -5,14 +5,14 @@ import { render } from 'react-dom';
 import PropTypes from 'prop-types';
 import ReactSvg from 'react-svg';
 import Transition from 'react-transition-group/Transition'
-import { CSSTransitionGroup } from 'react-transition-group'
 
 import store from '../store.js';
 import { history } from '../entry.jsx';
 import { getAllDms } from '../actions/dmActions.js';
 import { getAllCharacters } from '../actions/characterActions.js';
+import { logout } from '../actions/userActions.js';
 
-const Fade = ({ in: inProp, show, toCharacter, toDm }) => (
+const Fade = ({ in: inProp, show, toCharacter, toDm, logout }) => (
   <Transition in={inProp}
     timeout={0}
     appear>
@@ -20,6 +20,7 @@ const Fade = ({ in: inProp, show, toCharacter, toDm }) => (
       <div className={`hamburger-dropdown-div dropdown-${state}`}>
         <button onClick={toDm}>Dungeon Master</button>
         <button onClick={toCharacter}>Player</button>
+        <button onClick={logout}>Logout</button>
       </div>
     )}
   </Transition>
@@ -32,6 +33,7 @@ export class Navbar extends React.Component {
     this.homeOnClick = this.homeOnClick.bind(this);
     this.dmOnClick = this.dmOnClick.bind(this);
     this.characterOnClick = this.characterOnClick.bind(this);
+    this.logoutOnClick = this.logoutOnClick.bind(this);
     this.state={
       hamburgerToggle: false
     }
@@ -69,6 +71,11 @@ export class Navbar extends React.Component {
     history.push('./landing')
   }
 
+  logoutOnClick(){
+    store.dispatch(logout())
+      history.push('./')
+  }
+
   render(){
 
     return(
@@ -95,7 +102,7 @@ export class Navbar extends React.Component {
             />
           </div>
         </button>
-          <Fade in={this.state.hamburgerToggle} show={this.state.hamburgerToggle} toDm={this.dmOnClick} toCharacter={this.characterOnClick}/>
+          <Fade in={this.state.hamburgerToggle} show={this.state.hamburgerToggle} toDm={this.dmOnClick} toCharacter={this.characterOnClick} logout={this.logoutOnClick}/>
       </nav>
     )
   }
