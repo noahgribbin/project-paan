@@ -10,7 +10,8 @@
   text-align: center;
   font-size: 2.0rem;
   line-height: 2.75rem;
-  margin-bottom: 1rem
+  margin-bottom: 1rem;
+  display: inline-block;
 }
 
 .create-dm-form {
@@ -19,16 +20,22 @@
 
 .create-dm-input-div {
   width:100%;
+  height: 50px;
+  border: 2px solid $color-5;
 }
 
 .create-dm-input {
-  display: block;
-  width: 90%;
+  display: inline-block;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
   background: #eee;
   padding-left: 5%;
-  margin-top: 1rem;
+  margin-top: 0;
+  float: left;
 }
 .create-dm-input:focus{
   // border:none;
@@ -36,6 +43,47 @@
 }
 
 .create-dm-button {
-
+  border: none;
+  border-radius: 0;
+  display: inline-block;
+  width: 30%;
+  float: right;
+  margin: 0;
+  height: 100%;
 
 }
+
+.plus-dropdown{
+  display: inline-block;
+  color: $color-5;
+  display: inline-block;
+  padding: 8px;
+  margin-left: .5rem;
+}
+.title-icon-container{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.dropdown-form-exited{
+  transform: translateY(-1000%);
+  transition: 400ms;
+  height: 0;
+  div{
+    display: none
+  }
+  button{
+    display: none;
+  }
+}
+.dropdown-form-exiting{
+  transition: 400ms
+
+}
+.dropdown-form-entering{
+    transform: translateY(-1000%);
+}
+.dropdown-form-entered{
+  transform: translate(0%);
+  transition: 400ms ease-in-out;}

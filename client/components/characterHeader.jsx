@@ -18,7 +18,6 @@ export default class CharacterHeader extends React.Component {
     console.log('CharacterHeader props', this.props);
     this.toggleCharacterManagment = this.toggleCharacterManagment.bind(this);
     this.updateCharacter = this.props.updateCharacter.bind(this);
-    // this.loadCharacterData = this.props.loadCharacterData.bind(this);
     this.state = {
       showCharacterManagment: false,
       campaignName: ''
@@ -26,28 +25,12 @@ export default class CharacterHeader extends React.Component {
     console.log('!!!!!!!',this.props.campaignName);
   }
 
-
-  // async componentWillMount(){
-  //   console.log('COMPINENT WILL MOUNT');
-  //   await this.loadCharacterData()
-  //   await this.setState({campaignName: this.props.campaignName})
-  //
-  // }
-  //  async componentDidMount() {
-  //    console.log('COMPINENT DID MOUNT');
-  //   console.log('localState',this.state);
-  // }
-
-
   toggleCharacterManagment() {
     this.setState(prevState => ({
       showCharacterManagment: !prevState.showCharacterManagment
     }))
   }
 
-  toggleJoinParty() {
-// this.setState party
-  }
   onSubmit(e) {
     e.preventDefault();
     this.toggleCharacterManagment();
@@ -61,7 +44,7 @@ export default class CharacterHeader extends React.Component {
           character={this.props.character}
         />
         <h1 onClick={this.toggleCharacterManagment}>Click to Manage Character</h1>
-        {this.props.character ? <h1>{this.props.updateCampaignName}</h1> :null}
+        {this.props.campaign ? <h1>{this.props.campaign.campaignName}</h1> :null}
         { this.state.showCharacterManagment ?
           <section>
             <JoinPartyForm
@@ -81,15 +64,6 @@ export default class CharacterHeader extends React.Component {
                 onInput = {this.props.onInput}
                 toggleCharacterManagment = {this.toggleCharacterManagment}
                 character={this.props.character}
-                lv={this.props.lv}
-                hp={this.props.hp}
-                ac={this.props.ac}
-                strength={this.props.strength}
-                dexterity={this.props.dexterity}
-                constitution={this.props.constitution}
-                intelligence={this.props.intelligence}
-                wisdom={this.props.wisdom}
-                charisma={this.props.charisma}
               />
             </section>
           </section>

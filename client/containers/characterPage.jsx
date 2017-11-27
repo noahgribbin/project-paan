@@ -16,6 +16,7 @@ import { SpellList } from '../components/spellList.jsx'
 import { DeleteCharacter } from '../components/deleteCharacter.jsx'
 import { UpdateCharacterForm } from '../components/updateCharacterForm.jsx'
 import  CharacterHeader  from '../components/characterHeader.jsx'
+import  { Navbar } from '../components/navbar.jsx'
 
 import { createWeapon, getAllWeapons, deleteWeapon, updateWeapon, updateWeaponName, setWeapons, getCharacter,
          getAllCharacters, deleteCharacter,updateCharacter, updateCharacterName,
@@ -66,25 +67,20 @@ class CharacterPage extends React.Component {
       charisma: ''
     }
   }
-
-
-
    async componentWillMount(){
-    console.log('WILL');
-    console.log('componentDidMount',this.state);
-    console.log('componentDidMount',this.props);
+    console.log('state',this.state);
+    console.log('props',this.props);
     var data = {
       id: this.props.sessionCharacterId,
       token: this.props.token
     }
-  await this.props.getCharacter(data)
+    await this.props.getCharacter(data)
     .then(character => {
       console.log('CHARACTER', character);
-      // var campaignName = character.value.dmID.campaignName
-      // var characterName = character.value.name
       var characterName = character.value
-      // this.setState({campaignName:campaignName})
-      // this.setState({characterName:characterName})
+      if(character.value.dmID.campaignName){
+        var campaignName = character.value.dmID.campaignName
+      }
       this.setState({cahracter:character})
     })
     console.log(this.state);
@@ -92,11 +88,6 @@ class CharacterPage extends React.Component {
     await this.props.getAllWeapons(data)
     await  this.props.getAllSpells(data)
   }
-
-  // loadCharacterData() {
-  //   console.log('in');
-
-
 
   // Party function
   onJoinPartySubmit() {
@@ -114,6 +105,7 @@ class CharacterPage extends React.Component {
       console.log('this.state', this.state);
     })
 }
+
   // Character functions
   onJoinCodeInput(e) {
     store.dispatch(setJoinCode(e.target.value))
@@ -125,7 +117,7 @@ class CharacterPage extends React.Component {
     .then(() => {
       store.dispatch(getAllCharacters(allCharacterData))
       .then(() => {
-        debugger
+
         history.push('./player')
       })
     })
@@ -418,6 +410,8 @@ class CharacterPage extends React.Component {
   render() {
     return (
       <section>
+        <Navbar />
+        <section className="page-container">
         <CharacterHeader
           character={this.props.character}
           onJoinPartySubmit = {this.onJoinPartySubmit}
@@ -427,18 +421,7 @@ class CharacterPage extends React.Component {
           loadCharacterData={this.loadCharacterData}
           onInput = {this.onInput}
           campaign = {this.props.campaign}
-          campaignName={this.props.campaignName}
-          updateCampaignName={this.state.campaignName}
-          characterName={this.state.characterName}
-          hp={this.state.hp}
-          ac={this.state.ac}
-          strength={this.state.strength}
-          dexterity={this.state.dexterity}
-          constitution={this.state.constitution}
-          intelligence={this.state.intelligence}
-          wisdom={this.state.wisdom}
-          charisma={this.state.charisma}
-
+          campaignName={this.state.campaignName}
         />
 
         <CreateWeaponForm
@@ -482,16 +465,13 @@ class CharacterPage extends React.Component {
 
         { this.props.campaign ? <h1  className="to-session-page-h1" onClick={this.toSessionPage}>TO SESSION PAGE</h1> :null}
       </section>
+      </section>
     )
   }
 }
 
 
 const mapStateToProps = (state) => {
-  console.log('state has CHANGED',state.characterReducer);
-  console.log('campaign',state.characterReducer.campaign);
-  console.log('campaignName',state.characterReducer.campaignName);
-  // debugger
   return {
     weapons: state.characterReducer.weapons,
     armor:   state.characterReducer.armor,
@@ -532,7 +512,6 @@ CharacterPage.propTypes = {
   weapons:         React.PropTypes.array,
   armor:  React.PropTypes.array,
   spell:  React.PropTypes.array,
-  character:  React.PropTypes.object.isRequired,
   campaign:  React.PropTypes.object,
   campaignName:  React.PropTypes.string
 }

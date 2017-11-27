@@ -58,10 +58,10 @@ export default function characterReducer(state=initialState, action) {
     return Object.assign({}, state, {
       // update state
       character: null,
+      campaign: null,
       // characterName: null,
       // id: null,
       // campaignName: null,
-      // campaign: undefined,
       // weaponName:null,
       // armorName:null,
       // spellName:null,
@@ -87,6 +87,7 @@ export default function characterReducer(state=initialState, action) {
       console.log('HAS DM');
       return Object.assign({}, state, {
         character: action.payload,
+        campaign: action.payload.dmID,
       })
 
 

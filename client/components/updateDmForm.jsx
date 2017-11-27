@@ -20,11 +20,6 @@ export class UpdateDmForm extends React.Component {
       }
   }
 
-  // componentDidMount(){
-  //   document.getElementById("update-weapon-form-shader-"+this.props.dm._id).focus()
-  // }
-
-
   stopPropagation(e) {
     e.stopPropagation()
   }
@@ -51,27 +46,28 @@ export class UpdateDmForm extends React.Component {
   render() {
     return (
       <section className="update-weapon-form-shader"
-              //  id={"update-weapon-form-shader-"+this.props.dm._id}
                onClick={this.props.toggleHide}
                onKeyDown={this.onEscapeKey}
                tabIndex="0"
                >
-        <form className='update-weapon-form'
+        <div className="update-form-container">
+        <form className='create-dm-form'
               onSubmit={this.updateAndToggle}
-              // id={this.props.dm._id}
               onClick={this.stopPropagation}
                 >
-          <div className="update-weapon-form-input-div">
-            <input className="update-weapon-form-input"
+          <div className="create-dm-input-div">
+            <input className="create-dm-input"
+
                    onChange={this.updateCampaignName}
-                  //  placeholder={this.props.dm.campaignName}
+                   placeholder={this.props.dm.campaignName}
                    onKeyDown={this.deepOnEscapeKey}
                    ></input>
-          </div>
-          <button className="update-weapon-form-button"
+          <button className="create-dm-button"
                   type="submit"
                   >Update</button>
+          </div>
         </form>
+      </div>
       </section>
     )
   }

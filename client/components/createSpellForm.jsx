@@ -65,7 +65,7 @@ export class CreateSpellForm extends React.Component {
      function isTrue(ele) {
        return ele === true;
      }
-    //  debugger
+    //  
      for (var i = 0; i < fields.length; i++) {
        var error = fields[i]+'Error'
        if(this.state[fields[i]] ===''){
