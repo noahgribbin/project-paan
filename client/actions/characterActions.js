@@ -8,7 +8,7 @@ export function createCharacter(data) {
   return  {
     type: 'CREATE_CHARACTER',
     payload: request
-    .post(`${'http://localhost:8000'}/api/character`)
+    .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/character`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.character)
     .then(res => {
@@ -23,7 +23,7 @@ export function joinParty(data) {
   return {
     type: 'JOIN_PARTY',
     payload: request
-    .post(`${'http://localhost:8000'}/api/character/${data.code}`)
+    .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.code}`)
     .set({ authorization: `Bearer ${data.token}`})
     .send({id:data.id})
     .then( res => {
@@ -37,7 +37,7 @@ export function getCharacter(data) {
   return {
     type: 'GET_CHARACTER',
     payload: request
-    .get(`${'http://localhost:8000'}/api/character/${data.id}`)
+    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log('res.body: ',res.body);
@@ -50,7 +50,7 @@ export function getAllCharacters(data) {
   return {
     type: 'GET_ALL_CHARACTER',
     payload: request
-    .get(`${'http://localhost:8000'}/api/characters/${data.id}`)
+    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/characters/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       return res.body;
@@ -62,7 +62,7 @@ export function getPartyMembers(data) {
   return {
     type: 'GET_PARTY_MEMBERS',
     payload: request
-    .get(`${'http://localhost:8000'}/api/character/party/${data.id}`)
+    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/party/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then(res => {
       return res.body;
@@ -74,7 +74,7 @@ export function updateCharacter(data) {
   return {
     type: 'UPDATE_CHARACTER',
     payload: request
-    .put(`${'http://localhost:8000'}/api/character/${data.id}`)
+    .put(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.character)
     .then( res => {
@@ -88,7 +88,7 @@ export function deleteCharacter(data) {
   return {
     type: 'DELETE_CHARACTER',
     payload: request
-    .delete(`${'http://localhost:8000'}/api/character/${data.id}`)
+    .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log('deleteCharacter res.body', res.body)
@@ -127,7 +127,7 @@ export function createWeapon(data) {
   return {
     type: 'CREATE_WEAPON',
     payload: request
-    .post(`${'http://localhost:8000'}/api/character/${data.id}/weapon`)
+    .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/weapon`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.weapon)
     .then( res => {
@@ -141,7 +141,7 @@ export function createWeapon(data) {
 //   return {
 //     type: 'CREATE_'+type,
 //     payload: request
-//     .post(`${'http://localhost:8000'}/api/character/${data.id}/${type}`)
+//     .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/${type}`)
 //     .set({ authorization: `Bearer ${data.token}`})
 //     .send(data.type)
 //     .then( res => {
@@ -154,7 +154,7 @@ export function getAllWeapons(data) {
   return {
     type: 'GET_ALL_WEAPONS',
     payload: request
-    .get(`${'http://localhost:8000'}/api/character/${data.id}/weapons`)
+    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/weapons`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log('GET_ALL_WEAPONS res', res);
@@ -167,7 +167,7 @@ export function deleteWeapon(data) {
   return {
     type: 'DELETE_WEAPON',
     payload: request
-    .delete(`${'http://localhost:8000'}/api/character/weapon/${data.id}`)
+    .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/weapon/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log('deleteWeapon res: ', res);
@@ -180,7 +180,7 @@ export function updateWeapon(data) {
 
   return {
     type: 'UPDATE_WEAPON',
-    payload: request.put(`${'http://localhost:8000'}/api/character/weapon/${data.id}`)
+    payload: request.put(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/weapon/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.weapon)
     .then( res => {
@@ -216,7 +216,7 @@ export function createArmor(data) {
   return {
     type: 'CREATE_ARMOR',
     payload: request
-    .post(`${'http://localhost:8000'}/api/character/${data.id}/armor`)
+    .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/armor`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.armor)
     .then( res => {
@@ -230,7 +230,7 @@ export function getAllArmor(data) {
   return {
     type: 'GET_ALL_ARMOR',
     payload: request
-    .get(`${'http://localhost:8000'}/api/character/${data.id}/armor`)
+    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/armor`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log('GET_ALL_ARMOR res', res);
@@ -243,7 +243,7 @@ export function deleteArmor(data) {
   return {
     type: 'DELETE_ARMOR',
     payload: request
-    .delete(`${'http://localhost:8000'}/api/character/armor/${data.id}`)
+    .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/armor/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log('deleteArmor res: ', res);
@@ -256,7 +256,7 @@ export function updateArmor(data) {
 
   return {
     type: 'UPDATE_ARMOR',
-    payload: request.put(`${'http://localhost:8000'}/api/character/armor/${data.id}`)
+    payload: request.put(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/armor/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.armor)
     .then( res => {
@@ -286,7 +286,7 @@ export function createSpell(data) {
   return {
     type: 'CREATE_SPELL',
     payload: request
-    .post(`${'http://localhost:8000'}/api/character/${data.id}/spell`)
+    .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/spell`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.spell)
     .then( res => {
@@ -299,7 +299,7 @@ export function getAllSpells(data) {
   return {
     type: 'GET_ALL_SPELLS',
     payload: request
-    .get(`${'http://localhost:8000'}/api/character/${data.id}/spells`)
+    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/spells`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log('GET_ALL_SPELL res', res);
@@ -312,7 +312,7 @@ export function deleteSpell(data) {
   return {
     type: 'DELETE_SPELL',
     payload: request
-    .delete(`${'http://localhost:8000'}/api/character/spell/${data.id}`)
+    .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/spell/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log('deleteSpell res: ', res);
@@ -325,7 +325,7 @@ export function updateSpell(data) {
 
   return {
     type: 'UPDATE_SPELL',
-    payload: request.put(`${'http://localhost:8000'}/api/character/spell/${data.id}`)
+    payload: request.put(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/spell/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.spell)
     .then( res => {
