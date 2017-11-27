@@ -1,0 +1,70 @@
+on create weapon/armor clear weaponName/armorName from state
+  to prevent the accidental creating of duplicate items on click
+  of create button
+
+Fonts
+  Montserrat
+  Raleway
+
+
+Refactor Characterpage functions to not have so
+many goddamn functions
+
+functions could be Create/update/delete get and take
+model type as a arg
+
+  ex:
+    onSubmitCreate(weapon){
+
+    }
+
+
+    CHANGE CLASS NAMES OF WEAPON/ARMOR/SPELL ITEMS
+    They dont all need to have their own scss files,
+    they can share the same class
+      to save time i didnt change the name
+        now you gotta do it
+          lololololol
+            im sorry
+            :c
+            :D
+            easy work
+                  light work
+
+
+Suspect Padding-left on weapon/armor/spell list item is
+fucking with the dispaly of the Modal Shader
+  is offset to the right
+    mozbox?
+      whatever
+        which element needs to be fixed to
+        have padding not push screen
+
+
+Fix prop function naming conventions
+  i like having the props be what the function is
+    ex:
+    instead of onSubmit
+                  UpdateWeapon
+
+find a better way to have secret codes
+    maybe give them a code
+
+
+dont forget to change the backend routes from localhost
+ to the correct url
+  also maybe on the front end i didnt look but im
+    p sure in the actions too
+
+overflow on dm list items
+
+add universal grey shader class for any popup functionality
+
+can create a character with no name, or empty field
+
+add proficiency bonus and speed to character createing/updaing
+
+beef up weapon cards,
+maybe spell,
+    optional inputs,
+    nickname spell dc save type

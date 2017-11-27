@@ -1,0 +1,43 @@
+.delete-character-container{
+  display: inline-block;
+  width: 50%;
+}
+
+.delete-character-title{
+  width: 95%;
+  font-size: 1rem;
+  margin-left: auto;
+  background: $error-color;
+  color: $color-1;
+  margin-right: auto;
+  border-radius: 5px;
+}
+.delete-character-holder{
+  width: 50%;
+  display: inline-block;
+}
+
+.delete-character-warning-shader{
+  width: 100vw;
+  height:100vh;
+  background: rgba(34,34,34, .9);
+  position: fixed;
+  top:0;
+}
+
+.delete-character-warning-text{
+  color: white;
+}
+
+.delete-character-yes{
+  color: white;
+  margin-top: 1rem;
+  font-size: 4rem;
+  text-align: center;
+}
+.delete-character-no{
+  color: white;
+  margin-top: 1rem;
+  font-size: 4rem;
+  text-align: center;
+}

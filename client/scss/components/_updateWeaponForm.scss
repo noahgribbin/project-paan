@@ -1,0 +1,39 @@
+.update-weapon-form-shader {
+  width: 100vw;
+  height:100vh;
+  background: rgba(0,0,0, .7);
+  position: fixed;
+  top:70px;
+  left:0;
+  opacity: 1;
+}
+.update-weapon-form-base {
+  width: 100vw;
+  height:100vh;
+  // background: white;
+  position: fixed;
+  top:0;
+  left:0;
+}
+.update-weapon-form-title{
+
+}
+.update-weapon-form{
+  width:90%;
+  position: absolute;
+  top: 1rem;
+  left: 5%;
+  overflow: hidden;
+}
+
+.update-weapon-form-input-div{
+
+}
+.update-weapon-form-input{
+  width: 100%
+}
+
+.update-weapon-form-button{
+  width: 100%
+
+}

@@ -1,0 +1,125 @@
+
+nav{
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  transition: 300ms;
+  background: $blue;
+  overflow-x: hidden;
+  max-width: 100vw;
+      .navbar-brand{
+        // width: 70%;
+        height: 70px;
+        display: inline-block;
+        float: left;
+        .navbar-logo{
+          float: left;
+          display: block;
+          height: 70px;
+          width: 70px;
+          color: #eca565;
+          background-size: contain;
+          position: relative;
+          color: $color-4;
+          background-size: contain;
+          .navbar-svg{
+            position: absolute;
+            top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            position: block;
+            height: 50px;
+            line-height: 80px;
+            width: 50px;
+          }
+        }
+        .navbar-title{
+          display: inline-block;
+          float: left;
+          font-size: 1.25rem;
+          color: $color-1;
+          line-height: 70px;
+          height: 70px;
+        }
+    }
+    button{
+      width: 80px;
+      height: 70px;
+      margin-top: 0;
+      background: none;
+      display: inline-block;
+      float: right;
+      position: relative;
+      text-align: center;
+      .hamburger-holder{
+        width: 70px;
+      }
+      div{
+        height: 100%;
+      svg{
+        position: absolute;
+        padding-top: 10px;
+        padding-left: 10px;
+        left: 0;
+      }
+    }
+    }
+}
+
+.flip-burger{
+  transition: 400ms;
+  transform: rotate(-0.5turn);
+}
+.revert-flip-burger{
+  transition: 400ms;
+  transform: rotate(0turn);
+}
+.hamburger-nav{
+
+}
+.hamburger-dropdown-div{
+  position: absolute;
+  width: 100%;
+  padding-top: 70px;
+  z-index: -1;
+  button{
+    display: block;
+    float: none;
+    width: 100%;
+    height: unset;
+    color: #f4f4f4;
+    padding: 0 8px;
+    border-top: 1px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-weight: 100;
+  }
+}
+
+.dropdown-entering {
+  background: $blue;
+  transform: translateY(-100%);
+
+
+}
+.dropdown-entered {
+  opacity: 1;
+  background: $blue;
+  transform: translate(0%);
+  transition: 400ms ease-in-out;
+}
+
+.dropdown-exiting {
+  opacity: 1;
+  transition: 400ms
+}
+.dropdown-exited {
+  transform: translateY(-100%);
+  transition: 400ms;
+}
+
+.no-background{
+  background: none;
+}
