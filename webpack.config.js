@@ -20,8 +20,9 @@ dotenv.load();
 module.exports = {
   entry: './client/entry.jsx',
   output: {
-    path: path.resolve('dist'),
+     path: path.join(__dirname, 'public'),
     filename: 'index_bundle.js',
+    publicPath: '/public',
     sourceMapFilename: 'sourceMap.map'
   },
   devServer: {
