@@ -5,6 +5,7 @@ import {Router, Route, browserHistory} from 'react-router';
 import createHistory from 'history/createBrowserHistory'
 
 import store from './store.js';
+import index from './index.html';
 
 import {signup, login, logout} from './actions/userActions.js';
 

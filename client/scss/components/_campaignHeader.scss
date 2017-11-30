@@ -29,23 +29,23 @@
 }
 
 .campaign-header-exited{
-  position: absolute;
-transform: translateX(100%);
-transition: 400ms;
+  transform: translateX(100%);
+  transition: 400ms;
 display: none
 }
 .campaign-header-exiting{
-  position: absolute;
-background: red;
-transition: 400ms;
+  transform: translateX(-100%);
+  transition: 400ms;
 }
 .campaign-header-entered{
-  position: absolute;
   transform: translateX(0%);
   transition: 400ms;
+  overflow-x: hidden;
+
 }
 .campaign-header-entering{
-  position: absolute;
-  transform: translateX(100%);
+  transform: translateX(-100%);
   transition: 400ms;
+  // overflow-x: hidden;
+
 }

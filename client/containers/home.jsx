@@ -8,7 +8,6 @@ import  {CharacterHome} from '../components/characterHome.jsx'
 import  {DmHome} from '../components/dmHome.jsx'
 import  {Navbar} from '../components/navbar.jsx'
 import { history } from '../entry.jsx';
-
 import { getAllCharacters, setCharacters, getAllArmor } from '../actions/characterActions.js';
 import { getAllDms } from '../actions/dmActions.js';
 

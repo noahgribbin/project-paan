@@ -5,6 +5,8 @@ const  webpackConfig = require('../webpack.config.js');
 
 process.env.NODE_ENV = 'production';
 
+console.log(webpackConfig)
+
 console.log('Generating minified bundle for production via Webpack...');
 
 webpack(webpackConfig).run((err, stats) => {

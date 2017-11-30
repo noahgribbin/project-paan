@@ -19,12 +19,20 @@ dotenv.load();
 
 module.exports = {
   entry: './client/entry.jsx',
+  // Heroku
   output: {
-     path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'public'),
     filename: 'index_bundle.js',
-    publicPath: '/public',
+    publicPath: '/',
     sourceMapFilename: 'sourceMap.map'
   },
+  // // Local
+  // output: {
+  //   path: path.resolve('public'),
+  //   filename: 'index_bundle.js',
+  //     // publicPath: '/',
+  //   sourceMapFilename: 'sourceMap.map'
+  // },
   devServer: {
     historyApiFallback: true,
     contentBase: './',
@@ -32,9 +40,10 @@ module.exports = {
   },
   module: {
     loaders: [
+
+      { test: /\.html$/, loader: 'html-loader', exclude: /node_modules/ },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.png$/, loader: ['url-loader'], exclude:/node_modules/},
       { test: /\.(css|png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
       { test: /\.scss$/, loaders: ["style-loader","css-loader","sass-loader"],exclude: /node_modules/ },
     ]
