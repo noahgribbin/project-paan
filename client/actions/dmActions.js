@@ -6,7 +6,7 @@ export function createDm(data) {
   return {
     type: 'CREATE_DM',
     payload: request
-    .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/dm`)
+    .post(`${'http://localhost:8000'}/api/dm`)
     .set({authorization: `Bearer ${data.token}`})
     .send(data.dm)
     .then( res => {
@@ -20,7 +20,7 @@ export function getDm(data) {
 return {
   type: 'GET_DM',
   payload: request
-  .get(`${`https://dungeon-manager-be.herokuapp.com`}/api/dm/${data.id}`)
+  .get(`${`http://localhost:8000`}/api/dm/${data.id}`)
   .set({ authorization: `Bearer ${data.token}`})
   .then( res => {
     return res.body
@@ -32,7 +32,7 @@ export function getAllDms(data) {
   return {
     type: 'GET_ALL_DMS',
     payload: request
-    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/dms/${data.id}`)
+    .get(`${'http://localhost:8000'}/api/dms/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       return res.body.dms;
@@ -58,7 +58,7 @@ export function getCampaignMembers(data) {
   return {
     type: 'GET_CAMPAIGN_MEMBERS',
     payload: request
-    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/dm/party/${data.id}`)
+    .get(`${'http://localhost:8000'}/api/dm/party/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log(res.body);
@@ -71,7 +71,7 @@ export function updateDm(data) {
   return {
     type: 'UPDATE_DM',
     payload: request
-    .put(`${'https://dungeon-manager-be.herokuapp.com'}/api/dm/${data.id}`)
+    .put(`${'http://localhost:8000'}/api/dm/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.body)
     .then( res => {
@@ -84,7 +84,7 @@ export function deleteDm(data) {
   return {
     type: 'DELETE_DM',
     payload: request
-    .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/dm/${data.id}`)
+    .delete(`${'http://localhost:8000'}/api/dm/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
       console.log(res.body);

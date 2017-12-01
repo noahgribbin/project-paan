@@ -8,15 +8,41 @@ export class UpdateCharacterForm extends React.Component {
   constructor(props) {
     super(props)
       console.log('updateCharacterForm',this);
-      // this.onSubmit = this.props.onSubmit.bind(this)
-      // this.onInput = this.props.onInput.bind(this)
       this.toggleHide = this.props.toggleHide.bind(this)
-      this.updateAndToggle = this.props.updateAndToggle.bind(this)
-      this.onEscapeKey = this.props.onEscapeKey.bind(this)
-      this.deepOnEscapeKey = this.props.deepOnEscapeKey.bind(this)
+      this.updateAndToggle = this.updateAndToggle.bind(this)
+      this.onEscapeKey = this.onEscapeKey.bind(this)
+      this.deepOnEscapeKey = this.deepOnEscapeKey.bind(this)
       this.stopPropagation = this.props.stopPropagation.bind(this)
+      this.closeSelect = this.closeSelect.bind(this)
+      this.makeUppercase = this.makeUppercase.bind(this)
+      this.changeAndClose = this.changeAndClose.bind(this)
       this.state = {
-
+        characterName: this.props.character.characterName,
+        race: this.props.character.race,
+        class: this.props.character.class,
+        lv: this.props.character.lv,
+        ac: this.props.character.ac,
+        hp: this.props.character.hp,
+        strength: this.props.character.strength,
+        dexterity: this.props.character.dexterity,
+        constitution: this.props.character.constitution,
+        intelligence: this.props.character.intelligence,
+        wisdom: this.props.character.wisdom,
+        charisma: this.props.character.charisma,
+        characterName: this.props.character.characterName,
+        raceError: false,
+        classError: false,
+        lvError: false,
+        acError: false,
+        hpError: false,
+        strengthError: false,
+        dexterityError: false,
+        constitutionError: false,
+        intelligenceError: false,
+        wisdomError: false,
+        charismaError: false,
+        raceShow: false,
+        classShow: false,
       }
   }
 
@@ -24,6 +50,47 @@ export class UpdateCharacterForm extends React.Component {
     document.getElementById("updateCharacterForm").focus()
     this.setState()
   }
+
+  updateAndToggle(e) {
+    e.preventDefault()
+    this.toggleHide();
+    this.props.onSubmit();
+  }
+
+  errorCheck
+
+  onEscapeKey(e) {
+    console.log(e.keyCode);
+    if(e.keyCode===27){
+      this.toggleHide()
+    }
+  }
+  deepOnEscapeKey(e) {
+    this.stopPropagation(e)
+    this.onEscapeKey(e)
+  }
+
+  makeUppercase(str){
+    var firstLetter = str.charAt(0).toUpperCase();
+    var restOfString = str.slice(1);
+    return firstLetter+restOfString
+  }
+
+  changeAndClose(e){
+    this.props.onInput(e)
+    this.closeSelect(e)
+  }
+
+  closeSelect(e){
+    var name = e.target.getAttribute("name");
+    var show = name+"Show";
+    console.log(name);
+    console.log(show);
+    this.setState(prevState => ({
+      [show]: !prevState[show]
+    }))
+  }
+
 
 
 
@@ -46,6 +113,82 @@ export class UpdateCharacterForm extends React.Component {
                          name="characterName"
                          placeholder="Character name"
                          onKeyDown={this.deepOnEscapeKey}></input>
+                         <section className="select-section">
+                           <div onClick={this.toggleState}
+                                className={"select-title " + (this.state.raceShow ? ' select-title-toggle ' : null) + (this.props.raceError && this.state.showErrors ? ' input-error ' :null)}
+                                name="race">
+                             {this.props.race ? this.makeUppercase(this.props.race) : "Select Race"}
+                           </div>
+                           {this.state.raceShow ?
+                             <div className="select-option-container">
+                               <div className="select-option"
+                                    onClick={this.changeAndClose}
+                                    name="race"
+                                    value="human"
+                                    type="text">
+                                   Human
+                               </div>
+                               <div className="select-option"
+                                    onClick={this.changeAndClose}
+                                    name="race"
+                                    value="orc"
+                                    type="text">
+                                   Orc
+                               </div>
+                               <div className="select-option"
+                                    onClick={this.changeAndClose}
+                                    name="race"
+                                    value="elf"
+                                    type="text">
+                                   Elf
+                               </div>
+                               <div className="select-option"
+                                    onClick={this.changeAndClose}
+                                    name="race"
+                                    value="dwarf"
+                                    type="text">
+                                   Dwarf
+                               </div>
+                             </div>
+                           :null}
+                           <div onClick={this.toggleState}
+                                className={"select-title " + (this.state.classShow ? ' select-title-toggle ' :null ) + (this.props.classError && this.state.showErrors ?  ' input-error ' :null)}
+                                name="class">
+                             {this.props.class ? this.makeUppercase(this.props.class) : "Select Class"}
+                           </div>
+                           {this.state.classShow ?
+                             <div className="select-option-container">
+                               <div className="select-option"
+                                    onClick={this.changeAndClose}
+                                    name="class"
+                                    value="wizard"
+                                    type="text">
+                                   Wizard
+                               </div>
+                               <div className="select-option"
+                                    onClick={this.changeAndClose}
+                                    name="class"
+                                    value="fighter"
+                                    type="text">
+                                   Fighter
+                               </div>
+                               <div className="select-option"
+                                    onClick={this.changeAndClose}
+                                    name="class"
+                                    value="cleric"
+                                    type="text">
+                                   Cleric
+                               </div>
+                               <div className="select-option"
+                                    onClick={this.changeAndClose}
+                                    name="class"
+                                    value="druid"
+                                    type="text">
+                                   Druid
+                               </div>
+                             </div>
+                           :null}
+                         </section>
                   <input className="update-character-input"
                          onChange={this.props.onInput}
                          type="text"

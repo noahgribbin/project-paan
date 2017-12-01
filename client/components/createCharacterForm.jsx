@@ -14,13 +14,20 @@ export class CreateCharacterForm extends React.Component {
     this.errorCheck = this.props.errorCheck.bind(this);
     this.submitAndClear = this.submitAndClear.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.toggleState = this.toggleState.bind(this);
+    this.closeSelect = this.closeSelect.bind(this);
+    this.changeAndClose = this.changeAndClose.bind(this);
+    this.makeUppercase = this.makeUppercase.bind(this);
     this.state = {
-      showErrors: false
+      showErrors: false,
+      raceShow: false,
+      classShow: false
     }
   }
   async onChange(e){
-  const fields = ['characterName','lv','ac','hp','strength','dexterity','constitution','intelligence','wisdom','charisma'];
+  const fields = ['characterName', 'race', 'class', 'lv','ac','hp','strength','dexterity','constitution','intelligence','wisdom','charisma'];
   // this.setState({showErrors: false})
+  console.log(e.target);
   console.log(this.state);
   await this.props.onInput(e)
   await this.props.errorCheck(fields)
@@ -33,6 +40,45 @@ export class CreateCharacterForm extends React.Component {
     if(this.props.createCharacterError) return
     console.log('no Error');
     this.setState({showErrors: false})
+  }
+
+  toggleState(e){
+    console.log('show Race');
+    var name = e.target.getAttribute('name')+'Show'
+    var opp = name === 'raceShow' ? 'classShow' : 'raceShow';
+    console.log(name);
+    console.log(opp);
+    if(this.state[opp]){
+        console.log('SHOULD CLOSE');
+        this.setState(prevState =>({
+          [opp]: !prevState[opp]
+        }))
+    }
+    this.setState(prevSate => ({
+      [name]: !prevSate[name]
+    }))
+    console.log(this.state);
+  }
+
+  closeSelect(e){
+    var name = e.target.getAttribute("name");
+    var show = name+"Show";
+    console.log(name);
+    console.log(show);
+    this.setState(prevState => ({
+      [show]: !prevState[show]
+    }))
+  }
+
+  makeUppercase(str){
+    var firstLetter = str.charAt(0).toUpperCase();
+    var restOfString = str.slice(1);
+    return firstLetter+restOfString
+  }
+
+  changeAndClose(e){
+    this.onChange(e)
+    this.closeSelect(e)
   }
 
   render() {
@@ -51,6 +97,82 @@ export class CreateCharacterForm extends React.Component {
                      type="text"
                      name="characterName"
                      placeholder="Character name" ></input>
+              <section className="select-section">
+                <div onClick={this.toggleState}
+                     className={"select-title " + (this.state.raceShow ? ' select-title-toggle ' : null) + (this.props.raceError && this.state.showErrors ? ' input-error ' :null)}
+                     name="race">
+                  {this.props.race ? this.makeUppercase(this.props.race) : "Select Race"}
+                </div>
+                {this.state.raceShow ?
+                  <div className="select-option-container">
+                    <div className="select-option"
+                         onClick={this.changeAndClose}
+                         name="race"
+                         value="human"
+                         type="text">
+                        Human
+                    </div>
+                    <div className="select-option"
+                         onClick={this.changeAndClose}
+                         name="race"
+                         value="orc"
+                         type="text">
+                        Orc
+                    </div>
+                    <div className="select-option"
+                         onClick={this.changeAndClose}
+                         name="race"
+                         value="elf"
+                         type="text">
+                        Elf
+                    </div>
+                    <div className="select-option"
+                         onClick={this.changeAndClose}
+                         name="race"
+                         value="dwarf"
+                         type="text">
+                        Dwarf
+                    </div>
+                  </div>
+                :null}
+                <div onClick={this.toggleState}
+                     className={"select-title " + (this.state.classShow ? ' select-title-toggle ' :null ) + (this.props.classError && this.state.showErrors ?  ' input-error ' :null)}
+                     name="class">
+                  {this.props.class ? this.makeUppercase(this.props.class) : "Select Class"}
+                </div>
+                {this.state.classShow ?
+                  <div className="select-option-container">
+                    <div className="select-option"
+                         onClick={this.changeAndClose}
+                         name="class"
+                         value="wizard"
+                         type="text">
+                        Wizard
+                    </div>
+                    <div className="select-option"
+                         onClick={this.changeAndClose}
+                         name="class"
+                         value="fighter"
+                         type="text">
+                        Fighter
+                    </div>
+                    <div className="select-option"
+                         onClick={this.changeAndClose}
+                         name="class"
+                         value="cleric"
+                         type="text">
+                        Cleric
+                    </div>
+                    <div className="select-option"
+                         onClick={this.changeAndClose}
+                         name="class"
+                         value="druid"
+                         type="text">
+                        Druid
+                    </div>
+                  </div>
+                :null}
+              </section>
               <input className={"create-character-input " + (this.props.lvError === true && this.state.showErrors ? 'input-error' :null)}
                      onChange={this.onChange}
                      type="number"

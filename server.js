@@ -5,8 +5,7 @@ const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 8080;
 
-import forestFog from '../assets/forestFog.png';
-console.log(forestFog);
+
 //Local
 app.use(express.static(`${__dirname}/public`));
 // Heroku
@@ -20,13 +19,13 @@ app.use(express.static(`${__dirname}/public`));
 // });
 
 // // Local
-app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, 'app', 'index.html'));
-});
-// Heroku
 // app.get('*', function(request, response) {
-//   response.sendFile(path.resolve(__dirname,'public/index.html'));
+//   response.sendFile(path.resolve(__dirname, 'app', 'index.html'));
 // });
+// Heroku
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname,'public/index.html'));
+});
 
 app.listen(PORT, function(err){
   console.log('server up on port ', PORT);

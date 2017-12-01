@@ -47,7 +47,6 @@ export class UpdateSpellForm extends React.Component {
     var fields = ["spellName", "castingTime", "range", "duration", "components", "description"]
     var values = [this.props.spell.spellName, this.props.spell.castingTime, this.props.spell.range, this.props.spell.duration, this.props.spell.components, this.props.spell.description]
     document.getElementById("update-spell-form-shader-"+this.props.spell._id).focus()
-    // store.dispatch(this.setSpellAttributes(data))
     for (var i = 0; i < fields.length; i++) {
       var data = {
         property:fields[i],
@@ -56,7 +55,6 @@ export class UpdateSpellForm extends React.Component {
       console.log(data);
       store.dispatch(this.setSpellAttributes(data))
     }
-    // console.log(store.getState.characterReducer());
   }
 
 

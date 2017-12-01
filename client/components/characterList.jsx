@@ -14,7 +14,8 @@ export class CharacterList extends React.Component {
      super(props)
      console.log(this);
      this.toPlayerPage = this.toPlayerPage.bind(this);
-     this.characters = this.props.characters
+     this.characters = this.props.characters;
+     this.makeUppercase = this.makeUppercase.bind(this);
    }
 
 
@@ -23,9 +24,17 @@ export class CharacterList extends React.Component {
      this.setState({characters: store.getState().characterReducer.weapons})
    }
 
+   makeUppercase(str){
+     var firstLetter = str.charAt(0).toUpperCase();
+     var restOfString = str.slice(1);
+     return firstLetter+restOfString
+   }
 
    async toPlayerPage(e) {
-     var character = e.target.getAttribute('id');
+     console.log(e.target);
+     e.stopPropagation()
+     var character = e.target.getAttribute("id");
+     // var character = e.target;
      console.log('character', character);
      store.dispatch(setSessionCharacter(character))
      var data = {
@@ -45,18 +54,27 @@ export class CharacterList extends React.Component {
 
    render() {
      var toPlayerPage = this.toPlayerPage
+     var makeUppercase = this.makeUppercase
      if(this.props.characters) {
        var character = this.props.characters.map(function(character) {
            return <li className='character-list-li'
                       key={character._id}
                       id={character._id}
                       onClick={toPlayerPage}>
-                      {character.characterName}
+                      <div className="list-title"
+                           id={character._id}>
+                        {character.characterName}
+                      </div>
+                      <div className="list-subtitle"
+                           id={character._id}>
+                        {makeUppercase(character.race) + ' ' + makeUppercase(character.class) +" ("+character.lv+")"}
+                      </div>
+
                   </li>
          })
      }
      return (
-       <section>
+       <section className="character-list-section">
          <h1 className="character-list-title">Character List</h1>
          {this.props.characters ? <ul>{character}</ul> : null}
        </section>

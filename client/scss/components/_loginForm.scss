@@ -63,7 +63,7 @@ background: #eee;
 }
 
 .input-error{
-   border: 1px solid $error-color;
+   border: 1px solid $error-color !important; 
 }
 .input-error-message{
   text-align: center;

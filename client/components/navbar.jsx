@@ -12,6 +12,10 @@ import { getAllDms } from '../actions/dmActions.js';
 import { getAllCharacters } from '../actions/characterActions.js';
 import { logout } from '../actions/userActions.js';
 
+import D20 from '../assets/d20.svg';
+import Hamburger from '../assets/hamburger.svg';
+console.log(D20);
+
 const Fade = ({ in: inProp, show, toCharacter, toDm, logout }) => (
   <Transition in={inProp}
     timeout={0}
@@ -84,22 +88,21 @@ export class Navbar extends React.Component {
                onClick={this.homeOnClick}>
             <a className="navbar-logo">
 
-            <ReactSvg
-              path="client/assets/d20.svg"
-              className="navbar-svg"
-              evalScript="always"
-            />
+              <D20 />
+
           </a>
             <a className="navbar-title">Dungeon Manager</a>
           </div>
         <button>
           <div className={"hamburger-holder " + (this.state.hamburgerToggle ? ' flip-burger ' :null) + (!this.state.hamburgerToggle ? ' revert-flip-burger ' :null) }
                onClick={this.toggleHamburger}>
-            <ReactSvg
+
+           <Hamburger />
+            {/* <ReactSvg
               path="client/assets/hamburger.svg"
               className="navbar-svg "
               evalScript="always"
-            />
+            /> */}
           </div>
         </button>
           <Fade in={this.state.hamburgerToggle} show={this.state.hamburgerToggle} toDm={this.dmOnClick} toCharacter={this.characterOnClick} logout={this.logoutOnClick}/>

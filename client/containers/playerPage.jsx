@@ -25,6 +25,8 @@ class PlayerPage extends React.Component {
     this.resetCharacterState=this.resetCharacterState.bind(this);
     this.state = {
       characterName: '',
+      race: '',
+      class: '',
       lv: '',
       ac: '',
       hp: '',
@@ -37,6 +39,8 @@ class PlayerPage extends React.Component {
       characters: [],
       createCharacterError:false,
       characterNameError: false,
+      raceError: false,
+      classError: false,
       lvError: false,
       acError: false,
       hpError: false,
@@ -78,9 +82,12 @@ class PlayerPage extends React.Component {
 
   onInput(e) {
     console.log('E.target',e.target);
+    var val = e.target.value
+    if (val === undefined) val= e.target.getAttribute("value")
     var type = e.target.getAttribute('name')
+    console.log('Val',val);
     this.setState({
-      [type]: e.target.value
+      [type]: val
     })
     console.log(this.state);
   }
@@ -88,6 +95,8 @@ class PlayerPage extends React.Component {
   resetCharacterState(){
     this.setState({
       characterName: '',
+      race: '',
+      class: '',
       lv: '',
       ac: '',
       hp: '',
@@ -117,6 +126,8 @@ async createCharacter(e) {
     const data = {
       character: {
         characterName: this.state.characterName,
+        race: this.state.race,
+        class: this.state.class,
         lv: this.state.lv,
         ac: this.state.ac,
         hp: this.state.hp,
@@ -133,7 +144,7 @@ async createCharacter(e) {
       id: store.getState().profileReducer.profileID,
       token: store.getState().userReducer.token
     }
-    const fields = ['characterName','lv','ac','hp','strength','dexterity','constitution','intelligence','wisdom','charisma'];
+    const fields = ['characterName', 'race', 'class', 'lv','ac','hp','strength','dexterity','constitution','intelligence','wisdom','charisma'];
     await this.errorCheck(fields)
     if(this.state.createCharacterError) return
     console.log('shouldnt get here if errorcheck returns true');
@@ -155,8 +166,13 @@ async createCharacter(e) {
         <CreateCharacterForm
           onInput={this.onInput}
           onSubmit={this.createCharacter}
+          race={this.state.race}
+          class={this.state.class}
+          onSubmit={this.createCharacter}
           errorCheck={this.errorCheck}
           characterNameError= {this.state.characterNameError}
+          raceError= {this.state.raceError}
+          classError= {this.state.classError}
           lvError= {this.state.lvError}
           acError= {this.state.acError}
           hpError= {this.state.hpError}

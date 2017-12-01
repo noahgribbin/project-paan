@@ -3051,6 +3051,14 @@ var _characterActions = __webpack_require__(29);
 
 var _userActions = __webpack_require__(37);
 
+var _d = __webpack_require__(342);
+
+var _d2 = _interopRequireDefault(_d);
+
+var _hamburger = __webpack_require__(344);
+
+var _hamburger2 = _interopRequireDefault(_hamburger);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3058,6 +3066,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+console.log(_d2.default);
 
 var Fade = function Fade(_ref) {
   var inProp = _ref.in,
@@ -3169,11 +3179,7 @@ var Navbar = exports.Navbar = function (_React$Component) {
           _react2.default.createElement(
             'a',
             { className: 'navbar-logo' },
-            _react2.default.createElement(_reactSvg2.default, {
-              path: 'client/assets/d20.svg',
-              className: 'navbar-svg',
-              evalScript: 'always'
-            })
+            _react2.default.createElement(_d2.default, null)
           ),
           _react2.default.createElement(
             'a',
@@ -3188,11 +3194,7 @@ var Navbar = exports.Navbar = function (_React$Component) {
             'div',
             { className: "hamburger-holder " + (this.state.hamburgerToggle ? ' flip-burger ' : null) + (!this.state.hamburgerToggle ? ' revert-flip-burger ' : null),
               onClick: this.toggleHamburger },
-            _react2.default.createElement(_reactSvg2.default, {
-              path: 'client/assets/hamburger.svg',
-              className: 'navbar-svg ',
-              evalScript: 'always'
-            })
+            _react2.default.createElement(_hamburger2.default, null)
           )
         ),
         _react2.default.createElement(Fade, { 'in': this.state.hamburgerToggle, show: this.state.hamburgerToggle, toDm: this.dmOnClick, toCharacter: this.characterOnClick, logout: this.logoutOnClick })
@@ -3527,7 +3529,7 @@ var request = __webpack_require__(48);
 function createCharacter(data) {
   return {
     type: 'CREATE_CHARACTER',
-    payload: request.post('https://dungeon-manager-be.herokuapp.com' + '/api/character').set({ authorization: 'Bearer ' + data.token }).send(data.character).then(function (res) {
+    payload: request.post('http://localhost:8000' + '/api/character').set({ authorization: 'Bearer ' + data.token }).send(data.character).then(function (res) {
       var response = JSON.parse(res.text);
       return response;
     })
@@ -3538,7 +3540,7 @@ function joinParty(data) {
   console.log('inActionData.id', data.id);
   return {
     type: 'JOIN_PARTY',
-    payload: request.post('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.code).set({ authorization: 'Bearer ' + data.token }).send({ id: data.id }).then(function (res) {
+    payload: request.post('http://localhost:8000' + '/api/character/' + data.code).set({ authorization: 'Bearer ' + data.token }).send({ id: data.id }).then(function (res) {
       console.log('join party res', res);
       return res;
     })
@@ -3548,7 +3550,7 @@ function joinParty(data) {
 function getCharacter(data) {
   return {
     type: 'GET_CHARACTER',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/character/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log('res.body: ', res.body);
       return res.body;
     })
@@ -3558,7 +3560,7 @@ function getCharacter(data) {
 function getAllCharacters(data) {
   return {
     type: 'GET_ALL_CHARACTER',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/characters/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/characters/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       return res.body;
     })
   };
@@ -3567,7 +3569,7 @@ function getAllCharacters(data) {
 function getPartyMembers(data) {
   return {
     type: 'GET_PARTY_MEMBERS',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/character/party/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/character/party/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       return res.body;
     })
   };
@@ -3576,7 +3578,7 @@ function getPartyMembers(data) {
 function updateCharacter(data) {
   return {
     type: 'UPDATE_CHARACTER',
-    payload: request.put('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.character).then(function (res) {
+    payload: request.put('http://localhost:8000' + '/api/character/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.character).then(function (res) {
       console.log('updateCharacter res.body: ', res.body);
       return res.body;
     })
@@ -3586,7 +3588,7 @@ function updateCharacter(data) {
 function deleteCharacter(data) {
   return {
     type: 'DELETE_CHARACTER',
-    payload: request.delete('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.delete('http://localhost:8000' + '/api/character/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log('deleteCharacter res.body', res.body);
     })
   };
@@ -3621,7 +3623,7 @@ function setCharacters(data) {
 function createWeapon(data) {
   return {
     type: 'CREATE_WEAPON',
-    payload: request.post('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id + '/weapon').set({ authorization: 'Bearer ' + data.token }).send(data.weapon).then(function (res) {
+    payload: request.post('http://localhost:8000' + '/api/character/' + data.id + '/weapon').set({ authorization: 'Bearer ' + data.token }).send(data.weapon).then(function (res) {
       console.log(res);
       return res;
     })
@@ -3632,7 +3634,7 @@ function createWeapon(data) {
 //   return {
 //     type: 'CREATE_'+type,
 //     payload: request
-//     .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/${type}`)
+//     .post(`${'http://localhost:8000'}/api/character/${data.id}/${type}`)
 //     .set({ authorization: `Bearer ${data.token}`})
 //     .send(data.type)
 //     .then( res => {
@@ -3644,7 +3646,7 @@ function createWeapon(data) {
 function getAllWeapons(data) {
   return {
     type: 'GET_ALL_WEAPONS',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id + '/weapons').set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/character/' + data.id + '/weapons').set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log('GET_ALL_WEAPONS res', res);
       return res.body;
     })
@@ -3654,7 +3656,7 @@ function getAllWeapons(data) {
 function deleteWeapon(data) {
   return {
     type: 'DELETE_WEAPON',
-    payload: request.delete('https://dungeon-manager-be.herokuapp.com' + '/api/character/weapon/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.delete('http://localhost:8000' + '/api/character/weapon/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log('deleteWeapon res: ', res);
       return res;
     })
@@ -3665,7 +3667,7 @@ function updateWeapon(data) {
 
   return {
     type: 'UPDATE_WEAPON',
-    payload: request.put('https://dungeon-manager-be.herokuapp.com' + '/api/character/weapon/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.weapon).then(function (res) {
+    payload: request.put('http://localhost:8000' + '/api/character/weapon/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.weapon).then(function (res) {
       console.log('updateWeapon res: ', res);
       return res;
     })
@@ -3696,7 +3698,7 @@ function setWeaponAttributes(data) {
 function createArmor(data) {
   return {
     type: 'CREATE_ARMOR',
-    payload: request.post('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id + '/armor').set({ authorization: 'Bearer ' + data.token }).send(data.armor).then(function (res) {
+    payload: request.post('http://localhost:8000' + '/api/character/' + data.id + '/armor').set({ authorization: 'Bearer ' + data.token }).send(data.armor).then(function (res) {
       console.log(res);
       return res;
     })
@@ -3706,7 +3708,7 @@ function createArmor(data) {
 function getAllArmor(data) {
   return {
     type: 'GET_ALL_ARMOR',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id + '/armor').set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/character/' + data.id + '/armor').set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log('GET_ALL_ARMOR res', res);
       return res.body;
     })
@@ -3716,7 +3718,7 @@ function getAllArmor(data) {
 function deleteArmor(data) {
   return {
     type: 'DELETE_ARMOR',
-    payload: request.delete('https://dungeon-manager-be.herokuapp.com' + '/api/character/armor/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.delete('http://localhost:8000' + '/api/character/armor/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log('deleteArmor res: ', res);
       return res;
     })
@@ -3727,7 +3729,7 @@ function updateArmor(data) {
 
   return {
     type: 'UPDATE_ARMOR',
-    payload: request.put('https://dungeon-manager-be.herokuapp.com' + '/api/character/armor/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.armor).then(function (res) {
+    payload: request.put('http://localhost:8000' + '/api/character/armor/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.armor).then(function (res) {
       console.log('updateArmor res: ', res);
       return res;
     })
@@ -3752,7 +3754,7 @@ function setArmor(data) {
 function createSpell(data) {
   return {
     type: 'CREATE_SPELL',
-    payload: request.post('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id + '/spell').set({ authorization: 'Bearer ' + data.token }).send(data.spell).then(function (res) {
+    payload: request.post('http://localhost:8000' + '/api/character/' + data.id + '/spell').set({ authorization: 'Bearer ' + data.token }).send(data.spell).then(function (res) {
       console.log(res);
       return res;
     })
@@ -3761,7 +3763,7 @@ function createSpell(data) {
 function getAllSpells(data) {
   return {
     type: 'GET_ALL_SPELLS',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/character/' + data.id + '/spells').set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/character/' + data.id + '/spells').set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log('GET_ALL_SPELL res', res);
       return res.body;
     })
@@ -3771,7 +3773,7 @@ function getAllSpells(data) {
 function deleteSpell(data) {
   return {
     type: 'DELETE_SPELL',
-    payload: request.delete('https://dungeon-manager-be.herokuapp.com' + '/api/character/spell/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.delete('http://localhost:8000' + '/api/character/spell/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log('deleteSpell res: ', res);
       return res;
     })
@@ -3782,7 +3784,7 @@ function updateSpell(data) {
 
   return {
     type: 'UPDATE_SPELL',
-    payload: request.put('https://dungeon-manager-be.herokuapp.com' + '/api/character/spell/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.spell).then(function (res) {
+    payload: request.put('http://localhost:8000' + '/api/character/spell/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.spell).then(function (res) {
       console.log('updateSpell res: ', res);
       return res;
     })
@@ -3847,7 +3849,7 @@ var request = __webpack_require__(48);
 function createDm(data) {
   return {
     type: 'CREATE_DM',
-    payload: request.post('https://dungeon-manager-be.herokuapp.com' + '/api/dm').set({ authorization: 'Bearer ' + data.token }).send(data.dm).then(function (res) {
+    payload: request.post('http://localhost:8000' + '/api/dm').set({ authorization: 'Bearer ' + data.token }).send(data.dm).then(function (res) {
       var response = JSON.parse(res.text);
       return response;
     })
@@ -3857,7 +3859,7 @@ function createDm(data) {
 function getDm(data) {
   return {
     type: 'GET_DM',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/dm/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/dm/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       return res.body;
     })
   };
@@ -3866,7 +3868,7 @@ function getDm(data) {
 function getAllDms(data) {
   return {
     type: 'GET_ALL_DMS',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/dms/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/dms/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       return res.body.dms;
     })
   };
@@ -3889,7 +3891,7 @@ function setCampaignName(data) {
 function getCampaignMembers(data) {
   return {
     type: 'GET_CAMPAIGN_MEMBERS',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/dm/party/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/dm/party/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log(res.body);
       return res.body;
     })
@@ -3899,7 +3901,7 @@ function getCampaignMembers(data) {
 function updateDm(data) {
   return {
     type: 'UPDATE_DM',
-    payload: request.put('https://dungeon-manager-be.herokuapp.com' + '/api/dm/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.body).then(function (res) {
+    payload: request.put('http://localhost:8000' + '/api/dm/' + data.id).set({ authorization: 'Bearer ' + data.token }).send(data.body).then(function (res) {
       console.log(res);
       return res.body;
     })
@@ -3908,7 +3910,7 @@ function updateDm(data) {
 function deleteDm(data) {
   return {
     type: 'DELETE_DM',
-    payload: request.delete('https://dungeon-manager-be.herokuapp.com' + '/api/dm/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.delete('http://localhost:8000' + '/api/dm/' + data.id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       console.log(res.body);
       return res.body;
     })
@@ -4501,7 +4503,7 @@ var request = __webpack_require__(48);
 function signup(username, password) {
   return {
     type: 'SIGNUP',
-    payload: request.post('https://dungeon-manager-be.herokuapp.com' + '/api/signup').send({ username: username, password: password }).then(function (res) {
+    payload: request.post('http://localhost:8000' + '/api/signup').send({ username: username, password: password }).then(function (res) {
       var response = JSON.parse(res.text);
       return response;
     })
@@ -4511,7 +4513,7 @@ function signup(username, password) {
 function login(username, password) {
   return {
     type: 'LOGIN',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/signin').auth(username + ':' + password).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/signin').auth(username + ':' + password).then(function (res) {
       var response = JSON.parse(res.text);
       return response;
     })
@@ -10259,7 +10261,7 @@ var request = __webpack_require__(48);
 function createProfile(data) {
   return {
     type: 'CREATE_PROFILE',
-    payload: request.post('https://dungeon-manager-be.herokuapp.com' + '/api/profile').set({ authorization: 'Bearer ' + data.token }).send(data.user).then(function (res) {
+    payload: request.post('http://localhost:8000' + '/api/profile').set({ authorization: 'Bearer ' + data.token }).send(data.user).then(function (res) {
       var response = JSON.parse(res.text);
       return response;
     })
@@ -10270,7 +10272,7 @@ function getProfile(data) {
   console.log('getProgfile user', data);
   return {
     type: 'GET_PROFILE',
-    payload: request.get('https://dungeon-manager-be.herokuapp.com' + '/api/profile/' + data.user._id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
+    payload: request.get('http://localhost:8000' + '/api/profile/' + data.user._id).set({ authorization: 'Bearer ' + data.token }).then(function (res) {
       var response = JSON.parse(res.text);
       return response;
     })
@@ -12023,7 +12025,7 @@ var _resolvePathname = __webpack_require__(333);
 
 var _resolvePathname2 = _interopRequireDefault(_resolvePathname);
 
-var _valueEqual = __webpack_require__(351);
+var _valueEqual = __webpack_require__(353);
 
 var _valueEqual2 = _interopRequireDefault(_valueEqual);
 
@@ -17195,7 +17197,7 @@ function compose() {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ActionTypes; });
 /* harmony export (immutable) */ __webpack_exports__["a"] = createStore;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_symbol_observable__);
 
 
@@ -25296,7 +25298,7 @@ exports = module.exports = __webpack_require__(90)(undefined);
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: 'icomoon';\n  src:  url(" + __webpack_require__(146) + ");\n  src:  url(" + __webpack_require__(146) + "#iefix) format('embedded-opentype'),\n    url(" + __webpack_require__(349) + ") format('truetype'),\n    url(" + __webpack_require__(350) + ") format('woff'),\n    url(" + __webpack_require__(348) + "#icomoon) format('svg');\n  font-weight: normal;\n  font-style: normal;\n}\n\n[class^=\"icon-\"], [class*=\" icon-\"] {\n  /* use !important to prevent issues with browser extensions that change fonts */\n  font-family: 'icomoon' !important;\n  speak: none;\n  font-style: normal;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  line-height: 1;\n\n  /* Better Font Rendering =========== */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.icon-plus:before {\n  content: \"\\EA0A\";\n}\n.icon-minus:before {\n  content: \"\\EA0B\";\n}\n.icon-play3:before {\n  content: \"\\EA1C\";\n}\n.icon-ctrl:before {\n  content: \"\\EA50\";\n}\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: 'icomoon';\n  src:  url(" + __webpack_require__(146) + ");\n  src:  url(" + __webpack_require__(146) + "#iefix) format('embedded-opentype'),\n    url(" + __webpack_require__(349) + ") format('truetype'),\n    url(" + __webpack_require__(350) + ") format('woff'),\n    url(" + __webpack_require__(343) + "#icomoon) format('svg');\n  font-weight: normal;\n  font-style: normal;\n}\n\n[class^=\"icon-\"], [class*=\" icon-\"] {\n  /* use !important to prevent issues with browser extensions that change fonts */\n  font-family: 'icomoon' !important;\n  speak: none;\n  font-style: normal;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  line-height: 1;\n\n  /* Better Font Rendering =========== */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.icon-plus:before {\n  content: \"\\EA0A\";\n}\n.icon-minus:before {\n  content: \"\\EA0B\";\n}\n.icon-play3:before {\n  content: \"\\EA1C\";\n}\n.icon-ctrl:before {\n  content: \"\\EA50\";\n}\n", ""]);
 
 // exports
 
@@ -25310,7 +25312,7 @@ exports = module.exports = __webpack_require__(90)(undefined);
 exports.i(__webpack_require__(194), "");
 
 // module
-exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\ninput, button:focus {\n  outline: none; }\n\ninput {\n  background-color: #f5f8fa; }\n\nbutton {\n  padding: 0; }\n\ninput:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {\n  background-color: #eee !important;\n  background-image: none;\n  color: black; }\n\ninput:-webkit-autofill {\n  -webkit-box-shadow: 0 0 0 30px #eee inset; }\n\nhtml {\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Ubuntu, \"Helvetica Neue\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  background: #f4f4f4;\n  max-width: 100vw;\n  overflow-x: hidden; }\n\ninput {\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 1rem;\n  display: block;\n  padding-left: 1rem;\n  height: 2.5rem;\n  border-radius: 5px;\n  transition: 350ms;\n  outline: none;\n  border: 1px solid #AE9C96;\n  -webkit-box-sizing: border-box;\n  /* Safari/Chrome, other WebKit */\n  -moz-box-sizing: border-box;\n  /* Firefox, other Gecko */\n  box-sizing: border-box;\n  background: #eee; }\n\nh1 {\n  color: #AE9C96;\n  text-align: center;\n  font-size: 2.0rem;\n  font-weight: lighter;\n  line-height: 2.75rem;\n  margin-bottom: 1rem; }\n\nbutton {\n  display: block;\n  width: 90%;\n  margin-top: 1rem;\n  margin-left: auto;\n  margin-right: auto;\n  height: 2.25rem;\n  font-size: 1.25rem;\n  border-radius: 5px;\n  line-height: 2.25rem;\n  text-align: center;\n  border: none;\n  color: #f4f4f4;\n  font-weight: bold;\n  background: #eca565; }\n\nli {\n  color: #4B4D52; }\n\n.page-container {\n  position: absolute;\n  top: 70px;\n  width: 100%; }\n\n.campaign-page-title {\n  text-align: center; }\n\n.character-home-container {\n  height: 50vh;\n  width: 100%;\n  text-align: center;\n  background-image: url(" + __webpack_require__(345) + ");\n  background-size: cover;\n  border-top: 2px solid #4B4D52;\n  position: relative; }\n\n.home-banner {\n  position: absolute;\n  height: 10vh;\n  top: calc(50% - 5vh);\n  width: 84%;\n  margin: 0 8% 0 8%;\n  background: #f4f4f4;\n  opacity: .4; }\n\n.home-banner-text {\n  position: absolute;\n  height: 10vh;\n  font-size: 3rem;\n  width: 100%;\n  line-height: 9vh;\n  text-align: center;\n  top: calc(50% - 5vh);\n  color: #4B4D52;\n  font-weight: lighter; }\n\n.sub-banner {\n  position: absolute;\n  height: 5vh;\n  top: calc(70% - 2.5vh);\n  width: 84%;\n  margin: 0 8% 0 8%;\n  background: #f4f4f4;\n  opacity: .5; }\n\n.sub-banner-text {\n  position: absolute;\n  height: 5vh;\n  font-size: 1.5rem;\n  width: 100%;\n  line-height: 5vh;\n  text-align: center;\n  top: calc(70% - 2.5vh);\n  color: #333437;\n  font-weight: 400; }\n\n.dense {\n  opacity: 0.7; }\n\n.hero-section {\n  height: 100vh;\n  width: 100%;\n  text-align: center;\n  background-image: url(" + __webpack_require__(346) + ");\n  background-size: auto;\n  position: relative; }\n  .hero-section:before {\n    content: '';\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    background-image: linear-gradient(to bottom, rgba(111, 174, 234, 0.8) 70%, rgba(247, 156, 74, 0.8));\n    opacity: .4; }\n\n.hero-container {\n  position: absolute;\n  width: 90%;\n  padding-left: 5%;\n  padding-right: 5%;\n  top: 25%; }\n\n.hero-text-container {\n  height: 70%;\n  width: 100%; }\n\n.hero-text {\n  color: #f4f4f4;\n  font-size: 2.5rem;\n  margin-bottom: .25rem; }\n\n.button-holder {\n  height: 30%; }\n  .button-holder button {\n    opacity: 0.9; }\n\n.blue {\n  background: #0193b7; }\n\n.orange {\n  background: #eca565; }\n\n.character-list-title {\n  text-align: center;\n  margin: 0 0 1rem 0;\n  padding: 2rem 0 0 0; }\n\n.character-list-li {\n  width: 80%;\n  margin: 0 auto 0 auto;\n  font-size: 1.5rem;\n  height: 2.5rem;\n  line-height: 2.5rem;\n  overflow-y: hidden;\n  text-align: center; }\n\n.stat-div {\n  display: inline-block;\n  width: 33.33333%; }\n\n.stat-div-label {\n  text-align: center;\n  font-size: 1rem;\n  line-height: 1rem; }\n\n.stat-div-value {\n  text-align: center;\n  font-size: 1rem;\n  line-height: 1rem; }\n\n.stat-title {\n  text-align: center; }\n\n.proficiency-stat-div-holder {\n  width: 100%;\n  text-align: center; }\n\n.proficiency-stat-div {\n  display: inline-block;\n  width: 33.3333333333333%;\n  text-align: center; }\n\n.campaign-header-section {\n  overflow-x: hidden;\n  overflow-y: hidden;\n  height: 70px; }\n\n.campaign-header {\n  text-align: center;\n  height: 70px;\n  line-height: 70px; }\n  .campaign-header .campaign-header-title {\n    display: inline-block;\n    margin: 0; }\n  .campaign-header span {\n    height: 70px;\n    display: inline-block;\n    clear: both; }\n\n.campaign-header-settings {\n  height: 100vh;\n  width: 100%;\n  position: absolute;\n  overflow-y: hidden;\n  background: #0193b7; }\n\n.campaign-header-exited {\n  position: absolute;\n  transform: translateX(100%);\n  transition: 400ms;\n  display: none; }\n\n.campaign-header-exiting {\n  position: absolute;\n  background: red;\n  transition: 400ms; }\n\n.campaign-header-entered {\n  position: absolute;\n  transform: translateX(0%);\n  transition: 400ms; }\n\n.campaign-header-entering {\n  position: absolute;\n  transform: translateX(100%);\n  transition: 400ms; }\n\n.character-header {\n  background: #4B4D52;\n  border-bottom: .5px dashed #eac64e; }\n\n.button-container {\n  width: 90%;\n  margin: auto;\n  margin-top: 1rem;\n  margin-bottom: .5rem;\n  text-align: center; }\n\n.create-character-section {\n  width: 95%;\n  margin-top: 5%;\n  padding-left: 2.5%;\n  padding-right: 2.5%; }\n\n.create-character-title {\n  text-align: center;\n  font-size: 2.0rem;\n  line-height: 2.75rem;\n  margin-bottom: 1rem; }\n\n.create-character-input-div {\n  width: 100%; }\n\n.create-character-input {\n  display: block;\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  background: #eee;\n  padding-left: 5%;\n  margin-top: 1rem; }\n\n.create-character-stat-input {\n  display: block;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  text-align: center;\n  margin: 0;\n  border: none;\n  margin-left: auto;\n  margin-right: auto;\n  background: #eee; }\n\n.create-character-stat-input-container {\n  display: block;\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  background: #eee;\n  text-align: center;\n  margin-top: 1rem;\n  border-radius: 5px; }\n\n.stat-input-div {\n  width: 33.3333333%;\n  display: inline-block;\n  text-align: center; }\n\n.stat-input-title {\n  font-size: 100%;\n  margin-bottom: 0; }\n\n.create-character-input:focus {\n  outline: none; }\n\n.stat-input-error {\n  color: #fba2a2; }\n\n.create-dm-section {\n  width: 95%;\n  margin-top: 5%;\n  padding-left: 2.5%;\n  padding-right: 2.5%; }\n\n.create-dm-title {\n  text-align: center;\n  font-size: 2.0rem;\n  line-height: 2.75rem;\n  margin-bottom: 1rem;\n  display: inline-block; }\n\n.create-dm-input-div {\n  width: 100%;\n  height: 50px;\n  border: 2px solid #AE9C96; }\n\n.create-dm-input {\n  display: inline-block;\n  height: 100%;\n  border: none;\n  border-radius: 0;\n  width: 70%;\n  margin-left: auto;\n  margin-right: auto;\n  background: #eee;\n  padding-left: 5%;\n  margin-top: 0;\n  float: left; }\n\n.create-dm-input:focus {\n  outline: none; }\n\n.create-dm-button {\n  border: none;\n  border-radius: 0;\n  display: inline-block;\n  width: 30%;\n  float: right;\n  margin: 0;\n  height: 100%; }\n\n.plus-dropdown {\n  display: inline-block;\n  color: #AE9C96;\n  display: inline-block;\n  padding: 8px;\n  margin-left: .5rem; }\n\n.title-icon-container {\n  margin-left: auto;\n  margin-right: auto;\n  text-align: center; }\n\n.dropdown-form-exited {\n  transform: translateY(-1000%);\n  transition: 400ms;\n  height: 0; }\n  .dropdown-form-exited div {\n    display: none; }\n  .dropdown-form-exited button {\n    display: none; }\n\n.dropdown-form-exiting {\n  transition: 400ms; }\n\n.dropdown-form-entering {\n  transform: translateY(-1000%); }\n\n.dropdown-form-entered {\n  transform: translate(0%);\n  transition: 400ms ease-in-out; }\n\n.dice-amount-container {\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto; }\n\n.dice-amount {\n  display: inline-block;\n  width: 33.33333%;\n  text-align: center; }\n\n.weapon-value-container {\n  width: 100%;\n  margin-top: .5rem;\n  margin-left: auto;\n  margin-right: auto; }\n\n.dice-value {\n  display: inline-block;\n  width: 20%;\n  text-align: center; }\n\n.dice-type {\n  display: inline-block;\n  width: 33.33333%;\n  text-align: center; }\n\n.button-text {\n  font-size: 1rem;\n  line-height: 2rem;\n  padding: .25rem 0 .25rem 0;\n  background: #eee;\n  border: 1px solid grey;\n  border-radius: 5px;\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto; }\n\n.div-container {\n  width: 100%; }\n\n.create-item-section {\n  margin-top: 1rem;\n  margin-bottom: .5rem; }\n\n.create-item-text-area {\n  width: 90%;\n  height: 3rem;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 1rem;\n  display: block;\n  padding-left: 1rem;\n  padding-top: .5rem;\n  height: 4rem;\n  border-radius: 5px;\n  transition: 350ms;\n  outline: none;\n  border: none;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  background: #eee; }\n\n.active {\n  background: #bbb; }\n\n.create-item-input {\n  border-radius: 0;\n  width: 100%; }\n\n.create-item-input {\n  border-radius: 0;\n  width: 100%; }\n\n.create-item-form {\n  margin-left: auto;\n  margin-right: auto;\n  width: 90%; }\n\n.item-li {\n  list-style: none;\n  background: #DDDAD6;\n  height: 2rem;\n  line-height: 2rem;\n  border-bottom: 1px dashed #AE9C96;\n  padding-left: .5rem; }\n\n.item-label {\n  display: inline-block; }\n\n.spell-label-container {\n  display: inline-block; }\n\n.spell-item-label {\n  padding-left: 8px;\n  padding-right: 8px; }\n\n.spell-info-container {\n  margin-top: .5rem;\n  margin-bottom: .5rem; }\n\n.update-weapon-form-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.7);\n  position: fixed;\n  top: 70px;\n  left: 0;\n  opacity: 1; }\n\n.update-weapon-form-base {\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  top: 0;\n  left: 0; }\n\n.update-weapon-form {\n  width: 90%;\n  position: absolute;\n  top: 1rem;\n  left: 5%;\n  overflow: hidden; }\n\n.update-weapon-form-input {\n  width: 100%; }\n\n.update-weapon-form-button {\n  width: 100%; }\n\n.update-spell-form-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.7);\n  position: fixed;\n  top: 0;\n  left: 0;\n  opacity: 1; }\n\n.update-spell-form {\n  width: 90%;\n  position: absolute;\n  top: 1rem;\n  left: 5%;\n  overflow: hidden; }\n\n.update-spell-form-input {\n  width: 100%; }\n\n.update-spell-form-button {\n  width: 100%; }\n\n.update-armor-form-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.7);\n  position: fixed;\n  top: 0;\n  left: 0;\n  opacity: 1; }\n\n.update-armor-form {\n  width: 90%;\n  position: absolute;\n  top: 1rem;\n  left: 5%;\n  overflow: hidden; }\n\n.update-armor-form-input {\n  width: 100%; }\n\n.update-armor-form-button {\n  width: 100%; }\n\n.weapon-label-container {\n  width: 70%;\n  float: left;\n  display: inline-block; }\n\n.weapon-button-container {\n  width: 30%;\n  display: inline-block;\n  float: right; }\n\n.toggle-weapon-update-form-button {\n  width: 1.5rem;\n  padding-top: 1.5rem;\n  margin-top: .2rem;\n  margin-right: .5rem;\n  float: right;\n  line-height: .25rem;\n  background: grey;\n  display: inline-block; }\n\n.delete-weapon-button {\n  width: 1.5rem;\n  padding-top: 1.5rem;\n  margin-top: .2rem;\n  margin-right: .5rem;\n  float: right;\n  line-height: .25rem;\n  background: red;\n  display: inline-block; }\n\nnav {\n  height: 70px;\n  width: 100%;\n  position: fixed;\n  top: 0;\n  z-index: 5;\n  transition: 300ms;\n  background: #0193b7;\n  overflow-x: hidden;\n  max-width: 100vw; }\n  nav .navbar-brand {\n    height: 70px;\n    display: inline-block;\n    float: left; }\n    nav .navbar-brand .navbar-logo {\n      float: left;\n      display: block;\n      height: 70px;\n      width: 70px;\n      color: #eca565;\n      background-size: contain;\n      position: relative;\n      color: #eca565;\n      background-size: contain; }\n      nav .navbar-brand .navbar-logo .navbar-svg {\n        position: absolute;\n        top: 10px;\n        padding-left: 10px;\n        padding-right: 10px;\n        position: block;\n        height: 50px;\n        line-height: 80px;\n        width: 50px; }\n    nav .navbar-brand .navbar-title {\n      display: inline-block;\n      float: left;\n      font-size: 1.25rem;\n      color: #f4f4f4;\n      line-height: 70px;\n      height: 70px; }\n  nav button {\n    width: 80px;\n    height: 70px;\n    margin-top: 0;\n    background: none;\n    display: inline-block;\n    float: right;\n    position: relative;\n    text-align: center; }\n    nav button .hamburger-holder {\n      width: 70px; }\n    nav button div {\n      height: 100%; }\n      nav button div svg {\n        position: absolute;\n        padding-top: 10px;\n        padding-left: 10px;\n        left: 0; }\n\n.flip-burger {\n  transition: 400ms;\n  transform: rotate(-0.5turn); }\n\n.revert-flip-burger {\n  transition: 400ms;\n  transform: rotate(0turn); }\n\n.hamburger-dropdown-div {\n  position: absolute;\n  width: 100%;\n  padding-top: 70px;\n  z-index: -1; }\n  .hamburger-dropdown-div button {\n    display: block;\n    float: none;\n    width: 100%;\n    height: unset;\n    color: #f4f4f4;\n    padding: 0 8px;\n    border-top: 1px;\n    border-radius: 5px;\n    margin-bottom: 1rem;\n    font-weight: 100; }\n\n.dropdown-entering {\n  background: #0193b7;\n  transform: translateY(-100%); }\n\n.dropdown-entered {\n  opacity: 1;\n  background: #0193b7;\n  transform: translate(0%);\n  transition: 400ms ease-in-out; }\n\n.dropdown-exiting {\n  opacity: 1;\n  transition: 400ms; }\n\n.dropdown-exited {\n  transform: translateY(-100%);\n  transition: 400ms; }\n\n.no-background {\n  background: none; }\n\n.dm-home-container {\n  height: 50vh;\n  width: 100%;\n  color: #4B4D52;\n  font-weight: lighter;\n  text-align: center;\n  background-image: url(" + __webpack_require__(347) + ");\n  background-size: cover;\n  border-bottom: 2px solid #4B4D52;\n  position: relative; }\n\n.dm-list-title {\n  text-align: center;\n  margin: 0 0 1rem 0;\n  padding: 2rem 0 0 0;\n  clear: both; }\n\n.dm-list-li {\n  width: 80%;\n  margin: 0 auto 0 auto;\n  font-size: 1.5rem;\n  height: 2.5rem;\n  line-height: 2.5rem;\n  overflow-y: hidden;\n  text-align: center; }\n\n.login-section {\n  width: 95%;\n  margin-top: 5%;\n  padding-left: 2.5%;\n  padding-right: 2.5%; }\n\n.login-title {\n  text-align: center;\n  font-size: 1.5rem;\n  line-height: 1.5rem;\n  margin-bottom: 1rem; }\n\n.login-input-container {\n  width: 100%; }\n\n.login-input {\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 1rem;\n  display: block;\n  padding-left: 1rem;\n  height: 2.5rem;\n  border-radius: 5px;\n  transition: 350ms;\n  outline: none;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  background: #eee; }\n\n.login-input:focus {\n  outline: none; }\n\n.login-button {\n  width: 90%;\n  height: 2.25rem;\n  font-size: 1.25rem;\n  border-radius: 5px;\n  line-height: 2.25rem;\n  text-align: center;\n  border: none;\n  color: white;\n  font-weight: bold;\n  background: #eca565; }\n\n.input-error {\n  border: 1px solid #fba2a2; }\n\n.input-error-message {\n  text-align: center;\n  color: #fba2a2;\n  margin-top: .5rem;\n  margin-bottom: 1rem; }\n\n.redirect-message {\n  display: block;\n  text-align: center;\n  font-size: 1rem;\n  line-height: 1rem;\n  margin-bottom: .5rem;\n  color: #eca565; }\n\n.redirect-container {\n  margin-top: 1rem; }\n\n.update-character-form-container {\n  width: 50%;\n  display: inline-block; }\n\n.update-character-form-title {\n  width: 95%;\n  font-size: 1rem;\n  margin-left: auto;\n  margin-right: auto;\n  border-radius: 5px; }\n\n.update-character-form-holder {\n  width: 50%;\n  display: inline-block; }\n\n.update-character-form-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(34, 34, 34, 0.9);\n  position: fixed;\n  top: 0;\n  left: 0; }\n\n.update-stat-input-container {\n  width: 33.33333333%;\n  text-align: center;\n  display: inline-block; }\n\n.update-stat-input-div {\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  border-radius: 5px;\n  margin-bottom: .5rem; }\n\n.update-character-stat-input-container {\n  margin-top: 1rem; }\n\n.update-character-stat-input {\n  margin: 0 auto 0 auto;\n  width: 90%;\n  text-align: center; }\n\n.update-stat-input-title {\n  font-size: 100%;\n  margin-bottom: 0; }\n\n.update-form-container {\n  width: 90%;\n  margin: 100px auto 0 auto; }\n\n.delete-character-container {\n  display: inline-block;\n  width: 50%; }\n\n.delete-character-title {\n  width: 95%;\n  font-size: 1rem;\n  margin-left: auto;\n  background: #fba2a2;\n  color: #f4f4f4;\n  margin-right: auto;\n  border-radius: 5px; }\n\n.delete-character-holder {\n  width: 50%;\n  display: inline-block; }\n\n.delete-character-warning-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(34, 34, 34, 0.9);\n  position: fixed;\n  top: 0; }\n\n.delete-character-warning-text {\n  color: white; }\n\n.delete-character-yes {\n  color: white;\n  margin-top: 1rem;\n  font-size: 4rem;\n  text-align: center; }\n\n.delete-character-no {\n  color: white;\n  margin-top: 1rem;\n  font-size: 4rem;\n  text-align: center; }\n", ""]);
+exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\ninput, button:focus {\n  outline: none; }\n\ninput {\n  background-color: #f5f8fa; }\n\nbutton {\n  padding: 0; }\n\ninput:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {\n  background-color: #eee !important;\n  background-image: none;\n  color: black; }\n\ninput:-webkit-autofill {\n  -webkit-box-shadow: 0 0 0 30px #eee inset; }\n\nhtml {\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Ubuntu, \"Helvetica Neue\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  background: #f4f4f4;\n  max-width: 100vw;\n  overflow-x: hidden; }\n\ninput {\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 1rem;\n  display: block;\n  padding-left: 1rem;\n  height: 2.5rem;\n  border-radius: 5px;\n  transition: 350ms;\n  outline: none;\n  border: 1px solid #AE9C96;\n  -webkit-box-sizing: border-box;\n  /* Safari/Chrome, other WebKit */\n  -moz-box-sizing: border-box;\n  /* Firefox, other Gecko */\n  box-sizing: border-box;\n  background: #eee; }\n\nh1 {\n  color: #AE9C96;\n  text-align: center;\n  font-size: 2.0rem;\n  font-weight: lighter;\n  line-height: 2.75rem;\n  margin-bottom: 1rem; }\n\nbutton {\n  display: block;\n  width: 90%;\n  margin-top: 1rem;\n  margin-left: auto;\n  margin-right: auto;\n  height: 2.25rem;\n  font-size: 1.25rem;\n  border-radius: 5px;\n  line-height: 2.25rem;\n  text-align: center;\n  border: none;\n  color: #f4f4f4;\n  font-weight: bold;\n  background: #eca565; }\n\nli {\n  color: #4B4D52; }\n\n.page-container {\n  position: absolute;\n  top: 70px;\n  width: 100%; }\n\n.campaign-page-title {\n  text-align: center; }\n\n.character-home-container {\n  height: 50vh;\n  width: 100%;\n  text-align: center;\n  background-image: url(" + __webpack_require__(348) + ");\n  background-size: cover;\n  border-top: 2px solid #4B4D52;\n  position: relative; }\n\n.home-banner {\n  position: absolute;\n  height: 10vh;\n  top: calc(50% - 5vh);\n  width: 84%;\n  margin: 0 8% 0 8%;\n  background: #f4f4f4;\n  opacity: .4; }\n\n.home-banner-text {\n  position: absolute;\n  height: 10vh;\n  font-size: 3rem;\n  width: 100%;\n  line-height: 9vh;\n  text-align: center;\n  top: calc(50% - 5vh);\n  color: #4B4D52;\n  font-weight: lighter; }\n\n.sub-banner {\n  position: absolute;\n  height: 5vh;\n  top: calc(70% - 2.5vh);\n  width: 84%;\n  margin: 0 8% 0 8%;\n  background: #f4f4f4;\n  opacity: .5; }\n\n.sub-banner-text {\n  position: absolute;\n  height: 5vh;\n  font-size: 1.5rem;\n  width: 100%;\n  line-height: 5vh;\n  text-align: center;\n  top: calc(70% - 2.5vh);\n  color: #333437;\n  font-weight: 400; }\n\n.dense {\n  opacity: 0.7; }\n\n.hero-section {\n  height: 100vh;\n  width: 100%;\n  text-align: center;\n  background-image: url(" + __webpack_require__(351) + ");\n  background-size: auto;\n  position: relative; }\n  .hero-section:before {\n    content: '';\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    background-image: linear-gradient(to bottom, rgba(111, 174, 234, 0.8) 70%, rgba(247, 156, 74, 0.8));\n    opacity: .4; }\n\n.hero-container {\n  position: absolute;\n  width: 90%;\n  padding-left: 5%;\n  padding-right: 5%;\n  top: 25%; }\n\n.hero-text-container {\n  height: 70%;\n  width: 100%; }\n\n.hero-text {\n  color: #f4f4f4;\n  font-size: 2.5rem;\n  margin-bottom: .25rem; }\n\n.button-holder {\n  height: 30%; }\n  .button-holder button {\n    opacity: 0.9; }\n\n.blue {\n  background: #0193b7; }\n\n.orange {\n  background: #eca565; }\n\n.character-list-title {\n  text-align: center;\n  margin: 0 0 1rem 0;\n  padding: 2rem 0 0 0; }\n\n.character-list-li {\n  width: 80%;\n  margin: 0 auto 0 auto;\n  font-size: 1.5rem;\n  height: 2.5rem;\n  line-height: 2.5rem;\n  overflow-y: hidden;\n  text-align: center; }\n\n.stat-div {\n  display: inline-block;\n  width: 33.33333%; }\n\n.stat-div-label {\n  text-align: center;\n  font-size: 1rem;\n  line-height: 1rem; }\n\n.stat-div-value {\n  text-align: center;\n  font-size: 1rem;\n  line-height: 1rem; }\n\n.stat-title {\n  text-align: center; }\n\n.proficiency-stat-div-holder {\n  width: 100%;\n  text-align: center; }\n\n.proficiency-stat-div {\n  display: inline-block;\n  width: 33.3333333333333%;\n  text-align: center; }\n\n.campaign-header-section {\n  overflow-x: hidden;\n  overflow-y: hidden;\n  height: 70px; }\n\n.campaign-header {\n  text-align: center;\n  height: 70px;\n  line-height: 70px; }\n  .campaign-header .campaign-header-title {\n    line-height: 70px;\n    display: inline-block;\n    margin: 0; }\n  .campaign-header span {\n    height: 70px;\n    display: inline-block;\n    clear: both; }\n\n.campaign-header-settings {\n  height: calc(100vh - 140px);\n  width: 100%;\n  position: absolute;\n  overflow-y: hidden;\n  background: #0193b7; }\n\n.campaign-header-exited {\n  transform: translateX(-100%);\n  transition: 400ms; }\n\n.campaign-header-exiting {\n  transform: translateX(-100%);\n  transition: 400ms; }\n\n.campaign-header-entered {\n  transform: translateX(0%);\n  transition: 400ms;\n  overflow-x: hidden; }\n\n.campaign-header-entering {\n  transform: translateX(-100%);\n  transition: 400ms; }\n\n.character-header {\n  background: #4B4D52;\n  border-bottom: .5px dashed #eac64e; }\n\n.button-container {\n  width: 90%;\n  margin: auto;\n  margin-top: 1rem;\n  margin-bottom: .5rem;\n  text-align: center; }\n\n.create-character-section {\n  width: 95%;\n  margin-top: 5%;\n  padding-left: 2.5%;\n  padding-right: 2.5%; }\n\n.create-character-title {\n  text-align: center;\n  font-size: 2.0rem;\n  line-height: 2.75rem;\n  margin-bottom: 1rem; }\n\n.create-character-input-div {\n  width: 100%; }\n\n.create-character-input {\n  display: block;\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  background: #eee;\n  padding-left: 5%;\n  margin-top: 1rem; }\n\n.create-character-stat-input {\n  display: block;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  text-align: center;\n  margin: 0;\n  border: none;\n  margin-left: auto;\n  margin-right: auto;\n  background: #eee; }\n\n.create-character-stat-input-container {\n  display: block;\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  background: #eee;\n  text-align: center;\n  margin-top: 1rem;\n  border-radius: 5px; }\n\n.stat-input-div {\n  width: 33.3333333%;\n  display: inline-block;\n  text-align: center; }\n\n.stat-input-title {\n  font-size: 100%;\n  margin-bottom: 0; }\n\n.create-character-input:focus {\n  outline: none; }\n\n.stat-input-error {\n  color: #fba2a2; }\n\n.create-dm-section {\n  width: 95%;\n  margin-top: 5%;\n  padding-left: 2.5%;\n  padding-right: 2.5%; }\n\n.create-dm-title {\n  text-align: center;\n  font-size: 2.0rem;\n  line-height: 2.75rem;\n  margin-bottom: 1rem;\n  display: inline-block; }\n\n.create-dm-input-div {\n  width: 100%;\n  height: 50px;\n  border: 2px solid #AE9C96; }\n\n.create-dm-input {\n  display: inline-block;\n  height: 100%;\n  border: none;\n  border-radius: 0;\n  width: 70%;\n  margin-left: auto;\n  margin-right: auto;\n  background: #eee;\n  padding-left: 5%;\n  margin-top: 0;\n  float: left; }\n\n.create-dm-input:focus {\n  outline: none; }\n\n.create-dm-button {\n  border: none;\n  border-radius: 0;\n  display: inline-block;\n  width: 30%;\n  float: right;\n  margin: 0;\n  height: 100%; }\n\n.plus-dropdown {\n  display: inline-block;\n  color: #AE9C96;\n  display: inline-block;\n  padding: 8px;\n  margin-left: .5rem; }\n\n.title-icon-container {\n  margin-left: auto;\n  margin-right: auto;\n  text-align: center; }\n\n.dropdown-form-exited {\n  transform: translateY(-1000%);\n  transition: 400ms;\n  height: 0; }\n  .dropdown-form-exited div {\n    display: none; }\n  .dropdown-form-exited button {\n    display: none; }\n\n.dropdown-form-exiting {\n  transition: 400ms; }\n\n.dropdown-form-entering {\n  transform: translateY(-1000%); }\n\n.dropdown-form-entered {\n  transform: translate(0%);\n  transition: 400ms ease-in-out; }\n\n.dice-amount-container {\n  width: 100%;\n  margin-left: auto;\n  margin-right: auto; }\n\n.dice-amount {\n  display: inline-block;\n  width: 33.33333%;\n  text-align: center; }\n\n.weapon-value-container {\n  width: 100%;\n  margin-top: .5rem;\n  margin-left: auto;\n  margin-right: auto; }\n\n.dice-value {\n  display: inline-block;\n  width: 20%;\n  text-align: center; }\n\n.dice-type {\n  display: inline-block;\n  width: 33.33333%;\n  text-align: center; }\n\n.button-text {\n  font-size: 1rem;\n  line-height: 2rem;\n  padding: .25rem 0 .25rem 0;\n  background: #eee;\n  border: 1px solid grey;\n  border-radius: 5px;\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto; }\n\n.div-container {\n  width: 100%; }\n\n.create-item-section {\n  margin-top: 1rem;\n  margin-bottom: .5rem; }\n\n.create-item-text-area {\n  width: 90%;\n  height: 3rem;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 1rem;\n  display: block;\n  padding-left: 1rem;\n  padding-top: .5rem;\n  height: 4rem;\n  border-radius: 5px;\n  transition: 350ms;\n  outline: none;\n  border: none;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  background: #eee; }\n\n.active {\n  background: #bbb; }\n\n.create-item-input {\n  border-radius: 0;\n  width: 100%; }\n\n.create-item-input {\n  border-radius: 0;\n  width: 100%; }\n\n.create-item-form {\n  margin-left: auto;\n  margin-right: auto;\n  width: 90%; }\n\n.item-li {\n  list-style: none;\n  background: #DDDAD6;\n  height: 2rem;\n  line-height: 2rem;\n  border-bottom: 1px dashed #AE9C96;\n  padding-left: .5rem; }\n\n.item-label {\n  display: inline-block; }\n\n.spell-label-container {\n  display: inline-block; }\n\n.spell-item-label {\n  padding-left: 8px;\n  padding-right: 8px; }\n\n.spell-info-container {\n  margin-top: .5rem;\n  margin-bottom: .5rem; }\n\n.update-weapon-form-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.7);\n  position: fixed;\n  top: 70px;\n  left: 0;\n  opacity: 1; }\n\n.update-weapon-form-base {\n  width: 100vw;\n  height: 100vh;\n  position: fixed;\n  top: 0;\n  left: 0; }\n\n.update-weapon-form {\n  width: 90%;\n  position: absolute;\n  top: 1rem;\n  left: 5%;\n  overflow: hidden; }\n\n.update-weapon-form-input {\n  width: 100%; }\n\n.update-weapon-form-button {\n  width: 100%; }\n\n.update-spell-form-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.7);\n  position: fixed;\n  top: 0;\n  left: 0;\n  opacity: 1; }\n\n.update-spell-form {\n  width: 90%;\n  position: absolute;\n  top: 1rem;\n  left: 5%;\n  overflow: hidden; }\n\n.update-spell-form-input {\n  width: 100%; }\n\n.update-spell-form-button {\n  width: 100%; }\n\n.update-armor-form-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(0, 0, 0, 0.7);\n  position: fixed;\n  top: 0;\n  left: 0;\n  opacity: 1; }\n\n.update-armor-form {\n  width: 90%;\n  position: absolute;\n  top: 1rem;\n  left: 5%;\n  overflow: hidden; }\n\n.update-armor-form-input {\n  width: 100%; }\n\n.update-armor-form-button {\n  width: 100%; }\n\n.weapon-label-container {\n  width: 70%;\n  float: left;\n  display: inline-block; }\n\n.weapon-button-container {\n  width: 30%;\n  display: inline-block;\n  float: right; }\n\n.toggle-weapon-update-form-button {\n  width: 1.5rem;\n  padding-top: 1.5rem;\n  margin-top: .2rem;\n  margin-right: .5rem;\n  float: right;\n  line-height: .25rem;\n  background: grey;\n  display: inline-block; }\n\n.delete-weapon-button {\n  width: 1.5rem;\n  padding-top: 1.5rem;\n  margin-top: .2rem;\n  margin-right: .5rem;\n  float: right;\n  line-height: .25rem;\n  background: red;\n  display: inline-block; }\n\nnav {\n  height: 70px;\n  width: 100%;\n  position: fixed;\n  top: 0;\n  z-index: 5;\n  transition: 300ms;\n  background: #0193b7;\n  max-width: 100vw; }\n  nav .navbar-brand {\n    height: 70px;\n    display: inline-block;\n    float: left; }\n    nav .navbar-brand .navbar-logo {\n      float: left;\n      display: block;\n      height: 70px;\n      width: 70px;\n      color: #eca565;\n      background-size: contain;\n      position: relative;\n      color: #eca565;\n      background-size: contain; }\n      nav .navbar-brand .navbar-logo svg {\n        position: absolute;\n        padding-top: 10px;\n        padding-left: 10px; }\n      nav .navbar-brand .navbar-logo .navbar-svg {\n        position: absolute;\n        top: 10px;\n        padding-left: 10px;\n        padding-right: 10px;\n        position: block;\n        height: 50px;\n        line-height: 80px;\n        width: 50px; }\n    nav .navbar-brand .navbar-title {\n      display: inline-block;\n      float: left;\n      font-size: 1.25rem;\n      color: #f4f4f4;\n      line-height: 70px;\n      height: 70px; }\n  nav button {\n    width: 80px;\n    height: 70px;\n    margin-top: 0;\n    background: none;\n    display: inline-block;\n    float: right;\n    position: relative;\n    text-align: center; }\n    nav button .hamburger-holder {\n      width: 70px; }\n    nav button div {\n      height: 100%; }\n      nav button div svg {\n        position: absolute;\n        padding-top: 10px;\n        padding-left: 10px;\n        left: 0; }\n\n.flip-burger {\n  transition: 400ms;\n  transform: rotate(-0.5turn); }\n\n.revert-flip-burger {\n  transition: 400ms;\n  transform: rotate(0turn); }\n\n.hamburger-dropdown-div {\n  position: absolute;\n  width: 100%;\n  padding-top: 70px;\n  z-index: -1; }\n  .hamburger-dropdown-div button {\n    display: block;\n    float: none;\n    width: 100%;\n    height: unset;\n    color: #f4f4f4;\n    padding: 0 8px;\n    border-top: 1px;\n    border-radius: 5px;\n    margin-bottom: 1rem;\n    font-weight: 100; }\n  .hamburger-dropdown-div button:hover:after {\n    width: 100%;\n    left: 0;\n    transition: 200ms;\n    position: absolute;\n    transition: .3s;\n    content: '';\n    width: 0;\n    left: 50%;\n    bottom: 0;\n    height: 3px;\n    background: #f7f7f7; }\n\n.dropdown-entering {\n  background: #0193b7;\n  transform: translateY(-100%); }\n\n.dropdown-entered {\n  opacity: 1;\n  background: #0193b7;\n  transform: translate(0%);\n  transition: 400ms ease-in-out; }\n\n.dropdown-exiting {\n  opacity: 1;\n  transition: 400ms; }\n\n.dropdown-exited {\n  display: none;\n  transform: translateY(-100%);\n  transition: 400ms; }\n\n.no-background {\n  background: none; }\n\n.dm-home-container {\n  height: 50vh;\n  width: 100%;\n  color: #4B4D52;\n  font-weight: lighter;\n  text-align: center;\n  background-image: url(" + __webpack_require__(352) + ");\n  background-size: cover;\n  border-bottom: 2px solid #4B4D52;\n  position: relative; }\n\n.dm-list-title {\n  text-align: center;\n  margin: 0 0 1rem 0;\n  padding: 2rem 0 0 0;\n  clear: both; }\n\n.dm-list-li {\n  width: 80%;\n  margin: 0 auto 0 auto;\n  font-size: 1.5rem;\n  height: 2.5rem;\n  line-height: 2.5rem;\n  overflow-y: hidden;\n  text-align: center; }\n\n.login-section {\n  width: 95%;\n  margin-top: 5%;\n  padding-left: 2.5%;\n  padding-right: 2.5%; }\n\n.login-title {\n  text-align: center;\n  font-size: 1.5rem;\n  line-height: 1.5rem;\n  margin-bottom: 1rem; }\n\n.login-input-container {\n  width: 100%; }\n\n.login-input {\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 1rem;\n  display: block;\n  padding-left: 1rem;\n  height: 2.5rem;\n  border-radius: 5px;\n  transition: 350ms;\n  outline: none;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  background: #eee; }\n\n.login-input:focus {\n  outline: none; }\n\n.login-button {\n  width: 90%;\n  height: 2.25rem;\n  font-size: 1.25rem;\n  border-radius: 5px;\n  line-height: 2.25rem;\n  text-align: center;\n  border: none;\n  color: white;\n  font-weight: bold;\n  background: #eca565; }\n\n.input-error {\n  border: 1px solid #fba2a2; }\n\n.input-error-message {\n  text-align: center;\n  color: #fba2a2;\n  margin-top: .5rem;\n  margin-bottom: 1rem; }\n\n.redirect-message {\n  display: block;\n  text-align: center;\n  font-size: 1rem;\n  line-height: 1rem;\n  margin-bottom: .5rem;\n  color: #eca565; }\n\n.redirect-container {\n  margin-top: 1rem; }\n\n.update-character-form-container {\n  width: 50%;\n  display: inline-block; }\n\n.update-character-form-title {\n  width: 95%;\n  font-size: 1rem;\n  margin-left: auto;\n  margin-right: auto;\n  border-radius: 5px; }\n\n.update-character-form-holder {\n  width: 50%;\n  display: inline-block; }\n\n.update-character-form-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(34, 34, 34, 0.9);\n  position: fixed;\n  top: 0;\n  left: 0; }\n\n.update-stat-input-container {\n  width: 33.33333333%;\n  text-align: center;\n  display: inline-block; }\n\n.update-stat-input-div {\n  width: 90%;\n  margin-left: auto;\n  margin-right: auto;\n  border-radius: 5px;\n  margin-bottom: .5rem; }\n\n.update-character-stat-input-container {\n  margin-top: 1rem; }\n\n.update-character-stat-input {\n  margin: 0 auto 0 auto;\n  width: 90%;\n  text-align: center; }\n\n.update-stat-input-title {\n  font-size: 100%;\n  margin-bottom: 0; }\n\n.update-form-container {\n  width: 90%;\n  margin: 100px auto 0 auto; }\n\n.delete-character-container {\n  display: inline-block;\n  width: 50%; }\n\n.delete-character-title {\n  width: 95%;\n  font-size: 1rem;\n  margin-left: auto;\n  background: #fba2a2;\n  color: #f4f4f4;\n  margin-right: auto;\n  border-radius: 5px; }\n\n.delete-character-holder {\n  width: 50%;\n  display: inline-block; }\n\n.delete-character-warning-shader {\n  width: 100vw;\n  height: 100vh;\n  background: rgba(34, 34, 34, 0.9);\n  position: fixed;\n  top: 0; }\n\n.delete-character-warning-text {\n  color: white; }\n\n.delete-character-yes {\n  color: white;\n  margin-top: 1rem;\n  font-size: 4rem;\n  text-align: center; }\n\n.delete-character-no {\n  color: white;\n  margin-top: 1rem;\n  font-size: 4rem;\n  text-align: center; }\n", ""]);
 
 // exports
 
@@ -41119,11 +41121,68 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 /* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(343);
+var React = __webpack_require__(1);
+
+function D20 (props) {
+    return React.createElement("svg",props,[React.createElement("g",{"key":0},[React.createElement("title",{"key":0},"background"),React.createElement("rect",{"x":"-1","y":"-1","width":"52","height":"52","id":"canvas_background","fill":"none","key":1})]),React.createElement("g",{"key":1},[React.createElement("title",{"key":0},"Layer 1"),React.createElement("path",{"stroke":"null","fill":"#eca565","d":"m47.247593,37.544393c0,0 0,0 0,0c0.053034,-0.051491 0.053034,-0.102981 0.053034,-0.102981c0,0 0,-0.051491 0,-0.051491c0,0 0,-0.051491 0,-0.051491c0,0 0,-0.051491 0,-0.051491c0,0 0,-0.051491 0,-0.102981c0,0 0,-0.051491 0,-0.051491c0,-0.051491 0,-0.102981 0,-0.102981l0,-23.943124c0,0 0,0 0,-0.051491c0,0 0,-0.051491 0,-0.051491c0,0 0,-0.051491 0,-0.051491c0,0 0,0 0,-0.051491c0,0 0,0 0,-0.051491c0,0 0,-0.051491 0,-0.051491c0,0 0,-0.051491 0,-0.051491c0,0 0,0 0,0c0,-0.051491 -0.053034,-0.051491 -0.053034,-0.102981c0,0 0,0 0,0c0,0 0,0 0,0c0,0 0,0 0,-0.051491c0,-0.051491 -0.053034,-0.051491 -0.053034,-0.051491c0,0 0,0 0,0c0,0 0,0 0,-0.051491c0,0 -0.053034,-0.051491 -0.053034,-0.051491c0,0 0,0 0,0c0,0 0,0 0,0c0,0 -0.053034,-0.051491 -0.106067,-0.051491c0,0 0,0 -0.053034,0c0,0 0,0 0,0l-21.478604,-12.100288c-0.318202,-0.154472 -0.689437,-0.154472 -0.954605,0l-21.372537,11.997307c0,0 0,0 0,0c-0.053034,0 -0.053034,0.051491 -0.106067,0.051491c0,0 0,0 -0.053034,0c0,0 -0.053034,0.051491 -0.053034,0.051491c0,0 0,0 -0.053034,0.051491c0,0 -0.053034,0.051491 -0.053034,0.051491c0,0 0,0.051491 -0.053034,0.051491c0,0 0,0 -0.053034,0.051491c0,0 0,0 0,0c0,0 0,0.051491 0,0.051491c0,0 0,0.051491 -0.053034,0.051491c0,0 0,0.051491 0,0.051491c0,0 0,0.051491 0,0.051491c0,0 0,0.051491 0,0.051491c0,0 0,0.051491 0,0.051491c0,0 0,0.051491 0,0.051491c0,0 0,0.051491 0,0.051491c0,0 0,0 0,0.051491l0,23.943124c0,0 0,0 0,0l0,0c0,0.051491 0,0.102981 0,0.154472c0,0 0,0.051491 0,0.051491c0,0.051491 0.053034,0.102981 0.053034,0.154472c0,0 0,0 0,0c0,0 0,0 0,0c0,0.051491 0.053034,0.102981 0.106067,0.154472c0,0 0,0 0,0.051491c0,0.102981 0.053034,0.154472 0.106067,0.154472c0,0 0,0 0,0c0.053034,0.051491 0.053034,0.051491 0.106067,0.102981c0,0 0,0 0.053034,0c0,0 0,0 0.053034,0l21.372537,11.997307c0,0 0,0 0,0c0,0 0.053034,0 0.053034,0.051491c0,0 0.053034,0 0.053034,0c0,0 0.053034,0 0.053034,0c0,0 0.053034,0 0.053034,0c0,0 0.053034,0 0.053034,0c0,0 0,0 0.053034,0c0.053034,0 0.053034,0 0.106067,0c0.053034,0 0.053034,0 0.106067,0c0,0 0,0 0.053034,0c0.053034,0 0.053034,0 0.106067,0c0,0 0.053034,0 0.053034,0c0,0 0.053034,0 0.053034,0c0,0 0.053034,0 0.053034,0c0,0 0.053034,0 0.053034,-0.051491c0,0 0,0 0,0l21.372537,-11.997307c0,0 0,0 0,0c0,0 0,0 0.053034,0c0,0 0,0 0.053034,0c0,0 0.053034,0 0.053034,-0.051491c0,0 0.053034,-0.051491 0.053034,-0.051491c0,0 0.053034,0 0.053034,-0.051491c0,0 0.053034,-0.051491 0.053034,-0.051491c0,0 0,-0.051491 0.053034,-0.051491c0,0.051491 0,0 0.053034,0zm-42.426872,-19.103009l5.939762,14.314384c0.053034,0.154472 0,0.360434 -0.212134,0.463415l-5.46246,2.214095c-0.212134,0.102981 -0.477302,-0.051491 -0.477302,-0.308944l0,-16.63146c0,-0.102981 0.159101,-0.154472 0.212134,-0.051491zm30.759482,14.211403l-21.107369,0c-0.265168,0 -0.424269,-0.308944 -0.318202,-0.514906l10.553684,-17.764253c0.159101,-0.205962 0.477302,-0.205962 0.583369,0l10.553684,17.764253c0.159101,0.257453 0,0.514906 -0.265168,0.514906zm-23.49388,-1.853661l-6.841333,-16.425498c-0.106067,-0.205962 0.053034,-0.463415 0.318202,-0.463415l17.076816,-0.823849c0.265168,0 0.477302,0.257453 0.318202,0.514906l-10.288517,17.249347c-0.106067,0.257453 -0.477302,0.257453 -0.583369,-0.051491zm23.281746,4.32521l-10.076382,12.048798c-0.159101,0.154472 -0.424269,0.154472 -0.530336,0l-10.076382,-12.048798c-0.159101,-0.205962 0,-0.566396 0.265168,-0.566396l20.152764,0c0.265168,0 0.424269,0.360434 0.265168,0.566396zm2.015276,-4.273719l-10.288517,-17.249347c-0.159101,-0.257453 0.053034,-0.514906 0.318202,-0.514906l17.076816,0.823849c0.265168,0 0.371235,0.257453 0.318202,0.463415l-6.841333,16.425498c-0.106067,0.308944 -0.477302,0.308944 -0.583369,0.051491zm-11.402222,-20.029839l0,-7.517626c0,-0.257453 0.318202,-0.411925 0.530336,-0.308944l15.485808,8.70191c0.106067,0.051491 0.053034,0.205962 -0.053034,0.205962l-15.644909,-0.772359c-0.159101,0 -0.318202,-0.154472 -0.318202,-0.308944zm-2.280444,0.308944l-15.644909,0.772359c-0.106067,0 -0.159101,-0.154472 -0.053034,-0.205962l15.538842,-8.650419c0.212134,-0.154472 0.530336,0.051491 0.530336,0.308944l0,7.466135c0,0.154472 -0.159101,0.308944 -0.371235,0.308944zm-11.66739,23.840143l8.538408,10.246627c0.053034,0.102981 -0.053034,0.205962 -0.159101,0.154472l-13.947834,-7.82657c-0.265168,-0.154472 -0.212134,-0.514906 0.053034,-0.617887l5.144258,-2.059624c0.106067,-0.051491 0.265168,0 0.371235,0.102981zm26.357694,-0.102981l5.144258,2.059624c0.265168,0.102981 0.318202,0.463415 0.053034,0.617887l-14.000868,7.82657c-0.106067,0.051491 -0.212134,-0.051491 -0.159101,-0.154472l8.538408,-10.246627c0.159101,-0.102981 0.318202,-0.154472 0.424269,-0.102981zm6.576165,0.566396l-5.46246,-2.214095c-0.159101,-0.051491 -0.265168,-0.257453 -0.212134,-0.463415l5.939762,-14.314384c0.053034,-0.102981 0.212134,-0.051491 0.212134,0.051491l0,16.63146c0,0.257453 -0.265168,0.411925 -0.477302,0.308944z","id":"svg_1","key":1})])]);
+}
+
+D20.displayName = "D20";
+
+D20.defaultProps = {"width":"50","height":"50"};
+
+module.exports = D20;
+
+D20.default = D20;
 
 
 /***/ }),
 /* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var React = __webpack_require__(1);
+
+function Icomoon (props) {
+    return React.createElement("svg",props,[React.createElement("metadata",{"key":0},"Generated by IcoMoon"),React.createElement("defs",{"key":1},React.createElement("font",{"id":"icomoon","horizAdvX":"1024"},[React.createElement("font-face",{"unitsPerEm":"1024","ascent":"960","descent":"-64","key":0}),React.createElement("missing-glyph",{"horizAdvX":"1024","key":1}),React.createElement("glyph",{"unicode":" ","horizAdvX":"512","d":"","key":2}),React.createElement("glyph",{"unicode":"","glyphName":"plus","d":"M992 576h-352v352c0 17.672-14.328 32-32 32h-192c-17.672 0-32-14.328-32-32v-352h-352c-17.672 0-32-14.328-32-32v-192c0-17.672 14.328-32 32-32h352v-352c0-17.672 14.328-32 32-32h192c17.672 0 32 14.328 32 32v352h352c17.672 0 32 14.328 32 32v192c0 17.672-14.328 32-32 32z","key":3}),React.createElement("glyph",{"unicode":"","glyphName":"minus","d":"M0 544v-192c0-17.672 14.328-32 32-32h960c17.672 0 32 14.328 32 32v192c0 17.672-14.328 32-32 32h-960c-17.672 0-32-14.328-32-32z","key":4}),React.createElement("glyph",{"unicode":"","glyphName":"play3","d":"M192 832l640-384-640-384z","key":5}),React.createElement("glyph",{"unicode":"","glyphName":"ctrl","d":"M736.014 512c-8.908 0-17.77 3.698-24.096 10.928l-199.918 228.478-199.918-228.478c-11.636-13.3-31.856-14.65-45.154-3.010-13.3 11.638-14.648 31.854-3.010 45.154l224 256c6.076 6.944 14.854 10.928 24.082 10.928s18.006-3.984 24.082-10.928l224-256c11.638-13.3 10.292-33.516-3.010-45.154-6.070-5.312-13.582-7.918-21.058-7.918z","key":6})]))]);
+}
+
+Icomoon.displayName = "Icomoon";
+
+Icomoon.defaultProps = {};
+
+module.exports = Icomoon;
+
+Icomoon.default = Icomoon;
+
+
+/***/ }),
+/* 344 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var React = __webpack_require__(1);
+
+function Hamburger (props) {
+    return React.createElement("svg",props,[React.createElement("g",{"key":0},[React.createElement("title",{"key":0},"background"),React.createElement("rect",{"fill":"none","id":"canvas_background","height":"52","width":"52","y":"-1","x":"-1","key":1})]),React.createElement("g",{"key":1},[React.createElement("title",{"key":0},"Layer 1"),React.createElement("line",{"id":"svg_1","y2":"24.670241","y1":"24.670241","x2":"42.234048","x1":"8.234048","strokeWidth":"3","strokeMiterlimit":"10","stroke":"#f4f4f4","fill":"none","key":1}),React.createElement("line",{"id":"svg_2","y2":"13.656589","y1":"13.656589","x2":"42","x1":"8.1","strokeWidth":"3","strokeMiterlimit":"10","stroke":"#f4f4f4","fill":"none","key":2}),React.createElement("line",{"id":"svg_3","y2":"35.644641","y1":"35.644641","x2":"42.105263","x1":"8.105263","strokeWidth":"3","strokeMiterlimit":"10","stroke":"#f4f4f4","fill":"none","key":3})])]);
+}
+
+Hamburger.displayName = "Hamburger";
+
+Hamburger.defaultProps = {"width":"50","height":"50"};
+
+module.exports = Hamburger;
+
+Hamburger.default = Hamburger;
+
+
+/***/ }),
+/* 345 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(346);
+
+
+/***/ }),
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41133,7 +41192,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ponyfill = __webpack_require__(344);
+var _ponyfill = __webpack_require__(347);
 
 var _ponyfill2 = _interopRequireDefault(_ponyfill);
 
@@ -41156,10 +41215,10 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(76), __webpack_require__(352)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(76), __webpack_require__(354)(module)))
 
 /***/ }),
-/* 344 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41188,28 +41247,10 @@ function symbolObservablePonyfill(root) {
 };
 
 /***/ }),
-/* 345 */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dlYnBhY2tfcHVibGljX3BhdGhfXyArICI1NzMxODBhMDI2YmViZjI5OWYxODk1ODA2OWFlMjk5NS5wbmciOw=="
-
-/***/ }),
-/* 346 */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dlYnBhY2tfcHVibGljX3BhdGhfXyArICIyOWE1OGRjZTYzYTFjYzI1MzMzM2NjODEwMmFkNzhkZi5wbmciOw=="
-
-/***/ }),
-/* 347 */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/png;base64,bW9kdWxlLmV4cG9ydHMgPSBfX3dlYnBhY2tfcHVibGljX3BhdGhfXyArICIyNjhlNzZhYmQzNmIzODczOTJjYzYxNGEzODg5YmUxNi5wbmciOw=="
-
-/***/ }),
 /* 348 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiID4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8bWV0YWRhdGE+R2VuZXJhdGVkIGJ5IEljb01vb248L21ldGFkYXRhPgo8ZGVmcz4KPGZvbnQgaWQ9Imljb21vb24iIGhvcml6LWFkdi14PSIxMDI0Ij4KPGZvbnQtZmFjZSB1bml0cy1wZXItZW09IjEwMjQiIGFzY2VudD0iOTYwIiBkZXNjZW50PSItNjQiIC8+CjxtaXNzaW5nLWdseXBoIGhvcml6LWFkdi14PSIxMDI0IiAvPgo8Z2x5cGggdW5pY29kZT0iJiN4MjA7IiBob3Jpei1hZHYteD0iNTEyIiBkPSIiIC8+CjxnbHlwaCB1bmljb2RlPSImI3hlYTBhOyIgZ2x5cGgtbmFtZT0icGx1cyIgZD0iTTk5MiA1NzZoLTM1MnYzNTJjMCAxNy42NzItMTQuMzI4IDMyLTMyIDMyaC0xOTJjLTE3LjY3MiAwLTMyLTE0LjMyOC0zMi0zMnYtMzUyaC0zNTJjLTE3LjY3MiAwLTMyLTE0LjMyOC0zMi0zMnYtMTkyYzAtMTcuNjcyIDE0LjMyOC0zMiAzMi0zMmgzNTJ2LTM1MmMwLTE3LjY3MiAxNC4zMjgtMzIgMzItMzJoMTkyYzE3LjY3MiAwIDMyIDE0LjMyOCAzMiAzMnYzNTJoMzUyYzE3LjY3MiAwIDMyIDE0LjMyOCAzMiAzMnYxOTJjMCAxNy42NzItMTQuMzI4IDMyLTMyIDMyeiIgLz4KPGdseXBoIHVuaWNvZGU9IiYjeGVhMGI7IiBnbHlwaC1uYW1lPSJtaW51cyIgZD0iTTAgNTQ0di0xOTJjMC0xNy42NzIgMTQuMzI4LTMyIDMyLTMyaDk2MGMxNy42NzIgMCAzMiAxNC4zMjggMzIgMzJ2MTkyYzAgMTcuNjcyLTE0LjMyOCAzMi0zMiAzMmgtOTYwYy0xNy42NzIgMC0zMi0xNC4zMjgtMzItMzJ6IiAvPgo8Z2x5cGggdW5pY29kZT0iJiN4ZWExYzsiIGdseXBoLW5hbWU9InBsYXkzIiBkPSJNMTkyIDgzMmw2NDAtMzg0LTY0MC0zODR6IiAvPgo8Z2x5cGggdW5pY29kZT0iJiN4ZWE1MDsiIGdseXBoLW5hbWU9ImN0cmwiIGQ9Ik03MzYuMDE0IDUxMmMtOC45MDggMC0xNy43NyAzLjY5OC0yNC4wOTYgMTAuOTI4bC0xOTkuOTE4IDIyOC40NzgtMTk5LjkxOC0yMjguNDc4Yy0xMS42MzYtMTMuMy0zMS44NTYtMTQuNjUtNDUuMTU0LTMuMDEwLTEzLjMgMTEuNjM4LTE0LjY0OCAzMS44NTQtMy4wMTAgNDUuMTU0bDIyNCAyNTZjNi4wNzYgNi45NDQgMTQuODU0IDEwLjkyOCAyNC4wODIgMTAuOTI4czE4LjAwNi0zLjk4NCAyNC4wODItMTAuOTI4bDIyNC0yNTZjMTEuNjM4LTEzLjMgMTAuMjkyLTMzLjUxNi0zLjAxMC00NS4xNTQtNi4wNzAtNS4zMTItMTMuNTgyLTcuOTE4LTIxLjA1OC03LjkxOHoiIC8+CjwvZm9udD48L2RlZnM+PC9zdmc+"
+module.exports = __webpack_require__.p + "573180a026bebf299f18958069ae2995.png";
 
 /***/ }),
 /* 349 */
@@ -41225,6 +41266,18 @@ module.exports = "data:application/font-woff;base64,d09GRgABAAAAAAWEAAsAAAAABTgA
 
 /***/ }),
 /* 351 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "29a58dce63a1cc253333cc8102ad78df.png";
+
+/***/ }),
+/* 352 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "268e76abd36b387392cc614a3889be16.png";
+
+/***/ }),
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41270,7 +41323,7 @@ var valueEqual = function valueEqual(a, b) {
 exports.default = valueEqual;
 
 /***/ }),
-/* 352 */
+/* 354 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {

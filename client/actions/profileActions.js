@@ -7,7 +7,7 @@ export function createProfile(data) {
   return {
     type: 'CREATE_PROFILE',
     payload: request
-    .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/profile`)
+    .post(`${'http://localhost:8000'}/api/profile`)
     .set({authorization: `Bearer ${data.token}`})
     .send(data.user)
     .then( res => {
@@ -22,7 +22,7 @@ export function getProfile(data) {
   return {
     type: 'GET_PROFILE',
     payload: request
-    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/profile/${data.user._id}`)
+    .get(`${'http://localhost:8000'}/api/profile/${data.user._id}`)
     .set({authorization: `Bearer ${data.token}`})
     .then( res => {
       var response = JSON.parse(res.text)

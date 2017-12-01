@@ -56,6 +56,8 @@ class CharacterPage extends React.Component {
     this.state = {
       campaignName: '',
       characterName: '',
+      race: '',
+      class: '',
       lv: '',
       ac: '',
       hp: '',
@@ -129,6 +131,8 @@ class CharacterPage extends React.Component {
       token:  this.props.token,
       character: {
         characterName: this.state.characterName,
+        race: this.state.race,
+        class: this.state.class,
         lv: this.state.lv,
         ac: this.state.ac,
         hp: this.state.hp,
@@ -472,6 +476,7 @@ class CharacterPage extends React.Component {
 
 
 const mapStateToProps = (state) => {
+  console.log("!!STORE!!",state);
   return {
     weapons: state.characterReducer.weapons,
     armor:   state.characterReducer.armor,

@@ -1,3 +1,6 @@
+.character-list-section{
+  margin-bottom: 2rem;
+}
 .character-list-title{
 text-align: center;
 margin: 0 0 1rem 0;
@@ -5,11 +8,34 @@ padding: 2rem 0 0 0;
 }
 
 .character-list-li{
+  transition: 400ms;
   width: 80%;
   margin: 0 auto 0 auto;
   font-size: 1.5rem;
   height: 2.5rem;
   line-height: 2.5rem;
   overflow-y:hidden;
-  text-align: center;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+  &:hover{
+    padding-left: 20px;
+    .list-subtitle{
+      transition: 400ms;
+      color: $blue;
+
+    }
+  }
+  div{
+    display: inline-block;
+  }
+  .list-title{
+    width: 50%;
+    overflow: hidden;
+  }
+  .list-subtitle{
+    font-size: .75rem;
+    color: lighten($color-3, 20%);
+    float: right;
+  }
 }

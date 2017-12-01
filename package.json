@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node tools/build.js",
-    "prod": "npm run build && node server.js",
+    "pod": "npm run build && node server.js",
     "start": "webpack-dev-server --inline --hot --content-base . --history-api-fallback"
   },
   "keywords": [],
@@ -65,6 +65,7 @@
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^7.1.0",
     "redux-logger": "^3.0.6",
+    "svg-react-loader": "^0.4.5",
     "webpack-dev-server": "^2.4.5"
   }
 }

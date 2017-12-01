@@ -8,7 +8,7 @@
   height: 70px;
   line-height: 70px;
   .campaign-header-title{
-    // height: 70px;
+    line-height: 70px;
     display: inline-block;
     margin:0;
   }
@@ -20,7 +20,7 @@
 }
 
 .campaign-header-settings{
-  height: 100vh;
+  height: calc(100vh - 140px);
   width: 100%;
   position: absolute;
   // top: 140px;
@@ -29,9 +29,9 @@
 }
 
 .campaign-header-exited{
-  transform: translateX(100%);
+  transform: translateX(-100%);
   transition: 400ms;
-display: none
+// display: none
 }
 .campaign-header-exiting{
   transform: translateX(-100%);
