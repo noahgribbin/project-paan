@@ -11,6 +11,9 @@ import store from '../store.js';
 export class UpdateWeaponForm extends React.Component {
   constructor(props) {
     super(props)
+
+    console.log(this);
+
     this.onChange = this.props.onChange.bind(this)
     this.onSubmit = this.props.onSubmit.bind(this)
     this.toggleHide = this.props.toggleHide.bind(this)
@@ -26,10 +29,10 @@ export class UpdateWeaponForm extends React.Component {
     this.errorCheck = this.errorCheck.bind(this)
 
     this.state = {
-      weaponName: '',
-      diceAmount: '',
-      diceValue: '',
-      damageType: '',
+      weaponName: this.props.weapon.name,
+      diceAmount: this.props.weapon.dice.slice(0,1),
+      diceValue: this.props.weapon.dice.slice(1,3),
+      damageType: this.props.weapon.damage,
       weaponNameError:false,
       diceAmountError:false,
       diceValueError:false,
@@ -40,6 +43,11 @@ export class UpdateWeaponForm extends React.Component {
   }
 
   componentDidMount(){
+    console.log(this.props.weapon.dice);
+    console.log(this.props.weapon.dice.slice(0,1));
+    console.log(this.props.weapon.dice.slice(1,3));
+    console.log(this.state.diceAmount);
+    console.log(this.state.diceValue);
     console.log('mounted');
     document.getElementById("update-weapon-form-shader-"+this.props.weapon._id).focus()
   }
@@ -74,27 +82,34 @@ export class UpdateWeaponForm extends React.Component {
   async updateWeaponAttribute(e){
     var fields = ['weaponName', 'diceAmount', 'diceValue', 'damageType']
     var data = {
-      value:e.target.getAttribute("value"),
+      value:e.target.value,
       type:e.target.getAttribute("type")
     }
-    if(data.value===null) {
-      data.value=e.target.value
+    if(data.value===undefined) {
+      data.value=e.target.getAttribute("value")
     }
     await this.setState({[data.type]:data.value})
     await this.errorCheck(fields)
     store.dispatch(this.setWeaponAttributes(data))
+    console.log(this.state);
   }
 
   async submitAndToggle(e) {
     e.preventDefault();
     var id = e.target.getAttribute('id')
     var fields = ['weaponName', 'diceAmount', 'diceValue', 'damageType']
+    var weapon = {
+      name: this.state.weaponName,
+      dice: this.state.diceAmount+this.state.diceValue,
+      damage: this.state.damageType
+    }
+    console.log('sumbitAndToggleWeapon',weapon);
     this.setState({showErrors:true})
     await this.errorCheck(fields)
     console.log(this.state);
     if(this.state.updateWeaponError) return
     console.log('too far');
-    this.onSubmit(id)
+    this.onSubmit(weapon, id)
     this.toggleHide()
   }
 
@@ -153,6 +168,7 @@ export class UpdateWeaponForm extends React.Component {
                    <input className={"create-item-input "  + (this.state.showErrors && this.state.weaponNameError && this.state.updateWeaponError ? ' input-error ' :null)}
                           onChange={this.updateWeaponAttribute}
                           placeholder="weapon name"
+                          defaultValue={this.props.weapon.name}
                           type="weaponName"></input>
                  </div>
                  <div className="dice-amount-container">

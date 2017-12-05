@@ -57,6 +57,7 @@ export default class UpdateCharacterButton extends React.Component {
             onSubmit={this.props.updateCharacter}
             onInput={this.props.onInput}
             character={this.props.character}
+            setCharacterAttrbutes={this.props.setCharacterAttrbutes}
           />
         :null}
       </section>

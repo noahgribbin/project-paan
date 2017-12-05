@@ -44,7 +44,8 @@ export default function characterReducer(state=initialState, action) {
     console.log(action);
     return Object.assign({}, state, {
       campaign: action.payload.body,
-      joinError: false
+      joinError: false,
+      partyCode: null
       // update state
     })
     case 'JOIN_PARTY_REJECTED' :

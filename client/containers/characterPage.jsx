@@ -22,7 +22,7 @@ import { createWeapon, getAllWeapons, deleteWeapon, updateWeapon, updateWeaponNa
          getAllCharacters, deleteCharacter,updateCharacter, updateCharacterName,
          createArmor, getAllArmor, deleteArmor, updateArmor, updateArmorName, setArmor,
          createSpell, getAllSpells, deleteSpell, updateSpell, updateSpellName, setSpells, joinParty, setJoinCode,
-         getPartyMembers, setWeaponAttributes, setSpellAttributes, create
+         getPartyMembers, setCharacterAttributes, setWeaponAttributes, setSpellAttributes, create
        } from '../actions/characterActions.js'
 
 
@@ -32,7 +32,8 @@ class CharacterPage extends React.Component {
     console.log('characterPage',this);
     this.onJoinPartySubmit = this.onJoinPartySubmit.bind(this);
     this.toSessionPage = this.toSessionPage.bind(this);
-    // this.loadCharacterData = this.loadCharacterData.bind(this);
+
+    // this.updateCharacterLocalState = this.updateCharacterLocalState.bind(this);
 
     this.onClickDeleteCharacter = this.onClickDeleteCharacter.bind(this);
     this.onSubmitUpdateCharacter = this.onSubmitUpdateCharacter.bind(this);
@@ -70,36 +71,45 @@ class CharacterPage extends React.Component {
     }
   }
    async componentWillMount(){
-    console.log('state',this.state);
-    console.log('props',this.props);
     var data = {
       id: this.props.sessionCharacterId,
       token: this.props.token
     }
     await this.props.getCharacter(data)
-    .then(character => {
-      console.log('CHARACTER', character);
-      var characterName = character.value
-      if(character.value.dmID.campaignName){
-        var campaignName = character.value.dmID.campaignName
-      }
-      this.setState({cahracter:character})
-    })
-    console.log(this.state);
     await  this.props.getAllArmor(data)
     await this.props.getAllWeapons(data)
     await  this.props.getAllSpells(data)
   }
 
+  // async updateCharacterLocalState(){
+  //   await this.setState({
+  //     campaignName: this.props.character.campaignName,
+  //     characterName: this.props.character.characterName,
+  //     race: this.props.character.race,
+  //     class: this.props.character.class,
+  //     lv: this.props.character.lv,
+  //     ac: this.props.character.ac,
+  //     hp: this.props.character.hp,
+  //     strength: this.props.character.strength,
+  //     dexterity: this.props.character.dexterity,
+  //     constitution: this.props.character.constitution,
+  //     intelligence: this.props.character.intelligence,
+  //     wisdom: this.props.character.wisdom,
+  //     charisma: this.props.character.charisma,
+  //   })
+  //   console.log('updateLocalState',this.state);
+  // }
+
   // Party function
   onJoinPartySubmit() {
-    // e.preventDefault()
     const data = {
       code : this.props.code,
       token: this.props.token,
       id:    this.props.sessionCharacterId
     }
-    console.log('onJoinPartySubmit',data);
+    // console.log(data);
+    console.log('onJoinPartySubmit',data.code);
+    if(!data.code)return;
     store.dispatch(joinParty(data))
     .then(() =>{
 
@@ -125,41 +135,28 @@ class CharacterPage extends React.Component {
     })
   }
 
-  onSubmitUpdateCharacter() {
+  onSubmitUpdateCharacter(character) {
     const data = {
       id:     this.props.sessionCharacterId,
       token:  this.props.token,
-      character: {
-        characterName: this.state.characterName,
-        race: this.state.race,
-        class: this.state.class,
-        lv: this.state.lv,
-        ac: this.state.ac,
-        hp: this.state.hp,
-        strength: this.state.strength,
-        dexterity: this.state.dexterity,
-        constitution: this.state.constitution,
-        intelligence: this.state.intelligence,
-        wisdom: this.state.wisdom,
-        charisma: this.state.charisma
-      }
+      character: character
     }
     const allCharacterData = {
       id: this.props.profileId,
       token: this.props.token
     }
+    console.log('update character data',data.character);
     store.dispatch(updateCharacter(data))
     .then(() => {
       store.dispatch(getAllCharacters(allCharacterData))
     })
   }
 
-
   onInput(e) {
     var type = e.target.getAttribute('name')
-    var value = e.target.value
+    var value = e.target.getAttribute('value')
     if (value===null) {
-      value=e.target.getAttribute('value')
+      value=e.target.value
     }
     console.log('type:value');
     console.log('type',type);
@@ -169,6 +166,7 @@ class CharacterPage extends React.Component {
       [type]: value
     })
     console.log(this.state);
+    console.log(this);
   }
 
 
@@ -227,22 +225,14 @@ class CharacterPage extends React.Component {
     }
   }
 
-  onSubmitUpdateWeapon(id) {
-    var dice = null;
-    const diceAmount = this.props.diceAmount
-    const diceValue = this.props.diceValue
-    if(diceValue&&diceAmount) dice = diceAmount + diceValue
-    console.log('dice',dice);
+  onSubmitUpdateWeapon(weapon, id) {
+
     const data =  {
       id: id,
       token: this.props.token,
-      weapon: {
-        name: this.props.weaponName,
-        dice: dice,
-        damage: this.props.weaponType
-      }
+      weapon: weapon
     }
-    console.log('data',data);
+    console.log('data',data.weapon);
     const characterData = {
       id: this.props.sessionCharacterId,
       token: this.props.token
@@ -299,18 +289,17 @@ class CharacterPage extends React.Component {
   }
 
 
-  onSubmitUpdateArmor(id) {
+  onSubmitUpdateArmor(armor, id) {
     const data =  {
       id: id,
       token: this.props.token,
-      armor: {
-        name: this.props.armorName
-      }
+      armor: armor
     }
     const characterData = {
       id: this.props.sessionCharacterId,
       token: this.props.token
     }
+    console.log('armorData', data);
     store.dispatch(updateArmor(data))
     .then( () => {
       store.dispatch(getAllArmor(characterData))
@@ -426,6 +415,7 @@ class CharacterPage extends React.Component {
           onInput = {this.onInput}
           campaign = {this.props.campaign}
           campaignName={this.state.campaignName}
+          setCharacterAttrbutes={this.props.setCharacterAttrbutes}
         />
 
         <CreateWeaponForm
@@ -504,6 +494,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    setCharacterAttributes: setCharacterAttributes,
     setWeaponAttributes: setWeaponAttributes,
     setSpellAttributes: setSpellAttributes,
     getCharacter: getCharacter,

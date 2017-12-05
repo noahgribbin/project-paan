@@ -46,6 +46,13 @@ export function getCharacter(data) {
   }
 }
 
+export function setCharacterAttributes(data) {
+  return {
+    type: 'SET_SPELL_ATTRIBUTES',
+    [data.property]: data.value
+  }
+}
+
 export function getAllCharacters(data) {
   return {
     type: 'GET_ALL_CHARACTER',

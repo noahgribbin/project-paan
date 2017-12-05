@@ -64,6 +64,8 @@ export default class CharacterHeader extends React.Component {
                 onInput = {this.props.onInput}
                 toggleCharacterManagment = {this.toggleCharacterManagment}
                 character={this.props.character}
+                setCharacterAttrbutes={this.props.setCharacterAttrbutes}
+
               />
             </section>
           </section>

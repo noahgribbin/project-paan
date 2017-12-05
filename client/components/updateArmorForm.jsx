@@ -25,7 +25,7 @@ export class UpdateArmorForm extends React.Component {
     this.errorCheck = this.errorCheck.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.state = {
-      armorName: '',
+      armorName: this.props.armor.armorName,
       armorNameError: '',
       updateArmorError: false,
       showErrors: false
@@ -42,15 +42,18 @@ export class UpdateArmorForm extends React.Component {
 
   async updateAndToggle(e) {
     e.preventDefault();
-    var fields = ['armorName']
     var id = e.target.getAttribute('id')
+    var fields = ['armorName']
+    var armor = {
+      name: this.state.armorName
+    }
     this.setState({showErrors:true})
     await this.errorCheck(fields)
     console.log(this.state);
     if(this.state.updateArmorError) return
     console.log('too far');
     this.toggleHide();
-    this.onSubmit(id);
+    this.onSubmit(armor,id);
   }
 
   onEscapeKey(e) {
@@ -92,7 +95,8 @@ export class UpdateArmorForm extends React.Component {
         errArr.push(false)
       }
     }
-
+    console.log(error);
+    console.log(this.state);
     if(errArr.some(isTrue)===true){
       this.setState({updateArmorError:true})
       console.log('updateArmorError', true);
@@ -131,7 +135,8 @@ export class UpdateArmorForm extends React.Component {
           <div className="update-armor-form-input-div">
             <input className={"create-item-input " + (this.state.showErrors && this.state.armorNameError ? 'input-error ' :null)}
                    onChange={this.updateArmorInput}
-                   placeholder={this.props.armor.name}
+                   placeholder="Armor name"
+                   defaultValue={this.props.armor.name}
                    onKeyDown={this.deepOnEscapeKey}
                    name="armorName"></input>
           </div>
