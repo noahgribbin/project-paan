@@ -42,16 +42,27 @@ export default class CharacterHeader extends React.Component {
       <section className="character-header">
         <CharacterStats
           character={this.props.character}
+          campaign={this.props.campaign}
+          toSessionPage={this.props.toSessionPage}
+
+          onSubmit = {this.onSubmit}
+          onJoinCodeInput = {this.props.onJoinCodeInput}
+          onJoinPartySubmit={this.props.onJoinPartySubmit}
+
+          deleteCharacter={this.props.deleteCharacter}
+
+          updateCharacter={this.props.updateCharacter}
+          onInput = {this.props.onInput}
+          toggleCharacterManagment = {this.toggleCharacterManagment}
+          setCharacterAttributes={this.props.setCharacterAttributes}
+
         />
+        {/* <div className="fa fa-camera-retro fa-lg"></div> */}
         <h1 onClick={this.toggleCharacterManagment}>Click to Manage Character</h1>
-        {this.props.campaign ? <h1>{this.props.campaign.campaignName}</h1> :null}
         { this.state.showCharacterManagment ?
           <section>
             <JoinPartyForm
-              onSubmit = {this.onSubmit}
-              onChange = {this.props.onJoinCodeInput}
-              toggleCharacterManagment={this.toggleCharacterManagment}
-              onJoinPartySubmit={this.props.onJoinPartySubmit}
+
             />
 
             <section className="button-container">
@@ -60,7 +71,7 @@ export default class CharacterHeader extends React.Component {
                 onClick={this.props.deleteCharacter}
               />
               <UpdateCharacterButton
-                updateCharacter={this.updateCharacter}
+                updateCharacter={this.props.updateCharacter}
                 onInput = {this.props.onInput}
                 toggleCharacterManagment = {this.toggleCharacterManagment}
                 character={this.props.character}

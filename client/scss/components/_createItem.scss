@@ -40,11 +40,15 @@ width: 90%;
 .item-li{
   list-style: none;
   background:$color-2;
-  height: 2rem;
-  line-height: 2rem;
+  height: 40px;
+  line-height: 40px;
   border-bottom: 1px dashed $color-5;
   padding-left: .5rem;
 }
 .item-label{
   display: inline-block;
+  width: 25%;
+}
+.item-label:first-child{
+  width: 50%;
 }

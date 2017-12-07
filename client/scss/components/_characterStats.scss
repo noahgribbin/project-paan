@@ -15,8 +15,47 @@
   font-size: 1rem;
   line-height: 1rem
 }
+.stat-title-container{
+  width: 100%;
+  text-align: center;
+}
 .stat-title{
   text-align: center;
+  margin-bottom: 0;
+  display: inline-block;
+}
+.character-stat-ellipsis{
+  color: $color-5;
+  line-height: 44px;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 1rem;
+}
+.character-managment-ul{
+  position: absolute;
+  background: $color-1;
+  top: 10px;
+  right: 2rem;
+  min-width: 100px;
+  li{
+    height:20px;
+    padding: 10px 0 10px 0;
+    input{
+      padding-left: 0;
+      margin: 0 auto 0 auto;
+      text-align: center;
+    }
+  }
+  li:nth-child(3){
+    height: 40px;
+  }
+}
+.stat-subtitle{
+  text-align: center;
+  width: 50%;
+  margin: 0 auto 0 auto;
+  font-size: 1.5rem;
+  color: lighten($color-5 ,10%);
 }
 .proficiency-stat-div-holder{
   width: 100%;
@@ -26,4 +65,9 @@
   display: inline-block;
   width: 33.3333333333333%;
   text-align: center;
+}
+.stat-dropdown-toggle{
+  display: block;
+  text-align: center;
+  color: $color-5;
 }

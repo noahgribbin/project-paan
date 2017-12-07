@@ -11,10 +11,10 @@ export class ToggleArmorUpdateFormButton extends React.Component {
 
   render() {
     return (
-      <div className="toggle-weapon-update-form-button"
+      <span className="toggle-weapon-update-form-button right fa fa-pencil-square-o"
            onClick={this.props.toggleShow}
            id={this.props.armorId}>
-      </div>
+      </span>
     )
   }
 }

@@ -16,10 +16,10 @@ export class DeleteWeaponButton extends React.Component {
 
   render() {
     return (
-      <div className="delete-weapon-button"
+      <span className="delete-weapon-button right fa fa-minus-square-o"
            onClick={this.onClick}
            id={this.props.weapon._id}>
-      </div>
+      </span>
     )
   }
 }

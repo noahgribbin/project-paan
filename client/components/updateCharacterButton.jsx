@@ -43,10 +43,10 @@ export default class UpdateCharacterButton extends React.Component {
   render(){
     return (
       <section className="update-character-form-holder">
-        <h1 onClick={this.toggleShow}
+        <p onClick={this.toggleShow}
             className="update-character-form-title">
             Update character
-        </h1>
+        </p>
         {this.state.showUpdateModal ?
           <UpdateCharacterForm
             toggleHide={this.toggleHide}

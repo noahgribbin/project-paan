@@ -7,7 +7,10 @@ import store from '../store.js';
 
 import { history } from '../entry.jsx';
 
-import { CreateWeaponForm } from '../components/createWeaponForm.jsx'
+import { CreateWeaponForm } from '../components/weaponSection.jsx'
+import { WeaponSection } from '../components/weaponSection.jsx'
+import { ArmorSection } from '../components/armorSection.jsx'
+import { SpellSection } from '../components/spellSection.jsx'
 import { WeaponList } from '../components/weaponList.jsx'
 import { CreateArmorForm } from '../components/createArmorForm.jsx'
 import { ArmorList } from '../components/armorList.jsx'
@@ -81,27 +84,9 @@ class CharacterPage extends React.Component {
     await  this.props.getAllSpells(data)
   }
 
-  // async updateCharacterLocalState(){
-  //   await this.setState({
-  //     campaignName: this.props.character.campaignName,
-  //     characterName: this.props.character.characterName,
-  //     race: this.props.character.race,
-  //     class: this.props.character.class,
-  //     lv: this.props.character.lv,
-  //     ac: this.props.character.ac,
-  //     hp: this.props.character.hp,
-  //     strength: this.props.character.strength,
-  //     dexterity: this.props.character.dexterity,
-  //     constitution: this.props.character.constitution,
-  //     intelligence: this.props.character.intelligence,
-  //     wisdom: this.props.character.wisdom,
-  //     charisma: this.props.character.charisma,
-  //   })
-  //   console.log('updateLocalState',this.state);
-  // }
-
   // Party function
-  onJoinPartySubmit() {
+  onJoinPartySubmit(e) {
+    e.preventDefault()
     const data = {
       code : this.props.code,
       token: this.props.token,
@@ -415,15 +400,10 @@ class CharacterPage extends React.Component {
           onInput = {this.onInput}
           campaign = {this.props.campaign}
           campaignName={this.state.campaignName}
-          setCharacterAttrbutes={this.props.setCharacterAttrbutes}
+          setCharacterAttributes={this.props.setCharacterAttributes}
+          toSessionPage={this.toSessionPage}
         />
-
-        <CreateWeaponForm
-          onSubmit = {this.onSubmitCreateWeapon}
-          onWeaponNameInput = {this.onWeaponNameInput}
-          setWeaponAttributes = {this.props.setWeaponAttributes}
-        />
-        <WeaponList
+        <WeaponSection
           // load = {this.onClickAllWeapons()}
           onLoad  ={this.onLoadAllWeapons}
           deleteWeapon ={this.onClickDeleteWeapon}
@@ -432,33 +412,32 @@ class CharacterPage extends React.Component {
           onInput = {this.onInput}
           onWeaponNameInput = {this.onWeaponNameInput}
           setWeaponAttributes = {this.props.setWeaponAttributes}
+          createWeapon = {this.onSubmitCreateWeapon}
+          onWeaponNameInput = {this.onWeaponNameInput}
+          setWeaponAttributes = {this.props.setWeaponAttributes}
         />
-        <CreateArmorForm
-          onSubmit = {this.onSubmitCreateArmor}
-          onArmorNameInput = {this.onArmorNameInput}
-        />
-        <ArmorList
+        <ArmorSection
           deleteArmor ={this.onClickDeleteArmor}
           armor = {this.props.armor}
           onSubmit = {this.onSubmitUpdateArmor}
           onArmorNameInput = {this.onArmorNameInput}
-        />
 
-        <CreateSpellForm
-          onSubmit = {this.onSubmitCreateSpell}
-          onSpellNameInput = {this.onSpellNameInput}
-          setSpellAttributes = {this.props.setSpellAttributes}
+          createArmor = {this.onSubmitCreateArmor}
+          onArmorNameInput = {this.onArmorNameInput}
         />
-        <SpellList
+        <SpellSection
           deleteSpell ={this.onClickDeleteSpell}
           spells = {this.props.spells}
           onSubmit = {this.onSubmitUpdateSpell}
           onSpellNameInput = {this.onSpellNameInput}
           setSpellAttributes = {this.props.setSpellAttributes}
+
+          createSpell = {this.onSubmitCreateSpell}
+          onSpellNameInput = {this.onSpellNameInput}
+          setSpellAttributes = {this.props.setSpellAttributes}
         />
 
-        { this.props.campaign ? <h1  className="to-session-page-h1" onClick={this.toSessionPage}>TO SESSION PAGE</h1> :null}
-      </section>
+        </section>
       </section>
     )
   }

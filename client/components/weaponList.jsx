@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 
 import store from '../store.js';

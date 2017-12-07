@@ -57,7 +57,8 @@ export class SpellItem extends React.Component {
             key={'armorLi_'+spell._id}
             onClick={this.toggleShowInfo}>
               <div className="spell-label-container">
-                <p className="spell-item-label">{spell.name}</p>
+                <p className="item-name spell-item-label">{spell.name}</p>
+                <span className="fa fa-caret-down"></span>
               </div>
         { this.state.showUpdateModal ?
           <UpdateSpellForm

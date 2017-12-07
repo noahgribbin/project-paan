@@ -22,8 +22,6 @@ class SessionPage extends React.Component {
     var campaignMember = this.props.dm.campaignMembers.map(function(member) {
       return(
         <section>
-          <Navbar />
-          <section className="page-container">
           <CharacterStats
             key={'CharacterStats_'+member._id}
             character= {member}
@@ -37,13 +35,15 @@ class SessionPage extends React.Component {
           <CharacterArmor
             key={'characterArmor_'+member._id}
             character= {member}/>
-          </section>
         </section>
       )
     })
     return (
       <section>
+        <Navbar />
+            <section className="page-container">
           {campaignMember}
+        </section>
       </section>
     )
   }

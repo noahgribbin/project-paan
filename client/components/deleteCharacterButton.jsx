@@ -38,10 +38,10 @@ export default class DeleteCharacterButton extends React.Component {
   render() {
     return (
       <section className="delete-character-holder">
-        <h1 onClick={this.toggleShowModal}
+        <p onClick={this.toggleShowModal}
             className="delete-character-title">
           Delete character
-        </h1>
+        </p>
         {this.state.showDeleteModal ?
           <DeleteCharacter
             onClick={this.props.onClick}
