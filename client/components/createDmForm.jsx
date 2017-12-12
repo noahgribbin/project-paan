@@ -133,7 +133,7 @@ toggleCreateForm(){
                     name="name"
                     placeholder="Campaign name"
                     maxLength="20"></input>
-             <button className="create-dm-button icon-plus" type="submit"></button>
+             <button className="create-dm-button fa fa-plus" type="submit"></button>
            </div>
          </form>
           {/* <TransitionForm in={this.state.showCreateDmForm} localState={this.state} submitAndClear={this.submitAndClear} onInput={this.onInput}/> */}

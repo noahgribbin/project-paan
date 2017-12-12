@@ -29,6 +29,7 @@ export default class UpdateCharacterButton extends React.Component {
     document.body.style.overflow="hidden"
   }
   toggleHide() {
+    console.log('hi');
     this.setState(prevState => ({
       showUpdateModal:!prevState.showUpdateModal
     }));

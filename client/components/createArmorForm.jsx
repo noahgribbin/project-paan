@@ -9,6 +9,7 @@ export class CreateArmorForm extends React.Component {
     super(props)
     this.onArmorNameInput = this.props.onArmorNameInput.bind(this);
     this.onSubmit = this.props.onSubmit.bind(this);
+    this.closeFormOpenList = this.props.closeFormOpenList.bind(this);
     this.submitAndClear = this.submitAndClear.bind(this);
     this.onChange = this.onChange.bind(this);
     this.errorCheck = this.errorCheck.bind(this);
@@ -26,6 +27,7 @@ export class CreateArmorForm extends React.Component {
     await this.errorCheck()
     if(this.state.armorNameError) return
     this.onSubmit(e)
+    this.closeFormOpenList()
     this.resetState()
     var form = document.getElementById("createArmorForm");
     form.reset();

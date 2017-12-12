@@ -16,7 +16,6 @@ export default class CharacterSpells extends React.Component {
     if(this.props.character.spells) {
         return(
           <section>
-            <h1>character spells</h1>
             <ul>
           {this.props.character.spells.map((item, index) =>
               <SpellCard

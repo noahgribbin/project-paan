@@ -11,6 +11,7 @@ export class CreateSpellForm extends React.Component {
     super(props)
     this.onSpellNameInput = this.props.onSpellNameInput.bind(this);
     this.onSubmit = this.props.onSubmit.bind(this);
+    this.closeFormOpenList = this.props.closeFormOpenList.bind(this);
     this.setSpellAttributes = this.props.setSpellAttributes.bind(this);
     this.updateSpellAttribute = this.updateSpellAttribute.bind(this);
     this.submitAndClear = this.submitAndClear.bind(this);
@@ -55,6 +56,7 @@ export class CreateSpellForm extends React.Component {
      await this.errorCheck(fields)
      if(this.state.createSpellError) return
      this.onSubmit(e)
+     this.closeFormOpenList()
      this.resetSpellState()
      var form = document.getElementById("createSpellForm");
      form.reset();
@@ -65,7 +67,7 @@ export class CreateSpellForm extends React.Component {
      function isTrue(ele) {
        return ele === true;
      }
-    //  
+    //
      for (var i = 0; i < fields.length; i++) {
        var error = fields[i]+'Error'
        if(this.state[fields[i]] ===''){

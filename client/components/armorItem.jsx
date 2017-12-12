@@ -47,7 +47,9 @@ export class ArmorItem extends React.Component {
     return(
       <li className= 'item-li'
           key={'armorLi_'+armor._id}>
-          {armor.name}
+          <div className="spell-label-container">
+            <p className="item-name spell-item-label">{armor.name}</p>
+          </div>
   { this.state.showUpdateModal ?
           <UpdateArmorForm
               armor={armor}

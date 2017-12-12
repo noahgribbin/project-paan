@@ -11,6 +11,7 @@ export class CreateWeaponForm extends React.Component {
     super(props)
     this.onWeaponNameInput = this.props.onWeaponNameInput.bind(this);
     this.onSubmit = this.props.onSubmit.bind(this);
+    // this.showForm = this.props.showForm.bind(this);
     this.setWeaponAttributes = this.props.setWeaponAttributes.bind(this);
     this.updateWeaponAttribute = this.updateWeaponAttribute.bind(this);
     this.submitAndClear = this.submitAndClear.bind(this);
@@ -52,6 +53,7 @@ export class CreateWeaponForm extends React.Component {
     if(this.state.createWeaponError) return
     console.log('!!!!!!!!!!!!!!!!!!!!!!!');
     this.onSubmit(e)
+    this.props.closeFormOpenList()
     this.resetWeaponState()
     var form = document.getElementById("createWeaponForm");
     form.reset();

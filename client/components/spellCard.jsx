@@ -3,21 +3,22 @@
 import React from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
+import AnimateHeight from 'react-animate-height';
 
 export class SpellCard extends React.Component {
   constructor(props) {
     super(props)
     console.log(this);
-    this.toggleShowInfo=this.toggleShowInfo.bind(this)
+    this.toggleHeight=this.toggleHeight.bind(this)
     this.state = {
-      showInfo:false
+      listHeight: 0
     }
   }
 
-  toggleShowInfo(){
-    this.setState(prevState => ({
-      showInfo:!prevState.showInfo
-    }));
+  toggleHeight(e){
+    var height = e.target.getAttribute('name')
+    var newHeight = this.state[height] === 0 ? 'auto': 0;
+    this.setState(prevState => ({[height]: newHeight}))
   }
 
   render() {
@@ -25,20 +26,25 @@ export class SpellCard extends React.Component {
       <section>
         <li className= 'item-li'
             key={'spellLi_'+this.props.spell._id}
-            onClick={this.toggleShowInfo}>
+            name="listHeight"
+            onClick={this.toggleHeight}>
               <div className="spell-label-container">
                 <p className="spell-item-label">{this.props.spell.name}</p>
               </div>
         </li>
-        { this.state.showInfo ?
-        <div className="spell-info-container">
-          <p className="spell-item-label">Casting time: {this.props.spell.castingTime}</p>
-          <p className="spell-item-label">Range: {this.props.spell.range}</p>
-          <p className="spell-item-label">Duration: {this.props.spell.duration}</p>
-          <p className="spell-item-label">Components: {this.props.spell.components}</p>
-          <p className="spell-item-label"> {this.props.spell.description}</p>
-        </div>
-        :null }
+      <AnimateHeight
+        duration={ 250 }
+        height={this.state.listHeight}
+        >
+        <ul className="spell-info-container">
+          <li className="spell-item-label">Casting time: {this.props.spell.castingTime}</li>
+          <li className="spell-item-label">Range: {this.props.spell.range}</li>
+          <li className="spell-item-label">Duration: {this.props.spell.duration}</li>
+          <li className="spell-item-label">Components: {this.props.spell.components}</li>
+          <li className="spell-item-label"> {this.props.spell.description}</li>
+        </ul>
+      </AnimateHeight>
+
       </section>
     )
 

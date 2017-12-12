@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from  'react-redux';
 import { bindActionCreators } from 'redux';
 import store from '../store.js';
+import AnimateHeight from 'react-animate-height';
 import { history } from '../entry.jsx';
 import  CharacterStats  from '../components/characterStats.jsx'
 import CharacterSpells from '../components/characterSpells.jsx'
@@ -19,6 +20,10 @@ class CampaignPage extends React.Component {
     this.deleteCampaign = this.deleteCampaign.bind(this);
     this.updateCampaign = this.updateCampaign.bind(this);
     this.onCampaignNameinput = this.onCampaignNameinput.bind(this);
+    this.toggleHeight = this.toggleHeight.bind(this);
+    this.state = {
+
+    }
   }
 
   async componentDidMount(){
@@ -67,11 +72,24 @@ class CampaignPage extends React.Component {
     store.dispatch(setCampaignName(e.target.value))
   }
 
+  toggleHeight(e){
+    var height = e.target.getAttribute('name')
+    var newHeight = this.state[height] === 0 ? 'auto': 0;
+    if(!this.state[height]){
+      newHeight = 'auto'
+    }
+    console.log(newHeight);
+    this.setState(prevState => ({
+      [height]: newHeight
+    }))
+  }
+
   render() {
+    var self = this;
+    var state = this.state
     if(this.props.dm.campaignMembers.length!==0){
-      console.log('HEYYYYYYY', this.props.dm.campaignMembers);
       var member = this.props.dm.campaignMembers.map(function(member) {
-        console.log(member);
+        console.log('MEMBER!!!',member);
         return (
           <section
               key={member._id}>
@@ -79,16 +97,71 @@ class CampaignPage extends React.Component {
           <CharacterStats
             key={'characterStats_'+member.id}
             character={member}
+            hideCharacterManagment={true}
           />
+
+
+
+          {member.spells.length !== 0 ?
+          <section>
+          <div className="item-title-continer">
+            <h1 className="item-section-title">Spells</h1>
+            <span className={"fa fa-caret-down right plus-form-toggle " }
+                  onClick={self.toggleHeight}
+                  name={"spellHeight"+member._id}></span>
+          </div>
+          <AnimateHeight
+             duration={ 250 }
+             height={ state["spellHeight"+member._id] ? state["spellHeight"+member._id] : 0 } // see props documentation bellow
+           >
           <CharacterSpells
             key={'characterSpell_'+member._id}
             character= {member}/>
+          </AnimateHeight>
+        </section>
+        :null}
+
+
+
+        {member.weapons.length !== 0 ?
+        <section>
+          <div className="item-title-continer">
+            <h1 className="item-section-title">Weapons</h1>
+            <span className={"fa fa-caret-down right plus-form-toggle " }
+                onClick={self.toggleHeight}
+                name={"weaponHeight"+member._id}></span>
+          </div>
+          <AnimateHeight
+            duration={ 250 }
+            height={ state["weaponHeight"+member._id] ? state["weaponHeight"+member._id] : 0 } // see props documentation bellow
+            >
           <CharacterWeapons
             key={'characterWeapons_'+member._id}
             character= {member}/>
+          </AnimateHeight>
+        </section>
+        :null}
+
+          {member.armor.length !== 0 ?
+          <section>
+          <div className="item-title-continer">
+            <h1 className="item-section-title">Armor</h1>
+              <span className={"fa fa-caret-down right plus-form-toggle " }
+                onClick={self.toggleHeight}
+                name={"armorHeight"+member._id}></span>
+          </div>
+
+          <AnimateHeight
+            duration={ 250 }
+            height={ state["armorHeight"+member._id] ? state["armorHeight"+member._id] : 0 } // see props documentation bellow
+            >
           <CharacterArmor
             key={'characterArmor_'+member._id}
             character= {member}/>
+          </AnimateHeight>
+        </section>
+        :null}
+
           </section>
         )
       })

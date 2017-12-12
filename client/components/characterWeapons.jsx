@@ -25,7 +25,6 @@ export default  class CharacterWeapons extends React.Component {
     if(this.props.character.weapons) {
         return(
           <section>
-            <h1>character weapons</h1>
             <ul>
           {this.props.character.weapons.map((item, index) =>
               <WeaponCard

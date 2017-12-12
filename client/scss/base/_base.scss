@@ -17,7 +17,9 @@ background: $color-1;
 max-width: 100vw;
 overflow-x: hidden;
 }
-
+p{
+  font-weight: lighter;
+}
 input{
   width:90%;
   margin-left: auto;
@@ -40,10 +42,12 @@ div{
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 -moz-box-sizing: border-box; /* Firefox, other Gecko */
 box-sizing: border-box; /* Opera/IE 8+ */
+  font-weight: lighter;
 }
 
 h1{
-  color: $color-5;
+  // color: $color-5;
+  color: #5e6065;
   text-align: center;
   font-size: 2.0rem;
   font-weight: lighter;
@@ -65,7 +69,7 @@ button{
   // border: 1px solid $color-3;
   border: none;
   color: $color-1;
-  font-weight: bold;
+  font-weight: lighter;
   background: $color-4;
   // background: $color-4;
 }
@@ -84,4 +88,8 @@ li{
 }
 .left{
   float:left;
+}
+
+.hide{
+  display:none;
 }

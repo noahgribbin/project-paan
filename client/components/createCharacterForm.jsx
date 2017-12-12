@@ -38,7 +38,7 @@ export class CreateCharacterForm extends React.Component {
     this.setState({showErrors: true})
     await this.onSubmit(e)
     if(this.props.createCharacterError) return
-    console.log('no Error');
+    this.props.closeFormOpenList()
     this.setState({showErrors: false})
   }
 
@@ -61,6 +61,8 @@ export class CreateCharacterForm extends React.Component {
   }
 
   closeSelect(e){
+    e.stopPropogation()
+    console.log('!!!!!!!!');
     var name = e.target.getAttribute("name");
     var show = name+"Show";
     console.log(name);
@@ -102,9 +104,8 @@ export class CreateCharacterForm extends React.Component {
                      className={"select-title " + (this.state.raceShow ? ' select-title-toggle ' : null) + (this.props.raceError && this.state.showErrors ? ' input-error ' :null)}
                      name="race">
                   {this.props.race ? this.makeUppercase(this.props.race) : "Select Race"}
-                </div>
-                {this.state.raceShow ?
-                  <div className="select-option-container">
+
+                  <div className={"select-option-container " + (!this.state.raceShow ? ' short ' : ' select-option-shown ')}>
                     <div className="select-option"
                          onClick={this.changeAndClose}
                          name="race"
@@ -134,14 +135,13 @@ export class CreateCharacterForm extends React.Component {
                         Dwarf
                     </div>
                   </div>
-                :null}
+
+                </div>
                 <div onClick={this.toggleState}
                      className={"select-title " + (this.state.classShow ? ' select-title-toggle ' :null ) + (this.props.classError && this.state.showErrors ?  ' input-error ' :null)}
                      name="class">
                   {this.props.class ? this.makeUppercase(this.props.class) : "Select Class"}
-                </div>
-                {this.state.classShow ?
-                  <div className="select-option-container">
+                  <div className={"select-option-container " + (!this.state.classShow ? ' short ' : ' select-option-shown ')}>
                     <div className="select-option"
                          onClick={this.changeAndClose}
                          name="class"
@@ -171,7 +171,7 @@ export class CreateCharacterForm extends React.Component {
                         Druid
                     </div>
                   </div>
-                :null}
+              </div>
               </section>
               <input className={"create-character-input " + (this.props.lvError === true && this.state.showErrors ? 'input-error' :null)}
                      onChange={this.onChange}

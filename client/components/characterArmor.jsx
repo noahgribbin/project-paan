@@ -16,7 +16,6 @@ export default class CharacterArmor extends React.Component {
     if(this.props.character.armor) {
         return(
           <section>
-            <h1>character armor</h1>
             <ul>
           {this.props.character.armor.map((item, index) =>
               <ArmorCard

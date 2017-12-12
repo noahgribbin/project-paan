@@ -3,9 +3,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
+import Transition from 'react-transition-group/Transition'
+import AnimateHeight from 'react-animate-height';
 
-import  UpdateCharacterButton  from './updateCharacterButton.jsx'
-import  DeleteCharacterButton  from './deleteCharacterButton.jsx'
+import CharacterManagmentModal from './characterManagmentModal.jsx'
 
 
 export default class CharacterStats extends React.Component {
@@ -14,12 +15,14 @@ export default class CharacterStats extends React.Component {
     console.log(this);
     this.toggleStats = this.toggleStats.bind(this)
     this.toggleCharacterManagment = this.toggleCharacterManagment.bind(this)
-    this.toggleJoinInput = this.toggleJoinInput.bind(this)
+    this.makeUppercase = this.makeUppercase.bind(this)
     this.closeCharacterManagment = this.closeCharacterManagment.bind(this)
     this.stopPropagation = this.stopPropagation.bind(this)
+    this.toggleHeight = this.toggleHeight.bind(this)
     this.state = {
       showAdvStats: false,
-      showCharacterManagment: false
+      showCharacterManagment: false,
+      height: 0
     }
   }
 
@@ -33,71 +36,79 @@ export default class CharacterStats extends React.Component {
       showCharacterManagment: !prevState.showCharacterManagment
     }))
   }
-  toggleJoinInput(){
-    this.setState(prevState => ({
-      showJoinInput: !prevState.showJoinInput
-    }))
-  }
   closeCharacterManagment(e){
     console.log("!!!");
     this.setState({
       showCharacterManagment: false,
-      showJoinInput: false
     })
     this.stopPropagation(e)
   }
   stopPropagation(e){
     e.stopPropagation()
   }
+  toggleHeight(){
+    var newHeight = this.state.height === 0 ? 'auto': 0;
+    console.log(newHeight);
+    this.setState(prevState => ({
+      height: newHeight
+    }))
+  }
+
+  makeUppercase(str){
+    var firstLetter = str.charAt(0).toUpperCase();
+    var restOfString = str.slice(1);
+    return firstLetter+restOfString
+  }
+
   render() {
     return (
       <section className="stat-div-holder">
         <div className="stat-title-container">
           <h1 className="stat-title">{this.props.character.characterName}</h1>
+          <div className="race-class-container">
+            <p className="race-class-title">{ "- "+this.makeUppercase(this.props.character.race)}</p>
+            <p className="race-class-title">{this.makeUppercase(this.props.character.class)}</p>
+            <p className="race-class-title">{this.props.character.lv}</p>
+          </div>
+          {!this.props.hideCharacterManagment ?
           <span className="fa fa-ellipsis-v right character-stat-ellipsis"
                 onClick={this.toggleCharacterManagment}></span>
+              :null}
           {this.props.campaign ?
             <h1 className="stat-subtitle"
                 onClick={this.props.toSessionPage}>
               {this.props.campaign.campaignName}
             </h1>
           :null}
-          {this.state.showCharacterManagment ?
-          <ul className="character-managment-ul"
-            // onMouseOut={this.closeCharacterManagment}
-            onClick={this.stopPropagation}>
-
-            <li >
-              <UpdateCharacterButton
+            {this.state.showCharacterManagment ?
+              <CharacterManagmentModal
                 updateCharacter={this.props.updateCharacter}
                 onInput = {this.props.onInput}
                 toggleCharacterManagment = {this.toggleCharacterManagment}
                 character={this.props.character}
                 setCharacterAttributes={this.props.setCharacterAttributes}
-              />
-            </li>
+                stopPropagation={this.stopPropagation}
 
-            <li>
-              <DeleteCharacterButton
+                onJoinCodeInput = {this.props.onJoinCodeInput}
+                onJoinPartySubmit={this.props.onJoinPartySubmit}
+
+
                 onClick={this.props.deleteCharacter}
               />
-            </li>
-            <li>
-              <form className="join-party-form" onSubmit={this.props.onJoinPartySubmit}>
-                <input onChange={this.props.onJoinCodeInput}
-                       placeholder="party code"
-                       className="join-party-form-input"></input>
-              </form>
-              </li>
-
-          </ul>
-          :null}
+            :null}
         </div>
         <span className="fa fa-caret-down stat-dropdown-toggle"
-              onClick={this.toggleStats}>
+              onClick={this.toggleHeight}>
         </span>
-        { this.state.showAdvStats ?
-          <section className="adv-stats-section">
+
+
+        <AnimateHeight
+           duration={ 500 }
+           height={ this.state.height } // see props documentation bellow
+         >
+
+
+          <section className={`adv-stats-section`}>
             <div className="stat-div">
               <h1 className="stat-div-label">LV</h1>
               <h1 className="stat-div-value">{this.props.character.lv}</h1>
@@ -135,8 +146,12 @@ export default class CharacterStats extends React.Component {
                 <h1 className="stat-div-label">CHA</h1>
                 <h1 className="stat-div-value">{this.props.character.charisma}</h1>
               </div>
+            </section>
           </section>
-        </section> :null}
+      </AnimateHeight>
+
+
+
       </section>
     )
   }

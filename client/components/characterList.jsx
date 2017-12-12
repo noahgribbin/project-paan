@@ -75,7 +75,6 @@ export class CharacterList extends React.Component {
      }
      return (
        <section className="character-list-section">
-         <h1 className="character-list-title">Character List</h1>
          {this.props.characters ? <ul>{character}</ul> : null}
        </section>
      )

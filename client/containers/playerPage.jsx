@@ -3,6 +3,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import AnimateHeight from 'react-animate-height';
 
 import store from '../store.js';
 
@@ -13,7 +14,6 @@ import { CharacterList } from '../components/characterList.jsx';
 import { Navbar } from '../components/navbar.jsx';
 
 import { createCharacter, getAllCharacters, setCharacters, getCharacter, getAllWeapons, getAllSpells, getAllArmor } from '../actions/characterActions.js';
-// import { getAllCharacters } from '../actions/characterActions.js';
 
 class PlayerPage extends React.Component {
   constructor(props) {
@@ -23,6 +23,8 @@ class PlayerPage extends React.Component {
     this.createCharacter=this.createCharacter.bind(this);
     this.errorCheck=this.errorCheck.bind(this);
     this.resetCharacterState=this.resetCharacterState.bind(this);
+    this.toggleHeight=this.toggleHeight.bind(this);
+    this.closeFormOpenList=this.closeFormOpenList.bind(this);
     this.state = {
       characterName: '',
       race: '',
@@ -49,7 +51,19 @@ class PlayerPage extends React.Component {
       constitutionError: false,
       intelligenceError: false,
       wisdomError: false,
-      charismaError: false
+      charismaError: false,
+      formHeight: 0,
+      listHeight: 0
+    }
+  }
+
+  componentWillMount(){
+    if(this.props.characters.length === 0) {
+      this.setState({formHeight:'auto'})
+    }else {
+
+      this.setState({listHeight:'auto'})
+      console.log('Characters');
     }
   }
 
@@ -121,6 +135,7 @@ class PlayerPage extends React.Component {
     })
   }
 
+
 async createCharacter(e) {
     e.preventDefault();
     const data = {
@@ -157,41 +172,80 @@ async createCharacter(e) {
     })
   }
 
+  toggleHeight(e){
+    var height = e.target.getAttribute('name')
+    var newHeight = this.state[height] === 0 ? 'auto' : 0;
+    console.log(height);
+    console.log(newHeight);
+    this.setState(prevState => ({
+      [height]: newHeight
+    }))
+    if(height==='formHeight'){
+      this.setState({'listHeight':0})
+    }else {
+      this.setState({'formHeight':0})
+    }
+  }
+
+  closeFormOpenList(){
+    this.setState({ formHeight: 0})
+    this.setState({ listHeight: 'auto'})
+  }
 
   render() {
     return (
       <section>
         <Navbar />
       <section className="page-container">
-        <CreateCharacterForm
-          onInput={this.onInput}
-          onSubmit={this.createCharacter}
-          race={this.state.race}
-          class={this.state.class}
-          onSubmit={this.createCharacter}
-          errorCheck={this.errorCheck}
-          characterNameError= {this.state.characterNameError}
-          raceError= {this.state.raceError}
-          classError= {this.state.classError}
-          lvError= {this.state.lvError}
-          acError= {this.state.acError}
-          hpError= {this.state.hpError}
-          strengthError= {this.state.strengthError}
-          dexterityError= {this.state.dexterityError}
-          constitutionError= {this.state.constitutionError}
-          intelligenceError= {this.state.intelligenceError}
-          wisdomError= {this.state.wisdomError}
-          charismaError= {this.state.charismaError}
-          createCharacterError={this.state.createCharacterError}
-        />
-
-        <CharacterList
-          getCharacter={this.props.getCharacter}
-          getAllArmor={this.props.getAllArmor}
-          getAllSpells={this.props.getAllSpells}
-          getAllWeapons={this.props.getAllWeapons}
-          characters={this.props.characters}
+        <div className="item-title-continer">
+          <h1 className="item-section-title">Characters</h1>
+          <span className="fa fa-plus right plus-form-toggle"
+                onClick={this.toggleHeight}
+                name="formHeight"></span>
+          <span className={"fa fa-caret-down right plus-form-toggle " + (this.props.characters.length === 0 ? ' hide ' :null)}
+                onClick={this.toggleHeight}
+                name="listHeight"></span>
+        </div>
+        <AnimateHeight
+          duration = {250}
+          height = {this.state.formHeight}
+        >
+          <CreateCharacterForm
+            onInput = {this.onInput}
+            onSubmit = {this.createCharacter}
+            race = {this.state.race}
+            class = {this.state.class}
+            onSubmit = {this.createCharacter}
+            errorCheck = {this.errorCheck}
+            characterNameError = {this.state.characterNameError}
+            raceError = {this.state.raceError}
+            classError = {this.state.classError}
+            lvError = {this.state.lvError}
+            acError = {this.state.acError}
+            hpError = {this.state.hpError}
+            strengthError = {this.state.strengthError}
+            dexterityError = {this.state.dexterityError}
+            constitutionError = {this.state.constitutionError}
+            intelligenceError = {this.state.intelligenceError}
+            wisdomError = {this.state.wisdomError}
+            charismaError = {this.state.charismaError}
+            createCharacterError = {this.state.createCharacterError}
+            closeFormOpenList = {this.closeFormOpenList}
           />
+        </AnimateHeight>
+
+        <AnimateHeight
+          duration = {250}
+          height = {this.state.listHeight}
+          >
+          <CharacterList
+            getCharacter={this.props.getCharacter}
+            getAllArmor={this.props.getAllArmor}
+            getAllSpells={this.props.getAllSpells}
+            getAllWeapons={this.props.getAllWeapons}
+            characters={this.props.characters}
+            />
+        </AnimateHeight>
       </section>
       </section>
     )

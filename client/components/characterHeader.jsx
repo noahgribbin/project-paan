@@ -57,30 +57,6 @@ export default class CharacterHeader extends React.Component {
           setCharacterAttributes={this.props.setCharacterAttributes}
 
         />
-        {/* <div className="fa fa-camera-retro fa-lg"></div> */}
-        <h1 onClick={this.toggleCharacterManagment}>Click to Manage Character</h1>
-        { this.state.showCharacterManagment ?
-          <section>
-            <JoinPartyForm
-
-            />
-
-            <section className="button-container">
-
-              <DeleteCharacterButton
-                onClick={this.props.deleteCharacter}
-              />
-              <UpdateCharacterButton
-                updateCharacter={this.props.updateCharacter}
-                onInput = {this.props.onInput}
-                toggleCharacterManagment = {this.toggleCharacterManagment}
-                character={this.props.character}
-                setCharacterAttrbutes={this.props.setCharacterAttrbutes}
-
-              />
-            </section>
-          </section>
-        :null}
       </section>
     )
   }

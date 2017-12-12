@@ -55,7 +55,7 @@ export class CampaignHeader extends React.Component {
         <div className="campaign-header">
 
         <h1 className="campaign-header-title">{this.props.dm.campaignName}</h1>
-        <span className="icon-plus"
+        <span className="fa fa-plus"
               onClick={this.toggleSettings}></span>
         </div>
 
@@ -70,18 +70,18 @@ export class CampaignHeader extends React.Component {
 
               <button onClick={this.props.deleteCampaign}> delete campaign</button>
               <button onClick={this.toggleShowUpdate}>update campaign</button>
-              { this.state.showUpdate ?
-              <UpdateDmForm
-              updateCampaign = {this.props.updateCampaign}
-              toggleHide={this.toggleHideUpdate}
-              updateCampaignName={this.props.updateCampaignName}
-              // campaignName={this.props.dm.campaignName}
-              dm={this.props.dm}
-            /> :null}
 
             </div>
           )}
         </Transition>
+        { this.state.showUpdate ?
+          <UpdateDmForm
+            updateCampaign = {this.props.updateCampaign}
+            toggleHide={this.toggleHideUpdate}
+            updateCampaignName={this.props.updateCampaignName}
+            // campaignName={this.props.dm.campaignName}
+            dm={this.props.dm}
+          /> :null}
 
 
 
