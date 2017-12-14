@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node tools/build.js",
-    "pod": "npm run build && node server.js",
-    "start": "webpack-dev-server --inline --hot --content-base . --history-api-fallback"
+    "start": "npm run build && node server.js",
+    "dev": "webpack-dev-server --inline --hot --content-base . --history-api-fallback"
   },
   "keywords": [],
   "author": "",
