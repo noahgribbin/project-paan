@@ -6,7 +6,7 @@ function signup(username, password) {
   return {
     type: 'SIGNUP',
     payload: request
-    .post(`${'http://localhost:8000'}/api/signup`)
+    .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/signup`)
     .send({username, password})
     .then( res => {
       var response = JSON.parse(res.text);
@@ -19,7 +19,7 @@ function login(username, password) {
   return {
     type: 'LOGIN',
     payload: request
-    .get(`${'http://localhost:8000'}/api/signin`)
+    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/signin`)
     .auth(`${username}:${password}`)
     .then( res => {
       var response = JSON.parse(res.text);

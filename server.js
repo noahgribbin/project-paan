@@ -7,16 +7,16 @@ const PORT = process.env.PORT || 8080;
 
 
 //Local
-app.use(express.static(`${__dirname}/public`));
+// app.use(express.static(`${__dirname}/public`));
 // Heroku
-// app.use(express.static(`${__dirname}/public`), function(err, req, res, next){
-//   console.log('app.use');
-//   if(err){
-//     console.log('err:', err.stack);
-//
-//   }
-//   console.log('err:', res.status);
-// });
+app.use(express.static(`${__dirname}/public`), function(err, req, res, next){
+  console.log('app.use');
+  if(err){
+    console.log('err:', err.stack);
+
+  }
+  console.log('err:', res.status);
+});
 
 // // Local
 // app.get('*', function(request, response) {
