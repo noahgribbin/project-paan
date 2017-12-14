@@ -23,7 +23,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'index_bundle.js',
-    publicPath: '/',
+    publicPath: '/public/',
     sourceMapFilename: 'sourceMap.map'
   },
   // // Local
