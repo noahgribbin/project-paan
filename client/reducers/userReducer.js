@@ -18,7 +18,6 @@ export default function userReducer(state=initialState, action) {
       fetching: true
     });
   case 'SIGNUP_FULFILLED' :
-  console.log(action);
     return Object.assign({}, state, {
       fetching: false,
       token: action.payload.token,
@@ -31,8 +30,9 @@ export default function userReducer(state=initialState, action) {
       return Object.assign({}, state, {
         alreadyExists: true,
         fetching: false
-      })
+      });
     }
+    break;
     // Login
   case 'LOGIN_PENDING' :
     return Object.assign({}, state , {
@@ -40,7 +40,6 @@ export default function userReducer(state=initialState, action) {
       signInError: ''
     });
   case 'LOGIN_FULFILLED' :
-    console.log(action);
     return Object.assign({}, state,  {
       fetching: false,
       token: action.payload.token,
@@ -48,30 +47,26 @@ export default function userReducer(state=initialState, action) {
       signInError: ''
     });
   case 'LOGIN_REJECTED' :
-    console.log(action);
     if (action.payload.status == 404)  {
       return Object.assign({}, state, {
         signInError: action.payload.response.text,
         fetching: false
-      })
+      });
     }else if (action.payload.status == 401) {
       return Object.assign({}, state, {
         signInError: 'badRequest',
         fetching: false
-      })
+      });
     }
+    break;
     // Logout
   case 'LOGOUT' :
-    console.log(action);
     return initialState;
-  //  usernameChange
   case 'LOGIN_USERNAME_FULFILLED':
-    console.log(action);
     return Object.assign({}, state, {
       username: action.payload
     });
   case 'LOGIN_USERNAME_REJECTED' :
-    console.log(action);
     return state;
     // Default
   default:

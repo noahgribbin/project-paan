@@ -12,7 +12,7 @@ export function createCharacter(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.character)
     .then(res => {
-      var response = JSON.parse(res.text)
+      var response = JSON.parse(res.text);
       return response;
     })
   };
@@ -27,10 +27,9 @@ export function joinParty(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send({id:data.id})
     .then( res => {
-      console.log('join party res', res);
-      return res
+      return res;
     })
-  }
+  };
 }
 // Get
 export function getCharacter(data) {
@@ -40,17 +39,16 @@ export function getCharacter(data) {
     .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log('res.body: ',res.body);
       return res.body;
     })
-  }
+  };
 }
 
 export function setCharacterAttributes(data) {
   return {
     type: 'SET_SPELL_ATTRIBUTES',
     [data.property]: data.value
-  }
+  };
 }
 
 export function getAllCharacters(data) {
@@ -62,7 +60,7 @@ export function getAllCharacters(data) {
     .then( res => {
       return res.body;
     })
-  }
+  };
 }
 
 export function getPartyMembers(data) {
@@ -74,7 +72,7 @@ export function getPartyMembers(data) {
     .then(res => {
       return res.body;
     })
-  }
+  };
 }
 
 export function updateCharacter(data) {
@@ -85,10 +83,9 @@ export function updateCharacter(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.character)
     .then( res => {
-      console.log('updateCharacter res.body: ',res.body);
       return res.body;
     })
-  }
+  };
 }
 
 export function deleteCharacter(data) {
@@ -97,25 +94,24 @@ export function deleteCharacter(data) {
     payload: request
     .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
-    .then( res => {
-      console.log('deleteCharacter res.body', res.body)
+    .then(() => {
+      return;
     })
-  }
+  };
 }
 // Plain Actions
 export function updateCharacterName(data) {
-  console.log('updateCharacterName action:',data);
   return {
     type: 'UPDATE_CHARACTER_NAME',
     characterName: data
-  }
+  };
 }
 
 export function setSessionCharacter(data) {
   return {
     type: 'SET_SESSION_CHARACTER',
     sessionCharacter: data
-  }
+  };
 }
 
 
@@ -123,7 +119,7 @@ export function setCharacters(data) {
   return {
     type: 'SET_WEAPONS',
     characters: data
-  }
+  };
 }
 // later
 
@@ -138,25 +134,11 @@ export function createWeapon(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.weapon)
     .then( res => {
-      console.log(res);
       return res;
     })
-  }
+  };
 }
-// export function create(data, type) {
-//   var upperType = type.toUpperCase()
-//   return {
-//     type: 'CREATE_'+type,
-//     payload: request
-//     .post(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/${type}`)
-//     .set({ authorization: `Bearer ${data.token}`})
-//     .send(data.type)
-//     .then( res => {
-//       console.log(res);
-//       return res;
-//     })
-//   }
-// }
+
 export function getAllWeapons(data) {
   return {
     type: 'GET_ALL_WEAPONS',
@@ -164,10 +146,9 @@ export function getAllWeapons(data) {
     .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/weapons`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log('GET_ALL_WEAPONS res', res);
-      return res.body
+      return res.body;
     })
-  }
+  };
 }
 
 export function deleteWeapon(data) {
@@ -177,10 +158,9 @@ export function deleteWeapon(data) {
     .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/weapon/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log('deleteWeapon res: ', res);
-      return res
+      return res;
     })
-  }
+  };
 }
 
 export function updateWeapon(data) {
@@ -191,31 +171,30 @@ export function updateWeapon(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.weapon)
     .then( res => {
-      console.log('updateWeapon res: ', res);
       return res;
     })
-  }
+  };
 }
 
 export function updateWeaponName(data) {
   return {
     type: 'UPDATE_WEAPON_NAME',
     weaponName: data
-  }
+  };
 }
 
 export function setWeapons(data) {
   return {
     type: 'SET_WEAPONS',
     weapons: data
-  }
+  };
 }
 export function setWeaponAttributes(data) {
 
   return {
     type: 'SET_WEAPON_ATTRIBUTES',
     [data.type]: data.value
-  }
+  };
 }
 
 // Armor
@@ -227,10 +206,9 @@ export function createArmor(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.armor)
     .then( res => {
-      console.log(res);
       return res;
     })
-  }
+  };
 }
 
 export function getAllArmor(data) {
@@ -240,10 +218,9 @@ export function getAllArmor(data) {
     .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/armor`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log('GET_ALL_ARMOR res', res);
-      return res.body
+      return res.body;
     })
-  }
+  };
 }
 
 export function deleteArmor(data) {
@@ -253,10 +230,9 @@ export function deleteArmor(data) {
     .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/armor/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log('deleteArmor res: ', res);
-      return res
+      return res;
     })
-  }
+  };
 }
 
 export function updateArmor(data) {
@@ -267,17 +243,16 @@ export function updateArmor(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.armor)
     .then( res => {
-      console.log('updateArmor res: ', res);
       return res;
     })
-  }
+  };
 }
 
 export function updateArmorName(data) {
   return {
     type: 'UPDATE_ARMOR_NAME',
     armorName: data
-  }
+  };
 }
 
 
@@ -285,7 +260,7 @@ export function setArmor(data) {
   return {
     type: 'SET_ARMOR',
     armor: data
-  }
+  };
 }
 
 // Spells
@@ -297,10 +272,9 @@ export function createSpell(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.spell)
     .then( res => {
-      console.log(res);
       return res;
     })
-  }
+  };
 }
 export function getAllSpells(data) {
   return {
@@ -309,10 +283,9 @@ export function getAllSpells(data) {
     .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/${data.id}/spells`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log('GET_ALL_SPELL res', res);
-      return res.body
+      return res.body;
     })
-  }
+  };
 }
 
 export function deleteSpell(data) {
@@ -322,10 +295,9 @@ export function deleteSpell(data) {
     .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/character/spell/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log('deleteSpell res: ', res);
-      return res
+      return res;
     })
-  }
+  };
 }
 
 export function updateSpell(data) {
@@ -336,10 +308,9 @@ export function updateSpell(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.spell)
     .then( res => {
-      console.log('updateSpell res: ', res);
       return res;
     })
-  }
+  };
 }
 
 export function setSpellAttributes(data) {
@@ -347,27 +318,27 @@ export function setSpellAttributes(data) {
   return {
     type: 'SET_SPELL_ATTRIBUTES',
     [data.property]: data.value
-  }
+  };
 }
 
 export function updateSpellName(data) {
   return {
     type: 'UPDATE_SPELL_NAME',
     spellName: data
-  }
+  };
 }
 export function setJoinCode(data) {
   return {
     type: 'SET_JOIN_CODE',
     partyCode: data
-  }
+  };
 }
 
 export function setSpells(data) {
   return {
     type: 'SET_SPELLS',
     spells: data
-  }
+  };
 }
 
 // other
@@ -375,5 +346,5 @@ export function toggleUpdate() {
   return {
     type: 'TOGGLE_UPDATE',
     updating: true
-  }
+  };
 }

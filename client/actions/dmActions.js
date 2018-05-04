@@ -10,22 +10,22 @@ export function createDm(data) {
     .set({authorization: `Bearer ${data.token}`})
     .send(data.dm)
     .then( res => {
-      var response = JSON.parse(res.text)
+      var response = JSON.parse(res.text);
       return response;
     })
   };
 }
 
 export function getDm(data) {
-return {
-  type: 'GET_DM',
-  payload: request
-  .get(`${`https://dungeon-manager-be.herokuapp.com`}/api/dm/${data.id}`)
-  .set({ authorization: `Bearer ${data.token}`})
-  .then( res => {
-    return res.body
-  })
-  }
+  return {
+    type: 'GET_DM',
+    payload: request
+    .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/dm/${data.id}`)
+    .set({ authorization: `Bearer ${data.token}`})
+    .then( res => {
+      return res.body;
+    })
+  };
 }
 
 export function getAllDms(data) {
@@ -37,21 +37,21 @@ export function getAllDms(data) {
     .then( res => {
       return res.body.dms;
     })
-  }
+  };
 }
 
 export function setSessionDm(data) {
   return {
     type: 'SET_SESSION_DM',
     sessionDm: data
-  }
+  };
 }
 
 export function setCampaignName(data) {
   return {
     type: 'SET_CAMPAIGN_NAME',
     campaignName: data
-  }
+  };
 }
 
 export function getCampaignMembers(data) {
@@ -61,10 +61,9 @@ export function getCampaignMembers(data) {
     .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/dm/party/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log(res.body);
-      return res.body
+      return res.body;
     })
-  }
+  };
 }
 
 export function updateDm(data) {
@@ -75,10 +74,9 @@ export function updateDm(data) {
     .set({ authorization: `Bearer ${data.token}`})
     .send(data.body)
     .then( res => {
-      console.log(res);
-      return res.body
+      return res.body;
     })
-  }
+  };
 }
 export function deleteDm(data) {
   return {
@@ -87,8 +85,7 @@ export function deleteDm(data) {
     .delete(`${'https://dungeon-manager-be.herokuapp.com'}/api/dm/${data.id}`)
     .set({ authorization: `Bearer ${data.token}`})
     .then( res => {
-      console.log(res.body);
-      return res.body
+      return res.body;
     })
-  }
+  };
 }

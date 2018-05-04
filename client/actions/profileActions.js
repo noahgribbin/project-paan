@@ -11,7 +11,7 @@ export function createProfile(data) {
     .set({authorization: `Bearer ${data.token}`})
     .send(data.user)
     .then( res => {
-      var response = JSON.parse(res.text)
+      var response = JSON.parse(res.text);
       return response;
     })
   };
@@ -25,8 +25,8 @@ export function getProfile(data) {
     .get(`${'https://dungeon-manager-be.herokuapp.com'}/api/profile/${data.user._id}`)
     .set({authorization: `Bearer ${data.token}`})
     .then( res => {
-      var response = JSON.parse(res.text)
+      var response = JSON.parse(res.text);
       return response;
     })
-  }
+  };
 }
