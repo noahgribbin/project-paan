@@ -20,7 +20,7 @@ export default function characterReducer(state=initialState, action) {
     case 'CREATE_CHARACTER_FULFILLED' :
     console.log(action);
     return Object.assign({}, state, {
-      characterName: action.payload.character.characterName,
+      characterName: action.payload.characterName,
       id: action.payload.character._id,
       // update state
     })
